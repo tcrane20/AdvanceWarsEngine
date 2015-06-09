@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1417567634 source:e:\desktop\radialglow\main.cpp
+	"main.h"
+	<math.h>
+
+1417567601 e:\desktop\radialglow\main.h
+	<windows.h>
+

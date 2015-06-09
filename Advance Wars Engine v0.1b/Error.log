@@ -1,0 +1,382 @@
+Mon Nov 25 13:32:30 Pacific Standard Time 2013:
+undefined method `hiding' for #<Pipe_Joint:0xa262e90>
+ 13>>Fighter
+:46:in `can_attack?'
+Scene_Map:1131:in `determine_unit_commands'
+Scene_Map:1123:in `each'
+Scene_Map:1123:in `determine_unit_commands'
+Scene_Map:518:in `phase_command'
+Scene_Map:134:in `update'
+Scene_Map:78:in `main'
+Scene_Map:53:in `loop'
+Scene_Map:85:in `main'
+Main
+:32
+
+Tue Mar 11 15:55:26 Pacific Daylight Time 2014:
+undefined method `daily_fuel' for nil:NilClass
+Scene_Map:237:in `phase_preturn'
+Scene_Map:130:in `update'
+Scene_Map:78:in `main'
+Scene_Map:53:in `loop'
+Scene_Map:85:in `main'
+Main
+:32
+
+2014-08-03 21:34:13 -0700:
+undefined method `each' for #<String:0x8347314>
+{0239}:24:in `block in main'
+{0239}:22:in `each'
+{0239}:22:in `main'
+{0243}:32:in `<main>'
+ruby:in `eval'
+
+2014-08-03 21:40:29 -0700:
+undefined method `&' for "\u0000":String
+{0109}:95:in `block in update'
+{0109}:93:in `each'
+{0109}:93:in `update'
+{0113}:631:in `update'
+{0115}:81:in `update'
+{0241}:137:in `update'
+{0239}:93:in `block in main'
+{0239}:89:in `loop'
+{0239}:89:in `main'
+{0243}:32:in `<main>'
+ruby:in `eval'
+
+2014-08-03 22:01:37 -0700:
+undefined method `&' for "\u0000":String
+{0109}:98:in `block in update'
+{0109}:95:in `each'
+{0109}:95:in `update'
+{0113}:631:in `update'
+{0115}:81:in `update'
+{0241}:137:in `update'
+{0239}:93:in `block in main'
+{0239}:89:in `loop'
+{0239}:89:in `main'
+{0243}:32:in `<main>'
+ruby:in `eval'
+
+2014-08-03 22:16:09 -0700:
+undefined method `&' for "\u0000":String
+{0109}:98:in `block in update'
+{0109}:95:in `each'
+{0109}:95:in `update'
+{0113}:631:in `update'
+{0115}:81:in `update'
+{0241}:137:in `update'
+{0239}:93:in `block in main'
+{0239}:89:in `loop'
+{0239}:89:in `main'
+{0243}:32:in `<main>'
+ruby:in `eval'
+
+2014-08-03 22:18:03 -0700:
+undefined method `&' for "\u0000":String
+{0109}:98:in `block in update'
+{0109}:95:in `each'
+{0109}:95:in `update'
+{0113}:631:in `update'
+{0115}:81:in `update'
+{0241}:137:in `update'
+{0239}:93:in `block in main'
+{0239}:89:in `loop'
+{0239}:89:in `main'
+{0243}:32:in `<main>'
+ruby:in `eval'
+
+2014-08-03 22:18:24 -0700:
+undefined method `&' for "\u0000":String
+{0109}:98:in `block in update'
+{0109}:95:in `each'
+{0109}:95:in `update'
+{0113}:631:in `update'
+{0115}:81:in `update'
+{0241}:137:in `update'
+{0239}:93:in `block in main'
+{0239}:89:in `loop'
+{0239}:89:in `main'
+{0243}:32:in `<main>'
+ruby:in `eval'
+
+2014-08-03 22:23:32 -0700:
+undefined method `pack' for #<String:0x8268ab0>
+{0109}:93:in `update'
+{0113}:631:in `update'
+{0115}:81:in `update'
+{0241}:137:in `update'
+{0239}:93:in `block in main'
+{0239}:89:in `loop'
+{0239}:89:in `main'
+{0243}:32:in `<main>'
+ruby:in `eval'
+
+2014-08-03 22:26:54 -0700:
+undefined method `[]' for #<Regexp:0x210bfc4>
+{0109}:94:in `update'
+{0113}:631:in `update'
+{0115}:81:in `update'
+{0241}:137:in `update'
+{0239}:93:in `block in main'
+{0239}:89:in `loop'
+{0239}:89:in `main'
+{0243}:32:in `<main>'
+ruby:in `eval'
+
+2014-08-04 19:02:53 -0700:
+undefined method `&' for "\u0000":String
+{0109}:97:in `block in update'
+{0109}:95:in `each'
+{0109}:95:in `update'
+{0113}:631:in `update'
+{0115}:81:in `update'
+{0241}:137:in `update'
+{0239}:93:in `block in main'
+{0239}:89:in `loop'
+{0239}:89:in `main'
+{0243}:32:in `<main>'
+ruby:in `eval'
+
+2014-08-04 19:03:28 -0700:
+undefined method `&' for "\u0000":String
+{0109}:97:in `block in update'
+{0109}:95:in `each'
+{0109}:95:in `update'
+{0113}:631:in `update'
+{0115}:81:in `update'
+{0241}:137:in `update'
+{0239}:93:in `block in main'
+{0239}:89:in `loop'
+{0239}:89:in `main'
+{0243}:32:in `<main>'
+ruby:in `eval'
+
+2014-08-04 19:06:33 -0700:
+unknown encoding name - binary
+{0109}:91:in `force_encoding'
+{0109}:91:in `update'
+{0113}:631:in `update'
+{0115}:81:in `update'
+{0241}:137:in `update'
+{0239}:93:in `block in main'
+{0239}:89:in `loop'
+{0239}:89:in `main'
+{0243}:32:in `<main>'
+ruby:in `eval'
+
+2014-08-04 19:08:39 -0700:
+undefined method `&' for "\u0000":String
+{0109}:97:in `block in update'
+{0109}:95:in `each'
+{0109}:95:in `update'
+{0113}:631:in `update'
+{0115}:81:in `update'
+{0241}:137:in `update'
+{0239}:93:in `block in main'
+{0239}:89:in `loop'
+{0239}:89:in `main'
+{0243}:32:in `<main>'
+ruby:in `eval'
+
+Mon Aug 04 19:09:13 Pacific Daylight Time 2014:
+undefined method `encoding' for #<String:0x3698970>
+Multiple Inputs
+:91:in `old_update'
+Mouse Support:631:in `gg_update_input_snapshot_lat'
+ScreenShot:81:in `zer0_script_editor_upd'
+
+DEBUG TOOL:137:in `update'
+#EDIT# Scene_Title
+:93:in `main'
+#EDIT# Scene_Title
+:89:in `loop'
+#EDIT# Scene_Title
+:100:in `main'
+Main
+:32
+
+2014-08-04 19:25:09 -0700:
+undefined method `&' for #<Enumerator: "\u0000":bytes>
+{0109}:97:in `block in update'
+{0109}:95:in `each'
+{0109}:95:in `update'
+{0113}:631:in `update'
+{0115}:81:in `update'
+{0241}:137:in `update'
+{0239}:93:in `block in main'
+{0239}:89:in `loop'
+{0239}:89:in `main'
+{0243}:32:in `<main>'
+ruby:in `eval'
+
+2014-08-04 19:25:46 -0700:
+undefined method `&' for #<Enumerator: "\u0000":bytes>
+{0109}:97:in `block in update'
+{0109}:95:in `each'
+{0109}:95:in `update'
+{0113}:631:in `update'
+{0115}:81:in `update'
+{0241}:137:in `update'
+{0239}:93:in `block in main'
+{0239}:89:in `loop'
+{0239}:89:in `main'
+{0243}:32:in `<main>'
+ruby:in `eval'
+
+2014-08-04 19:26:24 -0700:
+undefined method `&' for #<Enumerator: "\u0000":bytes>
+{0109}:97:in `block in update'
+{0109}:95:in `each'
+{0109}:95:in `update'
+{0113}:631:in `update'
+{0115}:81:in `update'
+{0241}:137:in `update'
+{0239}:93:in `block in main'
+{0239}:89:in `loop'
+{0239}:89:in `main'
+{0243}:32:in `<main>'
+ruby:in `eval'
+
+2014-08-04 19:27:37 -0700:
+undefined method `tileset=' for #<Tilemap:0x81eed50>
+{0234}:30:in `initialize'
+{0237}:16:in `new'
+{0237}:16:in `main'
+{0243}:32:in `<main>'
+ruby:in `eval'
+
+2014-08-04 19:28:59 -0700:
+wrong number of arguments (1 for 4)
+{0240}:874:in `initialize'
+{0110}:224:in `new'
+{0110}:224:in `initialize'
+{0034}:16:in `initialize'
+{0035}:21:in `initialize'
+{0103}:14:in `initialize'
+{0113}:777:in `initialize'
+{0102}:12:in `initialize'
+{0239}:61:in `new'
+{0239}:61:in `main'
+{0244}:32:in `<main>'
+ruby:in `eval'
+
+2014-08-04 19:33:47 -0700:
+undefined method `y' for 0:Fixnum
+{0101}:9:in `initialize'
+{0240}:874:in `initialize'
+{0110}:224:in `new'
+{0110}:224:in `initialize'
+{0034}:16:in `initialize'
+{0035}:21:in `initialize'
+{0103}:14:in `initialize'
+{0113}:777:in `initialize'
+{0102}:12:in `initialize'
+{0239}:61:in `new'
+{0239}:61:in `main'
+{0244}:32:in `<main>'
+ruby:in `eval'
+
+2014-08-12 17:51:21 -0700:
+undefined method `visible=' for nil:NilClass
+{0234}:257:in `update'
+{0240}:344:in `initialize'
+{0237}:16:in `new'
+{0237}:16:in `main'
+{0244}:34:in `<main>'
+ruby:in `eval'
+
+2014-08-12 17:53:15 -0700:
+undefined method `tileset=' for #<Tilemap:0x8669e84>
+{0234}:30:in `initialize'
+{0240}:345:in `initialize'
+{0237}:16:in `new'
+{0237}:16:in `main'
+{0244}:34:in `<main>'
+ruby:in `eval'
+
+2014-08-12 17:55:06 -0700:
+undefined method `unit_moving' for nil:NilClass
+{0212}:34:in `update'
+{0234}:265:in `update'
+{0240}:344:in `initialize'
+{0237}:16:in `new'
+{0237}:16:in `main'
+{0244}:34:in `<main>'
+ruby:in `eval'
+
+2014-08-12 17:59:43 -0700:
+undefined method `update' for nil:NilClass
+{0234}:287:in `update'
+{0237}:18:in `main'
+{0244}:34:in `<main>'
+ruby:in `eval'
+
+2014-08-12 18:04:10 -0700:
+undefined method `type' for #<Infantry:0x85c9c04>
+{0237}:1108:in `determine_unit_commands'
+{0237}:525:in `phase_command'
+{0237}:134:in `update'
+{0237}:78:in `block in main'
+{0237}:53:in `loop'
+{0237}:53:in `main'
+{0244}:34:in `<main>'
+ruby:in `eval'
+
+2014-08-12 18:08:15 -0700:
+undefined method `tileset=' for #<Tilemap:0x85d7b88>
+{0234}:30:in `initialize'
+{0237}:16:in `new'
+{0237}:16:in `main'
+{0243}:34:in `<main>'
+ruby:in `eval'
+
+Tue Aug 12 18:09:24 Pacific Daylight Time 2014:
+undefined method `resize_screen' for Graphics:Module
+Main
+:23
+
+Tue Aug 12 18:09:36 Pacific Daylight Time 2014:
+undefined method `bytes' for 0:Fixnum
+Multiple Inputs
+:95:in `old_update'
+Multiple Inputs
+:93:in `each'
+Multiple Inputs
+:93:in `old_update'
+Mouse Support:631:in `gg_update_input_snapshot_lat'
+ScreenShot:81:in `zer0_script_editor_upd'
+
+DEBUG TOOL:137:in `update'
+#EDIT# Scene_Title
+:93:in `main'
+#EDIT# Scene_Title
+:89:in `loop'
+#EDIT# Scene_Title
+:100:in `main'
+Main
+:34
+
+2014-08-15 15:18:28 -0700:
+undefined method `&' for "\u0000":String
+{0109}:97:in `block in update'
+{0109}:93:in `each'
+{0109}:93:in `update'
+{0113}:631:in `update'
+{0115}:81:in `update'
+{0241}:137:in `update'
+{0239}:93:in `block in main'
+{0239}:89:in `loop'
+{0239}:89:in `main'
+{0243}:34:in `<main>'
+ruby:in `eval'
+
+2014-08-15 15:19:33 -0700:
+undefined method `tileset=' for #<Tilemap:0x89a7e70>
+{0234}:30:in `initialize'
+{0237}:16:in `new'
+{0237}:16:in `main'
+{0243}:34:in `<main>'
+ruby:in `eval'
+

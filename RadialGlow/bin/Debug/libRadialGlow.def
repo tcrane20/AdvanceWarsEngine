@@ -1,0 +1,6 @@
+EXPORTS
+    DrawMapsBitmap @1
+    DrawMapsBitmap2 @2
+    InitEmptyTile @3
+    RadialGlow @4
+    UpdateAutotiles @5

@@ -1,0 +1,592 @@
+2014-12-27 14:32:14 -0800:
+undefined method `call' for false:FalseClass
+{Scene_AWMap Phases}:144:in `process_cursor_movement_commands'
+{Scene_AWMap Phases}:71:in `update'
+{Scene_AWMap}:78:in `block in main'
+{Scene_AWMap}:72:in `loop'
+{Scene_AWMap}:72:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2014-12-27 15:33:01 -0800:
+undefined method `enemy_unit' for #<Stealth:0xbf334f4>
+{Unit
+}:630:in `block in exposed?'
+{Unit
+}:628:in `each'
+{Unit
+}:628:in `exposed?'
+{Unit_Sprite
+}:156:in `update_bitmap'
+{Unit_Sprite
+}:136:in `update'
+{Spriteset_Map
+ kk20}:204:in `block in update'
+{Spriteset_Map
+ kk20}:201:in `each'
+{Spriteset_Map
+ kk20}:201:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2014-12-27 15:58:46 -0800:
+undefined method `update' for nil:NilClass
+{Scene_AWMap Phases}:883:in `phase_menu'
+{Scene_AWMap Phases}:214:in `update_by_phase'
+{Scene_AWMap Phases}:73:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2014-12-28 16:24:11 -0800:
+bignum too big to convert into `long'
+{RPG Module}:451:in `x='
+{RPG Module}:451:in `x='
+{Unit_Sprite
+}:196:in `x='
+{Unit_Sprite
+}:189:in `update_screen'
+{Unit_Sprite
+}:125:in `update'
+{Spriteset_Map
+ kk20}:204:in `block in update'
+{Spriteset_Map
+ kk20}:201:in `each'
+{Spriteset_Map
+ kk20}:201:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2014-12-28 16:24:57 -0800:
+bignum too big to convert into `long'
+{RPG Module}:451:in `x='
+{RPG Module}:451:in `x='
+{Unit_Sprite
+}:196:in `x='
+{Unit_Sprite
+}:189:in `update_screen'
+{Unit_Sprite
+}:125:in `update'
+{Spriteset_Map
+ kk20}:204:in `block in update'
+{Spriteset_Map
+ kk20}:201:in `each'
+{Spriteset_Map
+ kk20}:201:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2014-12-28 16:27:19 -0800:
+bignum too big to convert into `long'
+{RPG Module}:451:in `x='
+{RPG Module}:451:in `x='
+{Unit_Sprite
+}:196:in `x='
+{Unit_Sprite
+}:189:in `update_screen'
+{Unit_Sprite
+}:125:in `update'
+{Spriteset_Map
+ kk20}:204:in `block in update'
+{Spriteset_Map
+ kk20}:201:in `each'
+{Spriteset_Map
+ kk20}:201:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2014-12-28 16:28:18 -0800:
+bignum too big to convert into `long'
+{RPG Module}:451:in `x='
+{RPG Module}:451:in `x='
+{Unit_Sprite
+}:199:in `x='
+{Unit_Sprite
+}:191:in `update_screen'
+{Unit_Sprite
+}:127:in `update'
+{Spriteset_Map
+ kk20}:204:in `block in update'
+{Spriteset_Map
+ kk20}:201:in `each'
+{Spriteset_Map
+ kk20}:201:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2014-12-28 16:28:52 -0800:
+bignum too big to convert into `long'
+{RPG Module}:451:in `x='
+{RPG Module}:451:in `x='
+{Unit_Sprite
+}:199:in `x='
+{Unit_Sprite
+}:191:in `update_screen'
+{Unit_Sprite
+}:127:in `update'
+{Spriteset_Map
+ kk20}:204:in `block in update'
+{Spriteset_Map
+ kk20}:201:in `each'
+{Spriteset_Map
+ kk20}:201:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2014-12-28 16:33:39 -0800:
+undefined method `-' for nil:NilClass
+{Unit_Sprite
+}:209:in `screen_x'
+{Unit_Sprite
+}:189:in `update_screen'
+{Unit_Sprite
+}:125:in `update'
+{Unit_Sprite
+}:116:in `refresh'
+{Unit_Sprite
+}:45:in `initialize'
+{Spriteset_Map
+ kk20}:94:in `new'
+{Spriteset_Map
+ kk20}:94:in `block in init_units'
+{Spriteset_Map
+ kk20}:91:in `each'
+{Spriteset_Map
+ kk20}:91:in `init_units'
+{Scene_AWMap}:66:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2014-12-28 16:34:41 -0800:
+undefined method `-' for nil:NilClass
+{Unit_Sprite
+}:210:in `screen_x'
+{Unit_Sprite
+}:189:in `update_screen'
+{Unit_Sprite
+}:125:in `update'
+{Unit_Sprite
+}:116:in `refresh'
+{Unit_Sprite
+}:45:in `initialize'
+{Spriteset_Map
+ kk20}:107:in `new'
+{Spriteset_Map
+ kk20}:107:in `draw_unit'
+{Unit
+}:303:in `init_sprite'
+{Build Window}:146:in `build_unit'
+{Scene_AWMap Phases}:942:in `phase_menu'
+{Scene_AWMap Phases}:214:in `update_by_phase'
+{Scene_AWMap Phases}:73:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2014-12-28 18:24:42 -0800:
+undefined local variable or method `control_after' for #<Game_Player:0xc18c534>
+{Game_Player kk20}:386:in `add_move_action'
+{Scene_AWMap Phases}:423:in `preturn_finish'
+{Scene_AWMap Phases}:227:in `phase_preturn'
+{Scene_AWMap Phases}:205:in `update_by_phase'
+{Scene_AWMap Phases}:73:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2014-12-28 18:25:02 -0800:
+undefined method `>' for nil:NilClass
+{Scene_AWMap Phases}:61:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2014-12-28 18:28:42 -0800:
+undefined method `scroll_move=' for #<Game_Player:0xc057b78>
+{Scene_AWMap Phases}:858:in `phase_action'
+{Scene_AWMap Phases}:209:in `update_by_phase'
+{Scene_AWMap Phases}:73:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2014-12-29 20:53:14 -0800:
+disposed sprite
+{Spriteset_Map
+ kk20}:211:in `bitmap='
+{Spriteset_Map
+ kk20}:211:in `block in update'
+{Spriteset_Map
+ kk20}:201:in `each'
+{Spriteset_Map
+ kk20}:201:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2014-12-29 20:58:12 -0800:
+disposed sprite
+{RPG Module}:202:in `viewport'
+{RPG Module}:202:in `block in animation'
+{RPG Module}:201:in `each'
+{RPG Module}:201:in `animation'
+{Unit_Sprite
+}:68:in `play_animation'
+{Spriteset_Map
+ kk20}:212:in `block in update'
+{Spriteset_Map
+ kk20}:201:in `each'
+{Spriteset_Map
+ kk20}:201:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2014-12-29 21:02:32 -0800:
+disposed sprite
+{RPG Module}:202:in `viewport'
+{RPG Module}:202:in `block in animation'
+{RPG Module}:201:in `each'
+{RPG Module}:201:in `animation'
+{Unit_Sprite
+}:68:in `play_animation'
+{Spriteset_Map
+ kk20}:213:in `block in update'
+{Spriteset_Map
+ kk20}:201:in `each'
+{Spriteset_Map
+ kk20}:201:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2015-01-14 17:02:22 -0800:
+disposed sprite
+{RPG Module}:202:in `viewport'
+{RPG Module}:202:in `block in animation'
+{RPG Module}:201:in `each'
+{RPG Module}:201:in `animation'
+{Unit_Sprite
+}:68:in `play_animation'
+{Spriteset_Map
+ kk20}:213:in `block in update'
+{Spriteset_Map
+ kk20}:201:in `each'
+{Spriteset_Map
+ kk20}:201:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2015-01-14 17:07:35 -0800:
+disposed sprite
+{RPG Module}:202:in `viewport'
+{RPG Module}:202:in `block in animation'
+{RPG Module}:201:in `each'
+{RPG Module}:201:in `animation'
+{Unit_Sprite
+}:68:in `play_animation'
+{Spriteset_Map
+ kk20}:213:in `block in update'
+{Spriteset_Map
+ kk20}:201:in `each'
+{Spriteset_Map
+ kk20}:201:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2015-01-14 17:09:25 -0800:
+disposed sprite
+{RPG Module}:202:in `viewport'
+{RPG Module}:202:in `block in animation'
+{RPG Module}:201:in `each'
+{RPG Module}:201:in `animation'
+{Unit_Sprite
+}:73:in `play_animation'
+{Spriteset_Map
+ kk20}:213:in `block in update'
+{Spriteset_Map
+ kk20}:201:in `each'
+{Spriteset_Map
+ kk20}:201:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2015-01-21 13:22:22 -0800:
+wrong number of arguments (4 for 3)
+{Game_Map}:336:in `set_weather'
+{CO_Drake
+}:84:in `use_cop'
+{Army
+}:193:in `use_power'
+{Scene_AWMap Phases}:918:in `phase_menu'
+{Scene_AWMap Phases}:211:in `update_by_phase'
+{Scene_AWMap Phases}:73:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2015-02-10 21:29:45 -0800:
+undefined method `x' for nil:NilClass
+{Scene_AWMap}:111:in `process_movement'
+{Scene_AWMap Phases}:531:in `phase_cursor'
+{Scene_AWMap Phases}:206:in `update_by_phase'
+{Scene_AWMap Phases}:73:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2015-02-10 21:30:46 -0800:
+private method `load' called for nil:NilClass
+{Scene_AWMap Phases}:815:in `phase_action'
+{Scene_AWMap Phases}:209:in `update_by_phase'
+{Scene_AWMap Phases}:73:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:40:in `<main>'
+ruby:in `eval'
+
+2015-02-10 23:28:38 -0800:
+undefined method `update' for nil:NilClass
+{Spriteset_Map
+ kk20}:241:in `update'
+{FZer0 Weather Script}:4806:in `update'
+{Spriteset_Map
+}:52:in `initialize'
+{Spriteset_Map
+ kk20}:47:in `initialize'
+{XPA Tilemap}:883:in `initialize'
+{Scene_AWMap}:65:in `new'
+{Scene_AWMap}:65:in `main'
+{Main
+}:57:in `<main>'
+ruby:in `eval'
+
+2015-02-10 23:34:09 -0800:
+undefined method `unit_moving' for nil:NilClass
+{StatWindow
+ find kk20}:48:in `update'
+{Spriteset_Map
+ kk20}:255:in `update'
+{FZer0 Weather Script}:4806:in `update'
+{Spriteset_Map
+}:52:in `initialize'
+{Spriteset_Map
+ kk20}:47:in `initialize'
+{XPA Tilemap}:883:in `initialize'
+{Scene_AWMap}:65:in `new'
+{Scene_AWMap}:65:in `main'
+{Main
+}:57:in `<main>'
+ruby:in `eval'
+
+2015-03-10 16:51:03 -0700:
+disposed sprite
+{RPG Module}:229:in `viewport'
+{RPG Module}:229:in `block in loop_animation'
+{RPG Module}:228:in `each'
+{RPG Module}:228:in `loop_animation'
+{RPG::Sprite Edit}:63:in `loop_animation'
+{Unit_Sprite
+}:81:in `play_animation'
+{Scene_AWMap Phases}:357:in `block (2 levels) in preturn_repair'
+{Scene_AWMap Phases}:107:in `call'
+{Scene_AWMap Phases}:107:in `process_cursor_movement_commands'
+{Scene_AWMap Phases}:71:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:57:in `<main>'
+ruby:in `eval'
+
+2015-03-10 17:00:35 -0700:
+undefined method `update' for nil:NilClass
+{Scene_AWMap Phases}:892:in `phase_menu'
+{Scene_AWMap Phases}:211:in `update_by_phase'
+{Scene_AWMap Phases}:73:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:57:in `<main>'
+ruby:in `eval'
+
+2015-03-10 17:02:25 -0700:
+undefined method `update' for nil:NilClass
+{Scene_AWMap Phases}:892:in `phase_menu'
+{Scene_AWMap Phases}:211:in `update_by_phase'
+{Scene_AWMap Phases}:73:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:57:in `<main>'
+ruby:in `eval'
+
+2015-03-13 18:30:36 -0700:
+disposed sprite
+{RPG Module}:229:in `viewport'
+{RPG Module}:229:in `block in loop_animation'
+{RPG Module}:228:in `each'
+{RPG Module}:228:in `loop_animation'
+{RPG::Sprite Edit}:63:in `loop_animation'
+{Unit_Sprite
+}:81:in `play_animation'
+{Scene_AWMap Phases}:359:in `block (2 levels) in preturn_repair'
+{Scene_AWMap Phases}:107:in `call'
+{Scene_AWMap Phases}:107:in `process_cursor_movement_commands'
+{Scene_AWMap Phases}:71:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:59:in `<main>'
+ruby:in `eval'
+
+2015-03-15 14:59:09 -0700:
+undefined local variable or method `days' for #<Day_Animation:0xc11879c @sprite=#<RPG::Sprite:0xc118788>>
+{Day Animation}:14:in `animate'
+{Spriteset_Map
+ kk20}:187:in `update'
+{FZer0 Weather Script}:4806:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:59:in `<main>'
+ruby:in `eval'
+
+2015-04-12 00:20:00 -0700:
+private method `load' called for nil:NilClass
+{Scene_AWMap Phases}:818:in `phase_action'
+{Scene_AWMap Phases}:209:in `update_by_phase'
+{Scene_AWMap Phases}:73:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:59:in `<main>'
+ruby:in `eval'
+
+2015-05-28 23:14:27 -0700:
+disposed sprite
+{Unit_Sprite
+}:157:in `opacity='
+{Unit_Sprite
+}:157:in `update_bitmap'
+{Unit_Sprite
+}:129:in `update'
+{Spriteset_Map
+ kk20}:153:in `block in update'
+{Spriteset_Map
+ kk20}:150:in `each'
+{Spriteset_Map
+ kk20}:150:in `update'
+{FZer0 Weather Script}:4806:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main
+}:59:in `<main>'
+ruby:in `eval'
+
+2015-05-28 23:39:33 -0700:
+uninitialized constant Scene_Title::Scene_Lobby
+{Scene_Title
+ Edit}:191:in `command_continue'
+{Scene_Title
+}:102:in `update'
+{Scene_Title
+ Edit}:110:in `block in main'
+{Scene_Title
+ Edit}:104:in `loop'
+{Scene_Title
+ Edit}:104:in `main'
+{Main
+}:59:in `<main>'
+ruby:in `eval'
+

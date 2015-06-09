@@ -1,0 +1,9 @@
+Remove any need for RTP things
+
+In the FMod script, comment out the line that tries to search for the RTP folder (below line 735)
+
+Configuration settings should not request Standard RTP package
+
+AW_Font needs to be installed.
+
+RGSS102E.dll needs to be in the folder
