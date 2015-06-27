@@ -26,47 +26,47 @@ class Scene_Title
       battle_test
       return
     end
-		
+    
     
     
     $CO.each_index{|i| $CO[i] = $CO[i].new }
     
 =begin
-		maps = {}
-		for i in 0..30
-		maps[i] = RPG::MapInfo.new
-		maps[i].name = "Map#{i}"
-		maps[i].parent_id = 0
-		maps[i].order = i
-		maps[i].expanded = false
-		maps[i].scroll_x = 20*16
-			maps[i].scroll_y = 15*16
-		end
-		
-		file = File.open("Data/MapInfos.rxdata", "wb")
-		Marshal.dump(maps, file)
-		file.close
+    maps = {}
+    for i in 0..30
+    maps[i] = RPG::MapInfo.new
+    maps[i].name = "Map#{i}"
+    maps[i].parent_id = 0
+    maps[i].order = i
+    maps[i].expanded = false
+    maps[i].scroll_x = 20*16
+      maps[i].scroll_y = 15*16
+    end
+    
+    file = File.open("Data/MapInfos.rxdata", "wb")
+    Marshal.dump(maps, file)
+    file.close
 =end
 
     #maps = load_data("Data/MapInfos.rxdata")
-		#maps.each_value{|m| p m}
-		#puts maps.keys.sort
+    #maps.each_value{|m| p m}
+    #puts maps.keys.sort
 =begin
-		maps[6] = maps[1]
-		maps[6].name = "Castle"
-		maps[6].parent_id = 0
-		maps[6].order = 6
-		maps[6].expanded = false
-		maps[6].scroll_x = 36*16
-		maps[6].scroll_y = 36*18
-		File.open("Data/MapInfos.rxdata", "wb")
-		Marshal.dump(maps, "Data/MapInfos.rxdata")
-		File.close
-		maps = load_data("Data/MapInfos.rxdata")
-		maps.each_key{|m| puts m}
-		puts maps.keys.sort
+    maps[6] = maps[1]
+    maps[6].name = "Castle"
+    maps[6].parent_id = 0
+    maps[6].order = 6
+    maps[6].expanded = false
+    maps[6].scroll_x = 36*16
+    maps[6].scroll_y = 36*18
+    File.open("Data/MapInfos.rxdata", "wb")
+    Marshal.dump(maps, "Data/MapInfos.rxdata")
+    File.close
+    maps = load_data("Data/MapInfos.rxdata")
+    maps.each_key{|m| puts m}
+    puts maps.keys.sort
 =end
-		# Load database
+    # Load database
     $data_actors        = load_data("Data/Actors.rxdata")
     $data_classes       = load_data("Data/Classes.rxdata")
     $data_skills        = load_data("Data/Skills.rxdata")
@@ -176,7 +176,7 @@ class Scene_Title
     $game_player        = Game_Player.new
     # Set up initial party
     $game_party.setup_starting_members
-		# Refresh game player
+    # Refresh game player
     $game_player.refresh
     # Switch to map screen
     $scene = Scene_MainMenu.new

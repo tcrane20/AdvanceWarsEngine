@@ -22,7 +22,7 @@ TILE_SILO       = 13
 TILE_COMTOWER   = 14
 TILE_HQ         = 15
 
-TILE_JOINT			= 16
+TILE_JOINT      = 16
 #====================#
 # Move Type          #
 #====================#
@@ -33,7 +33,7 @@ MOVE_TREAD      = 3
 MOVE_AIR        = 4
 MOVE_TRANS      = 5           # Lander only
 MOVE_SEA        = 6
-MOVE_TIRE_B			= 7
+MOVE_TIRE_B      = 7
 
 TOTAL_MOVETYPES = 8
 #====================#
@@ -58,27 +58,27 @@ LND             = 15          # Lander
 CRS             = 16          # Cruiser
 SUB             = 17          # Submarine
 BSP             = 18          # Battleship
-MEG							= 19
-CAR							= 20
-STH							= 21
-DST							= 22
-ZEP							= 23
-BIK							= 24
-ATK							= 25
+MEG              = 19
+CAR              = 20
+STH              = 21
+DST              = 22
+ZEP              = 23
+BIK              = 24
+ATK              = 25
 
 #====================#
 # Unit Groups        #
 #====================#
-INFANTRY 	= [INF, MEC, BIK]
-VEHICLE  	= [RCN, APC, ART, TNK, AAR, MIS, RKT, MTK, NEO, MEG, ATK]
-LAND		 	= INFANTRY + VEHICLE
-COPTER   	= [TCP, BCP]
-PLANE		 	= [ZEP, FTR, BMR, STH]
-AIR			 	= COPTER + PLANE
-SEA			 	= [LND, CRS, SUB, BSP, CAR, DST]
+INFANTRY   = [INF, MEC, BIK]
+VEHICLE    = [RCN, APC, ART, TNK, AAR, MIS, RKT, MTK, NEO, MEG, ATK]
+LAND       = INFANTRY + VEHICLE
+COPTER     = [TCP, BCP]
+PLANE       = [ZEP, FTR, BMR, STH]
+AIR         = COPTER + PLANE
+SEA         = [LND, CRS, SUB, BSP, CAR, DST]
 
-TRANSPORT	= [APC, LND, TCP]
-TANK			= [TNK, MTK, NEO, MEG]
+TRANSPORT  = [APC, LND, TCP]
+TANK      = [TNK, MTK, NEO, MEG]
 
 #==========================#
 # General Constants        #

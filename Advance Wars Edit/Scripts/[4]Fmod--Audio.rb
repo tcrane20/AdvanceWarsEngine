@@ -1117,16 +1117,16 @@ module Audio
   #     position        : Starting position in milliseconds
   #-------------------------------------------------------------------------- 
   def Audio.bgm_play(filename, volume = 0, pitch = 100, position = 0, fade_in = false)
-		format = Config.get_music_format(filename) #[loop, fin, volume]
-		
+    format = Config.get_music_format(filename) #[loop, fin, volume]
+    
     if @bgm_fading_out and !fade_in
       @next_bgm = RPG::AudioFile.new(filename, volume, pitch)
       @next_bgm_position = position
       return
     end
-		filename = "Audio/BGM/" + filename
+    filename = "Audio/BGM/" + filename
     start_volume = (volume == 0 ? format[2] : volume)
-		
+    
     if fade_in
       @bgm_target_volume = volume unless @bgm_fading_in
       @bgm_fading_in = true
@@ -1140,9 +1140,9 @@ module Audio
     @playing_bgm = RPG::AudioFile.new(filename, start_volume, pitch)
     @memorized_bgm = @playing_bgm
     @memorized_bgm_position = position
-		
-		# Set loop points
-		FMod.bgm_set_loop_points(format[0], format[1])
+    
+    # Set loop points
+    FMod.bgm_set_loop_points(format[0], format[1])
   end
   #--------------------------------------------------------------------------
   # * Stops BGM Playback
@@ -1294,7 +1294,7 @@ module Audio
         # If another BGM played while fading out, play it (most recent)
         if @next_bgm
           self.bgm_play(@next_bgm.name, @next_bgm.volume,
-						@next_bgm.pitch, @next_bgm_position)
+            @next_bgm.pitch, @next_bgm_position)
           @next_bgm = nil
         end
       else

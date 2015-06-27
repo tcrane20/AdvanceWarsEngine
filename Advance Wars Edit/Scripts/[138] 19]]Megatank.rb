@@ -9,7 +9,7 @@ class Megatank < Unit
   def initialize(x, y, army)
     super(x, y, army)
     @name = "megatank"
-		@real_name = "Megatank"
+    @real_name = "Megatank"
     @unit_type = MEG
     @cost = 26000
     @move = 4
@@ -18,25 +18,25 @@ class Megatank < Unit
     @fuel = 50
     @max_ammo = 3
     @ammo = 3
-		@weapon1 = "Megacannon"
-		@weapon2 = "Machine Gun"
-		@weapon1_effect = [0, 2, 1, 1, 0, 0]
-		@weapon2_effect = [2, 1, 0, 0, 1, 0]
+    @weapon1 = "Megacannon"
+    @weapon2 = "Machine Gun"
+    @weapon1_effect = [0, 2, 1, 1, 0, 0]
+    @weapon2_effect = [2, 1, 0, 0, 1, 0]
     @star_energy = 200
     @move_se = "h_tread"
-		
-		@stat_desc = ["Invented by Green Earth, Megatanks are the strongest land unit.",
-			"Megatanks move slower than most units. The unit travels on treads.",
-			"The vision range of this unit is pitiful.",
-			"The unit moves on fuel. It can no longer move if it drops to zero.",
-			"Megatanks use, of course, the megacannon. It uses up ammo quickly.",
-			"Megatanks can wipe out most vehicles in one shot, including Medium Tanks.",
-			"The attack does decent damage to ships.",
-			"The attack does decent damage to surfaced subs.", "",
-			"Megatanks are armed with machine guns when their primary weapon runs out of ammo.",
-			"Megatanks can wipe out infantry units in one shot.",
-			"The attack is effective against indirect-attacking vehicles.",
-			"The attack is effective against battle copters.", ""]
+    
+    @stat_desc = ["Invented by Green Earth, Megatanks are the strongest land unit.",
+      "Megatanks move slower than most units. The unit travels on treads.",
+      "The vision range of this unit is pitiful.",
+      "The unit moves on fuel. It can no longer move if it drops to zero.",
+      "Megatanks use, of course, the megacannon. It uses up ammo quickly.",
+      "Megatanks can wipe out most vehicles in one shot, including Medium Tanks.",
+      "The attack does decent damage to ships.",
+      "The attack does decent damage to surfaced subs.", "",
+      "Megatanks are armed with machine guns when their primary weapon runs out of ammo.",
+      "Megatanks can wipe out infantry units in one shot.",
+      "The attack is effective against indirect-attacking vehicles.",
+      "The attack is effective against battle copters.", ""]
   end
   
   def description

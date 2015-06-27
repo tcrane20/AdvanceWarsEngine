@@ -31,8 +31,8 @@ class CO_Markus < CO
     @cop_stars = 3
     @scop_stars = 6
   end
-	
-	def atk_bonus(unit)
+  
+  def atk_bonus(unit)
     bonus = 0
     if @scop
       bonus += (1.1 ** (10 - unit.unit_hp)) * 100
@@ -50,8 +50,8 @@ class CO_Markus < CO
       end
     end
     return bonus
-	end
-	
+  end
+  
   def def_bonus(unit)
     bonus = 0
     if @scop
@@ -64,24 +64,24 @@ class CO_Markus < CO
     end
   end
   
-	def luck_bonus(unit)
-		if @cop
-			return 6 + (10 - unit.unit_hp)
-		else
-			return 5
-		end
-	end
+  def luck_bonus(unit)
+    if @cop
+      return 6 + (10 - unit.unit_hp)
+    else
+      return 5
+    end
+  end
   
-	def use_cop
-		super
-		@no_luck_penalty = true
-	end
-	
-	def cop=(bool)
-		@cop = bool
-		@no_luck_penalty = bool
-	end
-	
-	
+  def use_cop
+    super
+    @no_luck_penalty = true
+  end
+  
+  def cop=(bool)
+    @cop = bool
+    @no_luck_penalty = bool
+  end
+  
+  
 end
 $CO.push(CO_Markus)

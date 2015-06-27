@@ -161,9 +161,9 @@ module Mouse
   #-------------------------------------------------------------------------
   @game_window = nil    # Set game handle to nil
   @cursor_show.call(0)  # Turn off system mouse
-  @windows = []					# List of windows mouse is currently over
-	@saved_window = nil		# Holds the last active window
-	#-------------------------------------------------------------------------
+  @windows = []          # List of windows mouse is currently over
+  @saved_window = nil    # Holds the last active window
+  #-------------------------------------------------------------------------
   # * Click?
   #     button : button to check
   #-------------------------------------------------------------------------
@@ -189,20 +189,20 @@ module Mouse
       return -1, -1
     end    
   end
-	#-------------------------------------------------------------------------
+  #-------------------------------------------------------------------------
   # * Returns true if Mouse is over game screen
   #-------------------------------------------------------------------------
-	def Mouse.on_screen?
-		return (Mouse.pos(false) != [-1,-1])
-	end
-	#-------------------------------------------------------------------------
+  def Mouse.on_screen?
+    return (Mouse.pos(false) != [-1,-1])
+  end
+  #-------------------------------------------------------------------------
   # * Returns the game window's origin
   #-------------------------------------------------------------------------
-	def Mouse.game_origin
-		x,y = Mouse.pos
-		return screen_x - x, screen_y - y
-	end
-	
+  def Mouse.game_origin
+    x,y = Mouse.pos
+    return screen_x - x, screen_y - y
+  end
+  
   #-------------------------------------------------------------------------
   # * Set Mouse Position
   #     x      : new x-coordinate (0 to 640)
@@ -252,39 +252,39 @@ module Mouse
     @cursor_pos_get.call(pos)
     return pos.unpack('ll')[1]
   end
-	
-	def Mouse.window_add(win)
-		return unless win.is_a?(Window_Base)
-		@windows.push(win)
-	end
-	
-	def Mouse.saved_window=(win)
-		return unless win.is_a?(Window_Base)
-		@saved_window = win
-	end
-	
-	def Mouse.update_windows
-		return if @windows.size == 0
-		# Organize list of windows based on z-coord
-		while @windows.size > 1
-			if @windows[0].z < @windows[1].z
-				@windows[1].active = false
-				@windows.delete_at(1)
-			else
-				@windows[0].active = false
-				@windows.delete_at(0)
-			end
-		end
-		# Activate the window
-		@windows[0].active = true
-		# Save the window as the "current" window and deactivate the previous one
-		if @windows[0] != @saved_window
-			@saved_window.active = false unless (@saved_window.nil? or @saved_window.disposed?)
-			@saved_window = @windows[0]
-		end
-		# Clear the array for next update
-		@windows = []
-	end
+  
+  def Mouse.window_add(win)
+    return unless win.is_a?(Window_Base)
+    @windows.push(win)
+  end
+  
+  def Mouse.saved_window=(win)
+    return unless win.is_a?(Window_Base)
+    @saved_window = win
+  end
+  
+  def Mouse.update_windows
+    return if @windows.size == 0
+    # Organize list of windows based on z-coord
+    while @windows.size > 1
+      if @windows[0].z < @windows[1].z
+        @windows[1].active = false
+        @windows.delete_at(1)
+      else
+        @windows[0].active = false
+        @windows.delete_at(0)
+      end
+    end
+    # Activate the window
+    @windows[0].active = true
+    # Save the window as the "current" window and deactivate the previous one
+    if @windows[0] != @saved_window
+      @saved_window.active = false unless (@saved_window.nil? or @saved_window.disposed?)
+      @saved_window = @windows[0]
+    end
+    # Clear the array for next update
+    @windows = []
+  end
   #-------------------------------------------------------------------------
   #                           AUTOMATIC FUNCTIONS                          #
   #-------------------------------------------------------------------------
@@ -321,13 +321,13 @@ module Mouse
        return nil
     end
   end
-	
-	#-------------------------------------------------------------------------  
+  
+  #-------------------------------------------------------------------------  
   # * Convert game window coordinates from screen coordinates
   #-------------------------------------------------------------------------  
   def Mouse.client_to_screen(x, y)
-		x, y = screen_to_client(screen_x, screen_y)
-		return x,y
+    x, y = screen_to_client(screen_x, screen_y)
+    return x,y
     return nil unless x and y
     pos = [x, y].pack('ll')
     if @window_scr2cli.call(hwnd, pos) != 0
@@ -617,12 +617,12 @@ end
 #   Adds new Mouse Input functions into a new class
 #==============================================================================
 module Input
-	C.push(Input::Key['Mouse Left']) if !C.include?(Input::Key['Mouse Left'])
-	B.push(Input::Key['Mouse Right']) if !B.include?(Input::Key['Mouse Right'])
+  C.push(Input::Key['Mouse Left']) if !C.include?(Input::Key['Mouse Left'])
+  B.push(Input::Key['Mouse Right']) if !B.include?(Input::Key['Mouse Right'])
 end
 
 class << Input
-	
+  
   #--------------------------------------------------------------------------
   # * Update old input calls
   #--------------------------------------------------------------------------
@@ -789,14 +789,14 @@ class Window_Selectable < Window_Base
   # * Perform mouse operations
   #--------------------------------------------------------------------------
   def mouse_operation
-		return unless Mouse.on_screen?
+    return unless Mouse.on_screen?
     mx = Mouse.pos_x - (self.x - self.ox)
     my = Mouse.pos_y - (self.y - self.oy)
-		
+    
     width = self.width / @column_max
     height = 32
     #for index in 0...@item_max
-		for index in self.top_row...(self.top_row + self.page_row_max)
+    for index in self.top_row...(self.top_row + self.page_row_max)
       x = index % @column_max * width
       y = index / @column_max * 32
       if mx > x and mx < x + width and my > y and my < y + height
@@ -804,12 +804,12 @@ class Window_Selectable < Window_Base
         return
       end
     end
-		if (Mouse.pos_y < self.y and self.top_row != 0) or 
-		(Mouse.pos_y > self.y + self.height and self.top_row + self.page_row_max < @item_max / @column_max)
-			mouse_cursor(nil)
-			return
-		end
-		
+    if (Mouse.pos_y < self.y and self.top_row != 0) or 
+    (Mouse.pos_y > self.y + self.height and self.top_row + self.page_row_max < @item_max / @column_max)
+      mouse_cursor(nil)
+      return
+    end
+    
   end
   #--------------------------------------------------------------------------
   # * Track the position of the mouse cursor
@@ -819,7 +819,7 @@ class Window_Selectable < Window_Base
  when its current position is at the top or bottom of the window. If the location is not
  at either of those spots, it will jump. Thus, what I want is this:
 1) If the mouse is located above the window (mouse_y < window_y) then @index = top_row - 1
-2) "										 " below "        " (mouse_y > window_y) then @index = bottom_row + 1
+2) "                     " below "        " (mouse_y > window_y) then @index = bottom_row + 1
 3) If mouse is at a viable spot within the visible selections, immediately jump to it
 =end
   def mouse_cursor(index)
@@ -828,13 +828,13 @@ class Window_Selectable < Window_Base
     #~ row1 = @index / @column_max
     #~ row2 = index / @column_max
     bottom = self.top_row + (self.page_row_max - 1)
-		#~ print bottom if Input.trigger?(Input::SHIFT)
-		#~ # Cursor is located above the top row item
+    #~ print bottom if Input.trigger?(Input::SHIFT)
+    #~ # Cursor is located above the top row item
     #~ if row1 == self.top_row and row2 < self.top_row
       #~ return if @scroll_wait > 0
       #~ @index = [@index - @column_max, 0].max
       #~ @scroll_wait = 10
-			#~ # Cursor is located below the bottom row item
+      #~ # Cursor is located below the bottom row item
     #~ elsif row1 == bottom and row2 > bottom
       #~ return if @scroll_wait > 0
       #~ @index = [@index + @column_max, @item_max - 1].min
@@ -842,21 +842,21 @@ class Window_Selectable < Window_Base
     #~ else
       #~ @index = index
     #~ end
-		if Mouse.pos_y < self.y and self.top_row != 0
-			return if @scroll_wait > 0
-			@index = self.top_row - @column_max
-			@scroll_wait = 10
-		elsif Mouse.pos_y > self.y + self.height and @index < @item_max - @column_max
-			return if @scroll_wait > 0
-			@index = bottom + @column_max
-			@scroll_wait = 10
-		else
-			return if index == nil
-			@index = index
-			@scroll_wait = 0
-		end
-		$game_system.se_play($data_system.cursor_se)
-		
+    if Mouse.pos_y < self.y and self.top_row != 0
+      return if @scroll_wait > 0
+      @index = self.top_row - @column_max
+      @scroll_wait = 10
+    elsif Mouse.pos_y > self.y + self.height and @index < @item_max - @column_max
+      return if @scroll_wait > 0
+      @index = bottom + @column_max
+      @scroll_wait = 10
+    else
+      return if index == nil
+      @index = index
+      @scroll_wait = 0
+    end
+    $game_system.se_play($data_system.cursor_se)
+    
   end
 end
 

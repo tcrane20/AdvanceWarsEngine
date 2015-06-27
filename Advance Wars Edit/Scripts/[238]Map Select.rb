@@ -15,16 +15,16 @@ _________________________
 ________________________________________________________________________________
 =end
 class Window_MapSelect < Window_Selectable
-	
-	def initialize(index = 0)
-		super(40,50,180,8+12*32)
-		self.active = true
-		self.index = index
-		@old_index = 0
+  
+  def initialize(index = 0)
+    super(40,50,180,8+12*32)
+    self.active = true
+    self.index = index
+    @old_index = 0
     @minimap_viewport = Viewport.new(0,0,640,480)
     @minimap_viewport.z = 10000
-		refresh
-	end
+    refresh
+  end
   #--------------------------------------------------------------------------
   # * Refresh
   #--------------------------------------------------------------------------
@@ -34,16 +34,16 @@ class Window_MapSelect < Window_Selectable
       self.contents = nil
     end
     @data = []
-		@mapfiles = []
+    @mapfiles = []
     @map_players = []
-		# Load map names into list
-		infos = load_data("Data/MapInfos.rxdata")
+    # Load map names into list
+    infos = load_data("Data/MapInfos.rxdata")
     # Check each map file
-		Dir.foreach("Data/") do |filename|
+    Dir.foreach("Data/") do |filename|
       # If filename contains the basic 'Map00x' format
-			if filename =~ /Map[\d]+\.rxdata/
+      if filename =~ /Map[\d]+\.rxdata/
         # Map ID and load it
-				num = filename[/\d+/].to_i
+        num = filename[/\d+/].to_i
         map = load_data(sprintf("Data/Map%03d.rxdata", num))
         if map.initialized?
           # Push map into list with its name
@@ -87,8 +87,8 @@ class Window_MapSelect < Window_Selectable
           break # Found our event, stop looping
         end
         # Failed to find a map initializer event. Do not load into list.
-			end
-		end 
+      end
+    end 
     # If item count is not 0, make a bit map and draw all items
     @item_max = @data.size
     if @item_max > 0
@@ -97,45 +97,45 @@ class Window_MapSelect < Window_Selectable
         draw_item(i)
       end
     end
-		get_minimap
-  end	
-	
-	def draw_item(index)
-		draw_text(index+1, @data[index])
-	end
-	
-	def get_map
-		map_id = @mapfiles[@index]
-		#@minimap.visible = false
-		return map_id
-	end
-	
-	def dispose
-		@minimap.dispose
-		super
-	end
-	
-	def visible=(bool)
-		@minimap.visible = bool
-		super(bool)
-	end
-	
-	def get_minimap
-		@old_index = @index
-		@minimap.dispose unless @minimap.nil?
-		map = load_data(sprintf("Data/Map%03d.rxdata", @mapfiles[@index]))
-		@minimap = Minimap_Graphic.new(map, @minimap_viewport)
+    get_minimap
+  end  
+  
+  def draw_item(index)
+    draw_text(index+1, @data[index])
+  end
+  
+  def get_map
+    map_id = @mapfiles[@index]
+    #@minimap.visible = false
+    return map_id
+  end
+  
+  def dispose
+    @minimap.dispose
+    super
+  end
+  
+  def visible=(bool)
+    @minimap.visible = bool
+    super(bool)
+  end
+  
+  def get_minimap
+    @old_index = @index
+    @minimap.dispose unless @minimap.nil?
+    map = load_data(sprintf("Data/Map%03d.rxdata", @mapfiles[@index]))
+    @minimap = Minimap_Graphic.new(map, @minimap_viewport)
     # Testing by adding variables to RPG::Map
     #map.players_setup = [] #KK20
    # mapfile = File.open(sprintf("Data/Map%03d.rxdata", @mapfiles[@index]), "wb")
    # Marshal.dump(map, mapfile)
    # mapfile.close
-	end
-	
-	alias get_minimap_before_update update
-	def update
-		get_minimap if @index != @old_index
-		get_minimap_before_update
-	end
-	
+  end
+  
+  alias get_minimap_before_update update
+  def update
+    get_minimap if @index != @old_index
+    get_minimap_before_update
+  end
+  
 end

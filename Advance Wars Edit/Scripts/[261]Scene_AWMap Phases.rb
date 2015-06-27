@@ -38,28 +38,28 @@ ________________________________________________________________________________
 =end
 class Scene_AWMap
   #--------------------------------------------------------------------------
-	# * Frame Update
-	#--------------------------------------------------------------------------
-	def update
+  # * Frame Update
+  #--------------------------------------------------------------------------
+  def update
     #DEBUG
     $thing.update unless $thing.nil?
     
-		# Update the map and frame count
-		$game_map.update
-		# Update any running events
-		$game_system.map_interpreter.update
-		# Update the player
-		cursor.update 
-		# Update system (timer), screen shakes/tints
-		$game_system.update
-		$game_screen.update
-		# Update sprite set (updates all the graphics on screen like unit or cursor)
-		$spriteset.update
+    # Update the map and frame count
+    $game_map.update
+    # Update any running events
+    $game_system.map_interpreter.update
+    # Update the player
+    cursor.update 
+    # Update system (timer), screen shakes/tints
+    $game_system.update
+    $game_screen.update
+    # Update sprite set (updates all the graphics on screen like unit or cursor)
+    $spriteset.update
     # Update arrow path
-		@arrow_path.each{|i| i.update}
-		# Reduce wait timer each frame
-		@wait -= 1 if @wait > 0
-		# Deletes placeholder spots in army units arrays
+    @arrow_path.each{|i| i.update}
+    # Reduce wait timer each frame
+    @wait -= 1 if @wait > 0
+    # Deletes placeholder spots in army units arrays
     unless @preturn == 2
       $game_map.army.each{|army|
         next if army.nil?
@@ -72,21 +72,21 @@ class Scene_AWMap
     else
       update_by_phase
     end
-		# Update message window
-		@message_window.update
-		# Check if an army has lost battle
+    # Update message window
+    @message_window.update
+    # Check if an army has lost battle
     check_for_defeated_armies
-		# If returning to title screen
-		if $game_temp.to_title
-			# Change to title screen
-			$scene = Scene_Title.new
-			return
-		end
-	end
+    # If returning to title screen
+    if $game_temp.to_title
+      # Change to title screen
+      $scene = Scene_Title.new
+      return
+    end
+  end
   #--------------------------------------------------------------------------
-	# Moves the cursor to a specified location to perform an action created by
+  # Moves the cursor to a specified location to perform an action created by
   # a Proc object.
-	#--------------------------------------------------------------------------
+  #--------------------------------------------------------------------------
   def process_cursor_movement_commands
     # If there is a cursor action
     if cursor.moveto_locations[0] != nil
@@ -152,15 +152,15 @@ class Scene_AWMap
   end
   
   #--------------------------------------------------------------------------
-	# Checks if an army has been defeated. Removes all existing units and 
+  # Checks if an army has been defeated. Removes all existing units and 
   # properties owned by the defeated army
-	#--------------------------------------------------------------------------
+  #--------------------------------------------------------------------------
   def check_for_defeated_armies
     loser_army = $game_map.army.find{|army| next if army.nil? ; army.lost_battle}
     if loser_army != nil
       case loser_army.id
       when 1 then p "Player 1/Orange Star lost"
-			when 2 then p "Player 2/Blue Moon lost"
+      when 2 then p "Player 2/Blue Moon lost"
       when 3 then p "Player 3/Green Earth lost"
       when 4 then p "Player 4/Yellow Comet lost"
       end
@@ -194,12 +194,12 @@ class Scene_AWMap
         # Closes the game...for now
         $scene = nil
       end
-		end
+    end
   end
   #--------------------------------------------------------------------------
-	# Main update method. Depending on what phase it is determines the update
+  # Main update method. Depending on what phase it is determines the update
   # routine taken.
-	#--------------------------------------------------------------------------
+  #--------------------------------------------------------------------------
   def update_by_phase
     case @phase
     when 0 then phase_preturn
@@ -213,11 +213,11 @@ class Scene_AWMap
     end
   end
   #--------------------------------------------------------------------------
-	# Phase 0 : Preturn
+  # Phase 0 : Preturn
   #   Performs the daily actions that occur before the player has actual
   #   control of the cursor. This includes daily income, repairs, and fuel
   #   burn (along with destroying them if necessary)
-	#--------------------------------------------------------------------------
+  #--------------------------------------------------------------------------
   def phase_preturn
     case @preturn
     when 1 then preturn_preparations
@@ -228,9 +228,9 @@ class Scene_AWMap
     end
   end
   #--------------------------------------------------------------------------
-	# Preturn 1 : Preparations
+  # Preturn 1 : Preparations
   #   Resets variables and flags, check for weather changes, gain income...
-	#--------------------------------------------------------------------------
+  #--------------------------------------------------------------------------
   def preturn_preparations
     # Do not process preturn phase until wait timer finishes
     return if @wait > 0
@@ -278,9 +278,9 @@ class Scene_AWMap
     end
   end
   #--------------------------------------------------------------------------
-	# Preturn 2 : Daily Fuel
+  # Preturn 2 : Daily Fuel
   #   Burn units' daily fuel. Destroys units that have "crashed" or "sunk".
-	#--------------------------------------------------------------------------
+  #--------------------------------------------------------------------------
   def preturn_dailyfuel
     # The two lines stops processing of this phase if a unit is carrying out
     # its destruction animation. When it finishes, continue the phase.
@@ -308,10 +308,10 @@ class Scene_AWMap
     end
   end
   #--------------------------------------------------------------------------
-	# Preturn 3 : Repair
+  # Preturn 3 : Repair
   #   Repairs units standing on owned properties. Also supplies units should
   #   they need it.
-	#--------------------------------------------------------------------------
+  #--------------------------------------------------------------------------
   def preturn_repair
     # If ran through all units
     if @unit_index == @player.units.size
@@ -376,9 +376,9 @@ class Scene_AWMap
     end # End loop
   end
   #--------------------------------------------------------------------------
-	# Preturn 4 : Unit Supply
+  # Preturn 4 : Unit Supply
   #   Checks units that can supply surrounding units. 
-	#--------------------------------------------------------------------------
+  #--------------------------------------------------------------------------
   def preturn_unitsupply
     
     # Loop until a unit that can supply daily is found
@@ -418,9 +418,9 @@ class Scene_AWMap
     end
   end
   #--------------------------------------------------------------------------
-	# Preturn 5 : Finish
+  # Preturn 5 : Finish
   #   Enables player control and resets variables for the next player.
-	#--------------------------------------------------------------------------
+  #--------------------------------------------------------------------------
   def preturn_finish
     cursor.add_move_action(@player.x, @player.y, nil, 30)
     cursor.scroll_mode = false
@@ -430,16 +430,16 @@ class Scene_AWMap
     #cursor.visible = true
   end
 
-	#-----------------------------------------------------------------------------
-	# Phase 1 => Cursor
-	#   Controls all related functions of cursor control. Process everything that
-	#   isn't part of unit commands (this includes menus/windows)
-	#-----------------------------------------------------------------------------
-	def phase_cursor
+  #-----------------------------------------------------------------------------
+  # Phase 1 => Cursor
+  #   Controls all related functions of cursor control. Process everything that
+  #   isn't part of unit commands (this includes menus/windows)
+  #-----------------------------------------------------------------------------
+  def phase_cursor
     # The cursor is always active in this phase
     cursor.disable_input = false
-		# Process the below unless the cursor is currently moving
-		unless cursor.moving?
+    # Process the below unless the cursor is currently moving
+    unless cursor.moving?
       # If scroll mode is activated
       if cursor.scroll_mode == 1
         # If the player is no longer holding B, turn off scroll mode
@@ -507,7 +507,7 @@ class Scene_AWMap
           end
         elsif $DEBUG #--------------------------------------------------------
           if Input.trigger?(Input::Key['Shift'])
-            p "Day " + $game_map.day.to_s
+            Transition.new
           elsif Input.repeat?(Input::Key['F'])
             unit.fuel -= 5 unless unit.nil?
           elsif Input.trigger?(Input::Key['P'])
@@ -541,17 +541,17 @@ class Scene_AWMap
           end        #--------------------------------------------------------
         end
       end
-		end
+    end
 
-		
-		@minimap.update unless @minimap.nil?
-	end
-	#-----------------------------------------------------------------------------
-	# Phase 2 => Command
-	#   Called when a unit is selected to carry out orders. Called when pressing
-	#   'C' on own units or enemies (movement range).
-	#-----------------------------------------------------------------------------
-	def phase_command
+    
+    @minimap.update unless @minimap.nil?
+  end
+  #-----------------------------------------------------------------------------
+  # Phase 2 => Command
+  #   Called when a unit is selected to carry out orders. Called when pressing
+  #   'C' on own units or enemies (movement range).
+  #-----------------------------------------------------------------------------
+  def phase_command
     # Determine action based on what ranges are currently being viewed
     case @range_type
     when 1 # Move
@@ -585,7 +585,7 @@ class Scene_AWMap
               $game_system.se_play($data_system.buzzer_se)
             end
           else # Invalid move, buzzer sound
-          	$game_system.se_play($data_system.buzzer_se)
+            $game_system.se_play($data_system.buzzer_se)
           end
         elsif Input.trigger?(Input::B)
           $game_system.se_play($data_system.cancel_se)
@@ -607,14 +607,14 @@ class Scene_AWMap
       
     end
 
-		
-	end
-	
-	#-----------------------------------------------------------------------------
-	# Phase 3 => Decision
-	#   Determine what command to give the unit, including choosing targets.
-	#-----------------------------------------------------------------------------
-	def phase_decision
+    
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Phase 3 => Decision
+  #   Determine what command to give the unit, including choosing targets.
+  #-----------------------------------------------------------------------------
+  def phase_decision
     
     if @active_window.visible
       cursor.disable_input = true
@@ -623,11 +623,11 @@ class Scene_AWMap
         # Assign command action
         @command.action = @active_window.command
         case @command.action
-				# If the player chose Can't Fire, play buzzer
-				when "Fire "
-					@command.action = nil
-					$game_system.se_play($data_system.buzzer_se)
-				when "Fire"
+        # If the player chose Can't Fire, play buzzer
+        when "Fire "
+          @command.action = nil
+          $game_system.se_play($data_system.buzzer_se)
+        when "Fire"
           Config.play_se("decide")
           remove_ranges
           # If direct combat unit
@@ -660,18 +660,18 @@ class Scene_AWMap
           @active_window = nil
           # begin the movement of the unit
           process_movement
-				end
-				# If cancel to make a command
-			elsif Input.trigger?(Input::B)
+        end
+        # If cancel to make a command
+      elsif Input.trigger?(Input::B)
         # Reset command target(s)
         @command.target = []
-				# Return to phase 2 (unit movement select)
-				$game_system.se_play($data_system.cancel_se)
-				@active_window.dispose
-				@active_window = nil
-				@phase = 2
+        # Return to phase 2 (unit movement select)
+        $game_system.se_play($data_system.cancel_se)
+        @active_window.dispose
+        @active_window = nil
+        @phase = 2
         cursor.disable_input = false
-			end
+      end
     else # Choosing location
       cursor.disable_input = false
       # Plays the sound effect when selecting a target... needs changing
@@ -749,24 +749,24 @@ class Scene_AWMap
     
   end
 
-	#-----------------------------------------------------------------------------
-	# Phase 4 => Action
+  #-----------------------------------------------------------------------------
+  # Phase 4 => Action
   #   Carries out the command assigned to the unit.
-	#-----------------------------------------------------------------------------
-	def phase_action
+  #-----------------------------------------------------------------------------
+  def phase_action
     # carry out the command after done moving (if it is not Wait)
-		if !@command.action.nil? and !$spriteset.unit_moving
-			# If the unit was ambushed along its path
-			unless @unit.trap
-				case @command.action
-				when "Capt"
-					building = $game_map.get_tile(*@command.move)
-					@unit.capture(building)
+    if !@command.action.nil? and !$spriteset.unit_moving
+      # If the unit was ambushed along its path
+      unless @unit.trap
+        case @command.action
+        when "Capt"
+          building = $game_map.get_tile(*@command.move)
+          @unit.capture(building)
           @unit.acted = true
-				when "Launch"
-					# Launch the silo
-					silo = $game_map.get_tile(*@command.move)
-					silo.launch
+        when "Launch"
+          # Launch the silo
+          silo = $game_map.get_tile(*@command.move)
+          silo.launch
           # Play missile launch animation
           proc = Proc.new{cursor.animation(112)}
           cursor.add_move_action(*@command.move, proc, WAIT_CURSOR_ANIMATION)
@@ -788,13 +788,13 @@ class Scene_AWMap
           # Create delay of 30 frames
           unit = @unit
           cursor.add_move_action(*@command.target, nil, 30, Proc.new{unit.acted = true})
-				when "Join"
-					@unit.join($game_map.get_unit(*@command.target))
-				when "Supply"
+        when "Join"
+          @unit.join($game_map.get_unit(*@command.target))
+        when "Supply"
           # Start the sound effect loop
           Config.play_se("income")
-					units_nearby = $game_map.get_nearby_units(*@command.move)
-					units_nearby.each{|u|
+          units_nearby = $game_map.get_nearby_units(*@command.move)
+          units_nearby.each{|u|
             # Skip if the space is empty
             next unless u.is_a?(Unit)
             # If the unit is of the same army and has low supplies
@@ -810,14 +810,14 @@ class Scene_AWMap
                           Config.play_se("income_end")
                           unit.acted = true}
           cursor.add_move_action(cursor.x, cursor.y, proc, 16)
-				when "Dive","Hide","Surface","Appear"
-					@unit.hiding = !@unit.hiding
+        when "Dive","Hide","Surface","Appear"
+          @unit.hiding = !@unit.hiding
           @unit.acted = true
-				when "Load"
+        when "Load"
           carrier = $game_map.get_unit(*@command.target)
-					carrier.load(@unit)
-					Config.play_se("load")
-				when "Drop", "Drop ", "Wait "
+          carrier.load(@unit)
+          Config.play_se("load")
+        when "Drop", "Drop ", "Wait "
           @command.target.each{|t|
             # Check for a hidden unit at this drop off location
             hidden_unit = $game_map.get_unit(t[0], t[1])
@@ -847,10 +847,10 @@ class Scene_AWMap
           # Create pause
           unit = @unit
           cursor.add_move_action(cursor.x, cursor.y, nil, 12, Proc.new{unit.acted = true})
-				when "Fire"
+        when "Fire"
           target = $game_map.get_unit(*@command.target)
           target = $game_map.get_tile(*@command.target) if target.nil?
-					damage_result = @unit.fire(DMG_RESULT, target)
+          damage_result = @unit.fire(DMG_RESULT, target)
           # Charge power bars
           if target.is_a?(Unit)
             target.army.charge_power(target, damage_result[0], 100)
@@ -862,116 +862,116 @@ class Scene_AWMap
           @unit.acted = true
         when "Wait"
           @unit.acted = true
-				end
-			end
-			# Reset values
-			@unit.trap = false
-			@unit.selected = false
-			@unit = nil
+        end
+      end
+      # Reset values
+      @unit.trap = false
+      @unit.selected = false
+      @unit = nil
       @command = nil
       @positions = []
       @positions2 = []
-			# Return to phase 1
-			@phase = 1
+      # Return to phase 1
+      @phase = 1
       cursor.disable_input = false
       cursor.scroll_mode = false
-		end
-	end
-	
-	#-----------------------------------------------------------------------------
-	# Phase 5 => Animation
-	#   Called if game animations are on. Processes all the animations that take
-	#   place in battle (damage scene, capture, powers, etc).
-	#-----------------------------------------------------------------------------
-	def phase_animation
-		
-	end
-	#-----------------------------------------------------------------------------
-	# Phase 6 => Menu
-	#   Process menu commands.
-	#-----------------------------------------------------------------------------
-	def phase_menu
+    end
+  end
+  
+  #-----------------------------------------------------------------------------
+  # Phase 5 => Animation
+  #   Called if game animations are on. Processes all the animations that take
+  #   place in battle (damage scene, capture, powers, etc).
+  #-----------------------------------------------------------------------------
+  def phase_animation
+    
+  end
+  #-----------------------------------------------------------------------------
+  # Phase 6 => Menu
+  #   Process menu commands.
+  #-----------------------------------------------------------------------------
+  def phase_menu
     cursor.disable_input = true
     # Update the window
     @active_window.update
-		#////////////////////////////////////////////
-		# Menu Window Commands
-		#////////////////////////////////////////////
-		if @active_window.is_a?(MapMenu_Window)
-			if Input.trigger?(Input::C)
-				case @active_window.at_index
-				when "Cancel"
-					$game_system.se_play($data_system.cancel_se)
-					@phase = 1
-				when "CO"
-					Config.play_se("decide")
+    #////////////////////////////////////////////
+    # Menu Window Commands
+    #////////////////////////////////////////////
+    if @active_window.is_a?(MapMenu_Window)
+      if Input.trigger?(Input::C)
+        case @active_window.at_index
+        when "Cancel"
+          $game_system.se_play($data_system.cancel_se)
+          @phase = 1
+        when "CO"
+          Config.play_se("decide")
           # CHANGE INTO A SCENE OBJECT ****************************************************
-					@officer_window = OfficerBio_Window.new(@player.officer)
-					@officer_window.z = 99999
+          @officer_window = OfficerBio_Window.new(@player.officer)
+          @officer_window.z = 99999
         when "Intel"
           return
         when "Options"
           return
-				when "End Turn"
-					Audio.bgm_fade(5000)
-					Config.play_se("decide")
-					@player.set_cursor(cursor.x, cursor.y)
-					cursor.scroll_mode = 2
-					@phase = 7
-				when "Power"
-					if @player.officer.nation == "Black Hole"
-						$game_system.bgm_play("BHPower")
-					else
-						$game_system.bgm_play("Power")
-					end
-					@player.use_power
-					@phase = 1
-				when "Super Power"
-					if @player.officer.nation == "Black Hole"
-						$game_system.bgm_play("BHSuperPower")
-					else
-						$game_system.bgm_play("SuperPower")
-					end
-					@player.use_power(true)
-					@phase = 1
-				end
+        when "End Turn"
+          Audio.bgm_fade(5000)
+          Config.play_se("decide")
+          @player.set_cursor(cursor.x, cursor.y)
+          cursor.scroll_mode = 2
+          @phase = 7
+        when "Power"
+          if @player.officer.nation == "Black Hole"
+            $game_system.bgm_play("BHPower")
+          else
+            $game_system.bgm_play("Power")
+          end
+          @player.use_power
+          @phase = 1
+        when "Super Power"
+          if @player.officer.nation == "Black Hole"
+            $game_system.bgm_play("BHSuperPower")
+          else
+            $game_system.bgm_play("SuperPower")
+          end
+          @player.use_power(true)
+          @phase = 1
+        end
         # Delete the window
         dispose_active_window
-			elsif Input.trigger?(Input::B)
-				$game_system.se_play($data_system.cancel_se)
-				dispose_active_window
-				@phase = 1
+      elsif Input.trigger?(Input::B)
+        $game_system.se_play($data_system.cancel_se)
+        dispose_active_window
+        @phase = 1
         cursor.disable_input = false
-			end
-			#////////////////////////////////////////////
-			# Build Window Commands
-			#////////////////////////////////////////////
-		elsif @active_window.is_a?(Build_Window) and @active_window.active
-			if Input.trigger?(Input::C)
-				if @player.funds >= @active_window.unit.cost(true)
-					Config.play_se("decide")
-					@active_window.build_unit
-					dispose_active_window
-					@phase = 1
+      end
+      #////////////////////////////////////////////
+      # Build Window Commands
+      #////////////////////////////////////////////
+    elsif @active_window.is_a?(Build_Window) and @active_window.active
+      if Input.trigger?(Input::C)
+        if @player.funds >= @active_window.unit.cost(true)
+          Config.play_se("decide")
+          @active_window.build_unit
+          dispose_active_window
+          @phase = 1
           cursor.disable_input = false
-				else
-					$game_system.se_play($data_system.buzzer_se)
-				end
-			elsif Input.trigger?(Input::B) 
-				$game_system.se_play($data_system.cancel_se)
-				dispose_active_window
-				@phase = 1
+        else
+          $game_system.se_play($data_system.buzzer_se)
+        end
+      elsif Input.trigger?(Input::B) 
+        $game_system.se_play($data_system.cancel_se)
+        dispose_active_window
+        @phase = 1
         cursor.disable_input = false
-			end
-		end
-		
-	end
+      end
+    end
+    
+  end
 
-	#-----------------------------------------------------------------------------
-	# Phase 7 => Endturn
-	#   Called when player ends their turn. Resets values and sets new conditions.
-	#-----------------------------------------------------------------------------
-	def phase_endturn
+  #-----------------------------------------------------------------------------
+  # Phase 7 => Endturn
+  #   Called when player ends their turn. Resets values and sets new conditions.
+  #-----------------------------------------------------------------------------
+  def phase_endturn
     # This army is no longer playing their turn
     @player.playing = false
     # Set next player. Advance day if first player's turn.
@@ -982,8 +982,8 @@ class Scene_AWMap
     end
     @player = $game_map.army[next_player]
     @player.playing = true
-		# Update all the units' status effects
-		$game_map.units.each{|u| u.update_status_effects}
+    # Update all the units' status effects
+    $game_map.units.each{|u| u.update_status_effects}
     # Revert unit colors, putting in some delays 
     proc = Proc.new{$spriteset.revert_unit_colors}
     cursor.add_move_action(cursor.x, cursor.y, nil, 10, proc)
@@ -991,7 +991,7 @@ class Scene_AWMap
     # Move cursor to next player's last location; prevent cursor input afterwards
     cursor.add_move_action(@player.x, @player.y, nil, 30, nil, true)
     #
-		$spriteset.draw_officer_tag
-		@phase = 0
-	end
+    $spriteset.draw_officer_tag
+    @phase = 0
+  end
 end

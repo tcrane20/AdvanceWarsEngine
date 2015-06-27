@@ -13,13 +13,13 @@ ________________________
 ________________________________________________________________________________
 =end
 class Carried_Graphic < RPG::Sprite
-	attr_accessor		:holding_exists	# If there is/are unit(s) being carried
+  attr_accessor    :holding_exists  # If there is/are unit(s) being carried
   #--------------------------------------------------------------------------
   # Initialize tile graphic
   #--------------------------------------------------------------------------
   def initialize(viewport=nil)
     super(viewport)
-		@holding_exists = false
+    @holding_exists = false
     self.bitmap = Bitmap.new(64, 96)
     # Create offset
     self.x = 128
@@ -31,9 +31,9 @@ class Carried_Graphic < RPG::Sprite
   def update_graphic(carrying_unit)
     update
     self.bitmap.clear
-		y = 0
+    y = 0
     carrying_unit.holding_units.each{|unit|
-			@holding_exists = true
+      @holding_exists = true
       # Draw the held unit
       id = "_" + unit.army.id.to_s
       bitmap = RPG::Cache.character(unit.name + id, 0)
@@ -45,7 +45,7 @@ class Carried_Graphic < RPG::Sprite
       bitmap = RPG::Cache.picture("hide") if unit.hiding
       rect = Rect.new(0, 0, 16, 16)
       self.bitmap.blt(16, 32+y, bitmap, rect) if bitmap.width == 16
-			y += 40
+      y += 40
     }
   end
   #----------------------------------------------------------------------------

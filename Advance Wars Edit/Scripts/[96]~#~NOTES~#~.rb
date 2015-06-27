@@ -14,16 +14,16 @@
     bitmap is (@width, @height).
       
 <> Use the following to check the names of all files located in the directory:
-		Dir.foreach("Data/") do |entry|
-			p (entry)
-		end
+    Dir.foreach("Data/") do |entry|
+      p (entry)
+    end
       
 <> We can create another folder that holds Maps. The game, upon loading, can put
-		these map files into the /Data folder by using appropriate ID values. That
-	  way the map can now be editted by the user. Perhaps create a way to prevent edits?
+    these map files into the /Data folder by using appropriate ID values. That
+    way the map can now be editted by the user. Perhaps create a way to prevent edits?
 
 <> You can edit the map's dimensions via $game_map.map.width/height, however you
-		need to edit the @map.data to accomodate the change.
+    need to edit the @map.data to accomodate the change.
 
 < Formulas >
 

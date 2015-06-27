@@ -30,37 +30,37 @@ class CO_Titus < CO
     @cop_stars = 4
     @scop_stars = 7
   end
-	
-	def atk_bonus(unit)
-    return 80
-	end
-	
-	def def_bonus(unit)
-		if @scop or @cop
-			return 200
-		else
-			return 130
-		end
-	end
-	
-	def def_luck_bonus(unit)
-		if @cop or @scop
-			return 20
-		else
-			return 0
-		end
-	end
   
-	def use_scop
-		super
-		@last_stand = true
-	end
-	
-	def scop=(bool)
-		@scop = bool
-		@last_stand = bool
-	end
-	
-	
+  def atk_bonus(unit)
+    return 80
+  end
+  
+  def def_bonus(unit)
+    if @scop or @cop
+      return 200
+    else
+      return 130
+    end
+  end
+  
+  def def_luck_bonus(unit)
+    if @cop or @scop
+      return 20
+    else
+      return 0
+    end
+  end
+  
+  def use_scop
+    super
+    @last_stand = true
+  end
+  
+  def scop=(bool)
+    @scop = bool
+    @last_stand = bool
+  end
+  
+  
 end
 $CO.push(CO_Titus)

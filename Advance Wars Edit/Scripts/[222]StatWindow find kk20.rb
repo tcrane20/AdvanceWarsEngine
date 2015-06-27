@@ -18,59 +18,59 @@ ___________________
 ________________________________________________________________________________
 =end
 class StatWindow < RPG::Sprite
-	
-	def initialize(viewport=nil)
-		super(viewport)
+  
+  def initialize(viewport=nil)
+    super(viewport)
     # Create graphic and lower opacity
-		self.bitmap = RPG::Cache.picture("info_bar")
-		self.opacity = 128
+    self.bitmap = RPG::Cache.picture("info_bar")
+    self.opacity = 128
     # Animation variables
     @phase = 0
     @old_cursor_rx = $game_player.real_x
     self.mirror = true
     @display_width = self.bitmap.width
-		# Creates an instance of the sprites that will be inserted into the window
-		@tile_sprite = Tile_Graphic.new
-		@unit_sprite = Unit_Graphic.new#<-- Held units done by this class
-		@damage_window = Damage_Window.new
+    # Creates an instance of the sprites that will be inserted into the window
+    @tile_sprite = Tile_Graphic.new
+    @unit_sprite = Unit_Graphic.new#<-- Held units done by this class
+    @damage_window = Damage_Window.new
     
-		self.y = 384
+    self.y = 384
     update_position
-	end
-	#--------------------------------------------------------------------------
-	# Update the graphic
-	#--------------------------------------------------------------------------
-	def update
-		super
+  end
+  #--------------------------------------------------------------------------
+  # Update the graphic
+  #--------------------------------------------------------------------------
+  def update
+    super
     # Moves to left or right side depending on cursor
-		update_position     
-		# Updates visibility
-		if $spriteset.unit_moving or $game_player.scroll_mode
-			self.visible = false
-			@tile_sprite.visible = false
-			@unit_sprite.visible = false
-			@unit_sprite.carried_sprites.visible = false
-			@damage_window.visible = false
-		else
-			self.visible = true
-			@tile_sprite.visible = true
-			@unit_sprite.visible = true
-			@unit_sprite.carried_sprites.visible = true
-			@damage_window.visible = true
-			# Update the information only when the stat bar is visible and on the
+    update_position     
+    # Updates visibility
+    if $spriteset.unit_moving or $game_player.scroll_mode
+      self.visible = false
+      @tile_sprite.visible = false
+      @unit_sprite.visible = false
+      @unit_sprite.carried_sprites.visible = false
+      @damage_window.visible = false
+    else
+      self.visible = true
+      @tile_sprite.visible = true
+      @unit_sprite.visible = true
+      @unit_sprite.carried_sprites.visible = true
+      @damage_window.visible = true
+      # Update the information only when the stat bar is visible and on the
       # correct side of the screen
       if @phase >= 0
         @tile_sprite.update
         @unit_sprite.update
         @damage_window.update
       end
-		end
-		
-	end
-	#--------------------------------------------------------------------------
-	# Updates the window's location. If cursor is too far left, puts window to right.
-	#--------------------------------------------------------------------------
-	def update_position
+    end
+    
+  end
+  #--------------------------------------------------------------------------
+  # Updates the window's location. If cursor is too far left, puts window to right.
+  #--------------------------------------------------------------------------
+  def update_position
     
     if @phase >= 0
       @display_width = self.bitmap.width
@@ -80,10 +80,10 @@ class StatWindow < RPG::Sprite
     
     # kk20 
     player_x = $game_player.real_x
-		screen_x = $game_map.display_x
+    screen_x = $game_map.display_x
     
     # If cursor is going from one side of the screen to the other
-		if (player_x - screen_x > 1152 and @old_cursor_rx - screen_x <= 1152) or 
+    if (player_x - screen_x > 1152 and @old_cursor_rx - screen_x <= 1152) or 
     (player_x - screen_x < 1280 and @old_cursor_rx - screen_x >= 1280)
       @phase *= -1
       # Mirror graphic if the player crosses the border at exactly phase 0
@@ -158,16 +158,16 @@ class StatWindow < RPG::Sprite
     # store player's real_x for next time
     @old_cursor_rx = player_x
 
-	end
-	#----------------------------------------------------------------------------
-	# Dispose process
-	#----------------------------------------------------------------------------
-	def dispose
-		unless self.bitmap == nil
-			self.bitmap.dispose
-			self.bitmap = nil
-		end
-		super
-	end
-	
+  end
+  #----------------------------------------------------------------------------
+  # Dispose process
+  #----------------------------------------------------------------------------
+  def dispose
+    unless self.bitmap == nil
+      self.bitmap.dispose
+      self.bitmap = nil
+    end
+    super
+  end
+  
 end

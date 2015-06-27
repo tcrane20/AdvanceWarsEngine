@@ -22,40 +22,40 @@ class CO_Hachi < CO
     "The former commander-in-chief of Orange Star who now owns a store. He likes to relax more so than fight nowadays.",
     "Knows secret trade routes, allowing him to purchase units for cheap.",
     "Makes deals with other merchants to buy units at half their normal cost.",
-			"Unites merchants everywhere to allow land units to be built in cities.",
-		"Retired commander of Orange Star. Purchases units for lower prices. Powers improve his buying capabilities and allow him to build units on cities."]
+      "Unites merchants everywhere to allow land units to be built in cities.",
+    "Retired commander of Orange Star. Purchases units for lower prices. Powers improve his buying capabilities and allow him to build units on cities."]
     @cop_stars = 4
     @scop_stars = 5
-		@cost_multiplier = 90
+    @cost_multiplier = 90
   end
   
-	def use_cop
-		super
-		@cost_multiplier = 50
-	end
-	
-	def use_scop
-		super
-		@build_on_cities = true
-	end
-	#========================
-	# Turning off COP effects
-	#========================
-	def cop=(bool)
-		if !bool
-			@cost_multiplier = 90
-		end
-		@cop = bool
-	end
-	#========================
-	# Turning off SCOP effects
-	#========================
-	def scop=(bool)
-		if !bool
-			@build_on_cities = false
-		end
-		@scop = bool
-	end
-	
+  def use_cop
+    super
+    @cost_multiplier = 50
+  end
+  
+  def use_scop
+    super
+    @build_on_cities = true
+  end
+  #========================
+  # Turning off COP effects
+  #========================
+  def cop=(bool)
+    if !bool
+      @cost_multiplier = 90
+    end
+    @cop = bool
+  end
+  #========================
+  # Turning off SCOP effects
+  #========================
+  def scop=(bool)
+    if !bool
+      @build_on_cities = false
+    end
+    @scop = bool
+  end
+  
 end
 $CO.push(CO_Hachi)

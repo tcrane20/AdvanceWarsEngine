@@ -145,8 +145,8 @@ class Dialogue_Window < Message_Window
   
         
   #--------------------------------------------------------------------------
-	# 
-	#--------------------------------------------------------------------------
+  # 
+  #--------------------------------------------------------------------------
   def slide_face
     shift = case @shifting_phase
     when 6, 13 then 48
@@ -179,8 +179,8 @@ class Dialogue_Window < Message_Window
   
   
   #--------------------------------------------------------------------------
-	# Check for when the window has no more commands to slide window off screen
-	#--------------------------------------------------------------------------
+  # Check for when the window has no more commands to slide window off screen
+  #--------------------------------------------------------------------------
   def run_message_window
     if !@open && @state == MSG_RUN
       @open = true
@@ -199,8 +199,8 @@ class Dialogue_Window < Message_Window
   
   
   #--------------------------------------------------------------------------
-	# 
-	#--------------------------------------------------------------------------
+  # 
+  #--------------------------------------------------------------------------
   def make_action(command)
     case command[0]
     when 0 # Face and window placement
@@ -209,8 +209,8 @@ class Dialogue_Window < Message_Window
     return super
   end
   #--------------------------------------------------------------------------
-	# 
-	#--------------------------------------------------------------------------
+  # 
+  #--------------------------------------------------------------------------
   def setup_window_display(parameters)
     # If changing the window's orientation
     if parameters[2] != @on_bottom

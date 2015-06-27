@@ -9,7 +9,7 @@ class Apc < Unit
   def initialize(x, y, army)
     super(x, y, army)
     @name = "apc"
-		@real_name = "APC"
+    @real_name = "APC"
     @unit_type = 3
     @cost = 5000
     @move = 6
@@ -23,13 +23,13 @@ class Apc < Unit
     @can_supply = true
     @can_daily_supply = true
     @move_se = "wheels"
-		
-		@stat_desc = ["A transport unit that can carry infantry and resupply nearby units.",
-			"This unit moves a far distance. The unit travels on treads.",
-			"APC units cannot see far at all.",
-			"The unit moves on fuel. It can no longer move if it drops to zero.",
-			"This unit has no weapons and cannot attack.", "", "", "", "",
-			"", "", "","", ""]
+    
+    @stat_desc = ["A transport unit that can carry infantry and resupply nearby units.",
+      "This unit moves a far distance. The unit travels on treads.",
+      "APC units cannot see far at all.",
+      "The unit moves on fuel. It can no longer move if it drops to zero.",
+      "This unit has no weapons and cannot attack.", "", "", "", "",
+      "", "", "","", ""]
   end
   
   def description

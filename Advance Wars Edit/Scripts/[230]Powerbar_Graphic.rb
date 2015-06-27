@@ -20,10 +20,10 @@ ________________________________________________________________________________
 # new sprite instance.
 
 class Powerbar_Graphic
-	attr_reader :width, :x
+  attr_reader :width, :x
   
-	def initialize(viewport, army)
-		@viewport = viewport
+  def initialize(viewport, army)
+    @viewport = viewport
     # CONFIGURE -----------------------------------
     @sprite_graphic = RPG::Cache.picture('co_stars')
     # Dimensions configured as [x, y, width, height] of ONE star/text graphic
@@ -38,7 +38,7 @@ class Powerbar_Graphic
     @total_anim_frames  = 17
     @draw_loc     = [65,40]
     # ---------------------------------------------
-		@army = army
+    @army = army
     @width = 0 # assuming stars on left side of screen, distance from right side of farthest star to screen's left border
     @x = 0
     @old_charge = 0
@@ -51,8 +51,8 @@ class Powerbar_Graphic
     @scop_empty.z = 10000
     @visible = true
     init_stars
-	end
-	
+  end
+  
   def dispose
     @sprite_graphic.dispose
     @cop_empty.dispose
@@ -69,9 +69,9 @@ class Powerbar_Graphic
     @star_sprites.each{|star| star.x += difference}
     @power_text.x += difference
   end
-	#--------------------------------------------------------------------------
-	# Initialize tile graphic
-	#--------------------------------------------------------------------------
+  #--------------------------------------------------------------------------
+  # Initialize tile graphic
+  #--------------------------------------------------------------------------
   def visible=(bool)
     #p "Set visible"
     @visible = bool
@@ -105,9 +105,9 @@ class Powerbar_Graphic
     @star_sprites.clear
     init_stars
   end
-	#--------------------------------------------------------------------------
-	# Initialize tile graphic
-	#--------------------------------------------------------------------------
+  #--------------------------------------------------------------------------
+  # Initialize tile graphic
+  #--------------------------------------------------------------------------
   def init_stars
     # Very common variable that will be used a lot
     num_large_stars = @army.officer.scop_stars - @army.officer.cop_stars
@@ -204,10 +204,10 @@ class Powerbar_Graphic
     end
 
   end
-	#--------------------------------------------------------------------------
-	# Initialize tile graphic
-	#--------------------------------------------------------------------------
-	def update
+  #--------------------------------------------------------------------------
+  # Initialize tile graphic
+  #--------------------------------------------------------------------------
+  def update
     return unless @visible
     update_color_change if Graphics.frame_count % 3 == 0
     if !@army.using_power? and @full_charge_color == 1
@@ -216,11 +216,11 @@ class Powerbar_Graphic
 
     return if @old_charge == @army.stored_energy
     @old_charge = @army.stored_energy
-		update_fill_amounts
-	end
-	#--------------------------------------------------------------------------
-	# Initialize tile graphic
-	#--------------------------------------------------------------------------
+    update_fill_amounts
+  end
+  #--------------------------------------------------------------------------
+  # Initialize tile graphic
+  #--------------------------------------------------------------------------
   def update_color_change
     @frame += 1
     @frame %= @total_anim_frames
@@ -273,9 +273,9 @@ class Powerbar_Graphic
       end
     }
   end
-	#--------------------------------------------------------------------------
-	# Initialize tile graphic
-	#--------------------------------------------------------------------------
+  #--------------------------------------------------------------------------
+  # Initialize tile graphic
+  #--------------------------------------------------------------------------
   def update_bounce
     for i in 0...@army.officer.scop_stars
       return if i >= @army.officer.cop_stars && @army.stored_energy != @army.officer.scop_rate
@@ -291,17 +291,17 @@ class Powerbar_Graphic
       star.y = @small_star_dim[3] - star.src_rect.height + @cop_empty.y + additional
     end
   end
-	#--------------------------------------------------------------------------
-	# Initialize tile graphic
-	#--------------------------------------------------------------------------
-	def update_fill_amounts
+  #--------------------------------------------------------------------------
+  # Initialize tile graphic
+  #--------------------------------------------------------------------------
+  def update_fill_amounts
     # If all the stars are filled up, make the empty star graphics invisible
     # so that we can't see them when the stars move
     @cop_empty.visible = @old_charge < @army.officer.cop_rate && !@army.using_power?
     @scop_empty.visible = @old_charge != @army.officer.scop_rate && !@army.using_power?
     # Init variables
-		star_index = 0
-		charged = @old_charge
+    star_index = 0
+    charged = @old_charge
     if (@army.officer.cop_stars > 0 && charged >= @army.officer.cop_rate) ||
     charged == @army.officer.scop_rate
       @full_charge_color = 1
@@ -311,10 +311,10 @@ class Powerbar_Graphic
 
     s_ratio = 100 / @small_star_heights.size
     l_ratio = 100 / @large_star_heights.size
-		# Draw the filled COP stars
-		for i in 0...@army.officer.cop_stars
-			# Determine what star to draw
-			amount = charged / s_ratio
+    # Draw the filled COP stars
+    for i in 0...@army.officer.cop_stars
+      # Determine what star to draw
+      amount = charged / s_ratio
       amount = @small_star_heights.size if amount > @small_star_heights.size
       amount = [amount - 1, 0].max
 
@@ -326,13 +326,13 @@ class Powerbar_Graphic
       star.y = @small_star_dim[3] - star.src_rect.height + @cop_empty.y
       charged -= 100
       break if charged < s_ratio
-			star_index += 1
-		end
+      star_index += 1
+    end
     return if charged < l_ratio
-		# Draw the SCOP stars
-		for i in 0...(@army.officer.scop_stars - @army.officer.cop_stars)
-			# Determine what star to draw
-			amount = charged / l_ratio
+    # Draw the SCOP stars
+    for i in 0...(@army.officer.scop_stars - @army.officer.cop_stars)
+      # Determine what star to draw
+      amount = charged / l_ratio
       amount = @large_star_heights.size if amount > @large_star_heights.size
       amount = [amount - 1, 0].max
 
@@ -344,8 +344,8 @@ class Powerbar_Graphic
       star.y = @large_star_dim[3] - star.src_rect.height + @scop_empty.y
       charged -= 100
       break if charged < l_ratio
-			star_index += 1
-		end
-	end
-	
+      star_index += 1
+    end
+  end
+  
 end

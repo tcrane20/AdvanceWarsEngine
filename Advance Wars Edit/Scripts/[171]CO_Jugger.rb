@@ -25,31 +25,31 @@ class CO_Jugger < CO
     "",
     "The power of his units are completely random. He may do more or less damage than expected.",
     "Units may do much more damage than expected. Likewise, they may do much less damage instead.",
-			"Units can do terrifying damage unexpectedly. However, they may also do almost no damage at all.",
-		"Random variance in damage makes his attacks unpredictable. Powers can increase or decrease his damage significantly."]
+      "Units can do terrifying damage unexpectedly. However, they may also do almost no damage at all.",
+    "Random variance in damage makes his attacks unpredictable. Powers can increase or decrease his damage significantly."]
     @cop_stars = 3
     @scop_stars = 7
   end
   
-	def luck_bonus(unit)
-		if @scop
-			return 100
-		elsif @cop
-			return 60
-		else
-			return 30
-		end
-	end
-	
-	def neg_luck_bonus(unit)
-		if @scop
-			return 50
-		elsif @cop
-			return 30
-		else
-			return 15
-		end
-	end
+  def luck_bonus(unit)
+    if @scop
+      return 100
+    elsif @cop
+      return 60
+    else
+      return 30
+    end
+  end
+  
+  def neg_luck_bonus(unit)
+    if @scop
+      return 50
+    elsif @cop
+      return 30
+    else
+      return 15
+    end
+  end
   
 end
 $CO.push(CO_Jugger)

@@ -1,7 +1,7 @@
 =begin
 ================================================================================
-Easy Script Importer-Exporter                                       Version 1.0
-by KK20                                                             Jun 11 2015
+Easy Script Importer-Exporter                                       Version 1.2
+by KK20                                                             Jun 22 2015
 --------------------------------------------------------------------------------
 
 [ Introduction ]++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -30,6 +30,7 @@ by KK20                                                             Jun 11 2015
   KK20 - made this script
   GubiD - referenced his VXA Script Import/Export
   FiXato and HIRATA Yasuyuki - referenced VX/VXA Script Exporter
+  ForeverZer0 - suggesting and using Win32API to read .ini file
 
 ================================================================================
 =end
@@ -44,6 +45,8 @@ by KK20                                                             Jun 11 2015
 #       0 = Disable (pretends like this script doesn't even exist)
 #       1 = Export
 #       2 = Import
+#       3 = Playtest (import scripts from folder to playtest game; does not
+#                     replace or create a 'Scripts.r_data' file)
 #------------------------------------------------------------------------------
 IMPORT_EXPORT_MODE = 1
 #------------------------------------------------------------------------------
@@ -67,6 +70,12 @@ DELETE_OLD_CONTENTS = true
 # Recommended to stay true. Useless for exporting.
 #------------------------------------------------------------------------------
 CREATE_SCRIPTS_COPY = true
+#------------------------------------------------------------------------------
+# If true, converts any instances of tab characters (\t) into two spaces. This
+# is extremely helpful if writing code from an external editor and moving it
+# back into RPG Maker where tab characters are instantly treated as two spaces.
+#------------------------------------------------------------------------------
+TABS_TO_SPACES = true
 #******************************************************************************
 # E N D   C O N F I G U R A T I O N
 #******************************************************************************
@@ -95,15 +104,11 @@ INVALID_CHAR_REPLACE = {
 }
 
 begin
-  scripts_file = case RGSS
-    when 1 then "Scripts.rxdata"
-    when 2 then "Scripts.rvdata"
-    when 3 then "Scripts.rvdata2"
-  end
-  # Most likely using a different RGSS version in XP
-  if !File.exists?("Data/" + scripts_file)
-    scripts_file = "Scripts.rxdata"
-  end
+  ini = Win32API.new('kernel32', 'GetPrivateProfileString','PPPPLP', 'L')
+  scripts_filename = "\0" * 256
+  ini.call('Game', 'Scripts', '', scripts_filename, 256, '.\\Game.ini')
+  scripts_filename.delete!("\0")
+  
   counter = 0
   
   if IMPORT_EXPORT_MODE == 1
@@ -122,14 +127,12 @@ begin
     
     Dir.mkdir(FOLDER_NAME) unless File.exists?(FOLDER_NAME)
     
-    scripts = load_data("Data/" + scripts_file)
+    scripts = load_data(scripts_filename)
     
     scripts.each_index{|index| 
       script = scripts[index]
       id, name, code = script
       next if id.nil?
-      
-      name.gsub!("\n") {}
       
       for i in 0...name.size
         name[i] = INVALID_CHAR_REPLACE[name[i].chr] if INVALID_CHAR_REPLACE[name[i].chr]
@@ -137,7 +140,8 @@ begin
       
       code = Zlib::Inflate.inflate(code)
       next if SKIP_EMPTY && code.size == 0
-
+      code.gsub!(/\t/) {'  '} if TABS_TO_SPACES
+      
       File.open(File.join(FOLDER_NAME, "[#{counter}]#{name}.rb"), "wb") do |f| 
         f.write code
       end
@@ -145,9 +149,10 @@ begin
     }
     
     p "#{counter} files successfully exported."
+    exit
   end
   
-  if IMPORT_EXPORT_MODE == 2
+  if IMPORT_EXPORT_MODE >= 2
     if RGSS == 3
       a = Dir.entries("Scripts", {:encoding => "UTF-8"})
     else
@@ -155,14 +160,21 @@ begin
     end
     
     a = a[2, a.size]
-    f = load_data("Data/" + scripts_file)
+    if IMPORT_EXPORT_MODE == 2
+      scripts_file = File.open(scripts_filename, "rb")
+      f = Marshal.load(scripts_file)
+    else
+      f = $RGSS_SCRIPTS
+    end
     
-    if CREATE_SCRIPTS_COPY
-      copy = File.open("Data/Copy - " + scripts_file, "wb")
+    if IMPORT_EXPORT_MODE == 2 && CREATE_SCRIPTS_COPY
+      base_name = File.basename(scripts_filename)
+      dir_name = File.dirname(scripts_filename)
+      copy = File.open(dir_name + "/Copy - " + base_name, "wb")
       Marshal.dump(f, copy)
       copy.close
     end
-
+    
     a.each{|filename|
       counter += 1
       script = File.open("Scripts/" + filename, "r+")
@@ -170,24 +182,30 @@ begin
       index = index.to_i
       script_name = filename.gsub(/\[\d+\](.*)\.rb/) { $1 }
       code = script.read
+      code.gsub!(/\t/) {'  '} if TABS_TO_SPACES
       
-      z = Zlib::Deflate.new(6)
-      data = z.deflate(code, Zlib::FINISH)
+      if IMPORT_EXPORT_MODE == 2
+        z = Zlib::Deflate.new(6)
+        data = z.deflate(code, Zlib::FINISH)
+      else
+        data = code
+      end
       
       f[index] = [index] if f[index].nil?
       f[index][1] = script_name
-      f[index][2] = data
+      f[index][IMPORT_EXPORT_MODE] = data
     }
     
-    data = File.open("Data/" + scripts_file, "wb")
-    Marshal.dump(f[0, counter], data)
-    data.close
-    
-    p "#{counter} files successfully imported. Please close your RPG Maker " +
+    if IMPORT_EXPORT_MODE == 2
+      data = File.open(scripts_filename, "wb")
+      Marshal.dump(f[0, counter], data)
+      data.close
+      p "#{counter} files successfully imported. Please close your RPG Maker " +
       "now without saving it. Re-open your project to find the scripts imported."
+      exit
+    end
   end
   
-  exit
 end
 
 end

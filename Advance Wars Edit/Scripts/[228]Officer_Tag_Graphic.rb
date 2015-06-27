@@ -21,64 +21,64 @@ ________________________________________________________________________________
 =end
 class Officer_Tag_Graphic < RPG::Sprite
   attr_accessor :y
-	def initialize(viewport, army, on_map = true)
-		super(viewport)
-		# Create gold, Stars and Day
-		@gold = Gold_Graphic.new(viewport, army)
-		@powerbar = Powerbar_Graphic.new(viewport, army)
+  def initialize(viewport, army, on_map = true)
+    super(viewport)
+    # Create gold, Stars and Day
+    @gold = Gold_Graphic.new(viewport, army)
+    @powerbar = Powerbar_Graphic.new(viewport, army)
     @day = Day_Graphic.new(viewport)
-		# Move graphic to left or right accordingly
+    # Move graphic to left or right accordingly
     @phase = 0
     @old_cursor_rx = 0#$game_player.real_x
     @on_map = on_map  # If drawing this graphic on the map, updating its position on the screen
     self.mirror = true
-		@army = army
-		self.bitmap = Bitmap.new(89, 86)
-		# Draw the border graphic
-		bitmap = RPG::Cache.picture("officer_tag_" + @army.id.to_s)
-		rect = Rect.new(0,0,89,28)
-		self.bitmap.blt(0,34,bitmap,rect)
-		# Draw officer graphic
-		bitmap = RPG::Cache.picture("CO_" + @army.officer.name)
-		rect = Rect.new(288,700,64,24) # Gets the officer's face graphic
-		self.bitmap.blt(0,36,bitmap,rect)
+    @army = army
+    self.bitmap = Bitmap.new(89, 86)
+    # Draw the border graphic
+    bitmap = RPG::Cache.picture("officer_tag_" + @army.id.to_s)
+    rect = Rect.new(0,0,89,28)
+    self.bitmap.blt(0,34,bitmap,rect)
+    # Draw officer graphic
+    bitmap = RPG::Cache.picture("CO_" + @army.officer.name)
+    rect = Rect.new(288,700,64,24) # Gets the officer's face graphic
+    self.bitmap.blt(0,36,bitmap,rect)
     self.z = 8000
     # Draw the graphic in the right location
     update_position
-	end
-	#----------------------------------------------------------------------------
-	# Update process
-	#----------------------------------------------------------------------------
-	def update
-		return if disposed?
-		super
+  end
+  #----------------------------------------------------------------------------
+  # Update process
+  #----------------------------------------------------------------------------
+  def update
+    return if disposed?
+    super
     update_position if @on_map
     
-		if $game_player.scroll_mode == 1
+    if $game_player.scroll_mode == 1
       self.visible = false
       @gold.visible = false
       @powerbar.visible = false
       @day.visible = false
-		elsif !self.visible
+    elsif !self.visible
       self.visible = true
       @gold.visible = true
       @powerbar.visible = true
       @day.visible = true
-		end
+    end
     
-		@gold.update
-		@powerbar.update
+    @gold.update
+    @powerbar.update
     @day.update
-		
-	end
-	#--------------------------------------------------------------------------
-	# Updates the window's location. If cursor is too far left, puts window to right.
+    
+  end
+  #--------------------------------------------------------------------------
+  # Updates the window's location. If cursor is too far left, puts window to right.
   # Because the powerbar graphic is going to be the longest thing, we change
   # its x-values first. Of course, later on, I'll need to have some kind of
   # check when, say, there are no CO Powers allowed, in which case, the tag
   # graphic is the longest thing.
-	#--------------------------------------------------------------------------
-	def update_position
+  #--------------------------------------------------------------------------
+  def update_position
     if !@on_map
       self.mirror = false
       @powerbar.reverse = false
@@ -89,10 +89,10 @@ class Officer_Tag_Graphic < RPG::Sprite
     end
     
     
-		player_x = $game_player.real_x
-		screen_x = $game_map.display_x
+    player_x = $game_player.real_x
+    screen_x = $game_map.display_x
     # If cursor is going from one side of the screen to the other
-		if (player_x - screen_x > 1152 and @old_cursor_rx - screen_x <= 1152) or 
+    if (player_x - screen_x > 1152 and @old_cursor_rx - screen_x <= 1152) or 
     (player_x - screen_x < 1280 and @old_cursor_rx - screen_x >= 1280)
       @phase *= -1
       # Mirror graphic if the player crosses the border at exactly phase 0
@@ -167,14 +167,14 @@ class Officer_Tag_Graphic < RPG::Sprite
     
     @old_cursor_rx = player_x
 
-	end
-	#--------------------------------------------------------------------------
-	# Disposes gold and officer tag graphics
-	#--------------------------------------------------------------------------
-	def dispose
-		@gold.dispose
-		@powerbar.dispose
+  end
+  #--------------------------------------------------------------------------
+  # Disposes gold and officer tag graphics
+  #--------------------------------------------------------------------------
+  def dispose
+    @gold.dispose
+    @powerbar.dispose
     @day.dispose
-		super
-	end
+    super
+  end
 end

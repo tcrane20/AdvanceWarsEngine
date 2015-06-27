@@ -26,8 +26,8 @@ class CO_Andy < CO
     "A young, whimsical boy-wonder who is quite knowledgeable with machines. He saved Macro Land from the last great invasion.",
     "Andy has no preferences over units. He is good with all of them, ready wherever, whenever.",
     "All units restore 2 HP. They also receive a firepower boost.",
-		"All units restore 5 HP. Firepower of units increases. Direct combat move 1 space further while indirect combat can fire 1 space further.",
-		"The Orange Star mechanic. Prefers no unit over another. Powers allow him to heal units and increase their damage."]
+    "All units restore 5 HP. Firepower of units increases. Direct combat move 1 space further while indirect combat can fire 1 space further.",
+    "The Orange Star mechanic. Prefers no unit over another. Powers allow him to heal units and increase their damage."]
     @cop_stars = 3
     @scop_stars = 6
   end
@@ -40,22 +40,22 @@ class CO_Andy < CO
     end
   end
   
-	def move_bonus(unit)
-		if @scop and unit.max_range(false) <= 1
-			return 1
-		else
-			return 0
-		end
-	end
-	
-	def range_bonus(unit)
-		if @scop and unit.max_range(false) > 1
-			return 1
-		else
-			return 0
-		end
-	end
-	
+  def move_bonus(unit)
+    if @scop and unit.max_range(false) <= 1
+      return 1
+    else
+      return 0
+    end
+  end
+  
+  def range_bonus(unit)
+    if @scop and unit.max_range(false) > 1
+      return 1
+    else
+      return 0
+    end
+  end
+  
   def use_cop
     super
     mass_heal(2, @army.units)

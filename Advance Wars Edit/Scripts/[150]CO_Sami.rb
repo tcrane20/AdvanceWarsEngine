@@ -28,48 +28,48 @@ class CO_Sami < CO
     "A special forces captain who is loyal to her nation. Very level-headed even in the midst of serious danger.",
     "Infantry units have superior firepower. They also capture properties faster. Shoddy in non-infantry direct combat.",
     "Infantry units gain more firepower and capture faster. Foot soldiers and transport units move 1 space further.",
-			"Infantry units have massive firepower and have their capture speeds quadrupled. Foot soldiers move 2 spaces further.",
-		"Infantry specialist. Soldiers have high attack and capture rates. Weak direct-combat units. Powers improve infantry attack, movement, and capture rates."]
+      "Infantry units have massive firepower and have their capture speeds quadrupled. Foot soldiers move 2 spaces further.",
+    "Infantry specialist. Soldiers have high attack and capture rates. Weak direct-combat units. Powers improve infantry attack, movement, and capture rates."]
     @cop_stars = 3
     @scop_stars = 8
   end
-	
-	def atk_bonus(unit)
-		if INFANTRY.include?(unit.unit_type)
-			if @scop
-				return 180
-			elsif @cop
-				return 160
-			else 
-				return 130
-			end
-		end
-		return 90 if unit.max_range(false) == 1
+  
+  def atk_bonus(unit)
+    if INFANTRY.include?(unit.unit_type)
+      if @scop
+        return 180
+      elsif @cop
+        return 160
+      else 
+        return 130
+      end
+    end
+    return 90 if unit.max_range(false) == 1
     return 100
   end
-	
-	def move_bonus(unit)
-		if [MOVE_FOOT, MOVE_MECH].include?(unit.move_type)
-			if @scop
-				return 2
-			elsif @cop
-				return 1
-			end
-		elsif TRANSPORT.include?(unit.unit_type)
-			return 1 if @cop
-		end
-		return 0
-	end
-	
-	def capt_bonus
-		if @scop
-			return ["mult", 400]
-		elsif @cop
-			return ["mult", 150]
-		else
-			return ["mult", 125]
-		end
-	end
+  
+  def move_bonus(unit)
+    if [MOVE_FOOT, MOVE_MECH].include?(unit.move_type)
+      if @scop
+        return 2
+      elsif @cop
+        return 1
+      end
+    elsif TRANSPORT.include?(unit.unit_type)
+      return 1 if @cop
+    end
+    return 0
+  end
+  
+  def capt_bonus
+    if @scop
+      return ["mult", 400]
+    elsif @cop
+      return ["mult", 150]
+    else
+      return ["mult", 125]
+    end
+  end
   
 end
 $CO.push(CO_Sami)

@@ -2,7 +2,7 @@ class Silo < Property
   attr_accessor :launched
   def initialize(x, y, launched = false)
     super(x, y, 0)
-		@name = 'silo'
+    @name = 'silo'
     @id = TILE_SILO
     @launched = launched
     @capt = -1

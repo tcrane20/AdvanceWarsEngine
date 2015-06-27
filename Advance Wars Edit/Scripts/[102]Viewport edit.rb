@@ -9,13 +9,13 @@ class Viewport < Object
   end
   
   alias call_orig_dispose dispose
-	def dispose
-		@disposed = true
-		call_orig_dispose
-	end
-	
-	def disposed?
-		return @disposed
-	end
-	
+  def dispose
+    @disposed = true
+    call_orig_dispose
+  end
+  
+  def disposed?
+    return @disposed
+  end
+  
 end

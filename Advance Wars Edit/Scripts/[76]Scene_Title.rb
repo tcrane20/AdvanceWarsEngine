@@ -15,7 +15,7 @@ class Scene_Title
       return
     end
 
-		# Load database
+    # Load database
     $data_actors        = load_data("Data/Actors.rxdata")
     $data_classes       = load_data("Data/Classes.rxdata")
     $data_skills        = load_data("Data/Skills.rxdata")

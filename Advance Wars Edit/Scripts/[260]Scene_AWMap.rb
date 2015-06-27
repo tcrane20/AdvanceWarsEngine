@@ -35,73 +35,73 @@ ________________________________________________________________________________
 =end
 class Scene_AWMap
   attr_reader :player, :unit
-	#--------------------------------------------------------------------------
-	# * Main Processing
-	#--------------------------------------------------------------------------
-	def main
-		
+  #--------------------------------------------------------------------------
+  # * Main Processing
+  #--------------------------------------------------------------------------
+  def main
+    
     @infmap = InfluenceMap.new if $DEBUG
     
-		#----------------Initialize Variables----------------
-		@wait = 0
-		@arrow_path = []
-		@outside_of_range = false
-		@passed_positions = []
-		@phase = 0
-		@preturn = 1
-		@playing_income_se = false
-		#-----------------------------------------------------
-		# Determines whose turn it is by using @army(X) values
+    #----------------Initialize Variables----------------
+    @wait = 0
+    @arrow_path = []
+    @outside_of_range = false
+    @passed_positions = []
+    @phase = 0
+    @preturn = 1
+    @playing_income_se = false
+    #-----------------------------------------------------
+    # Determines whose turn it is by using @army(X) values
     @player = $game_map.army[0]
     @player.playing = true
-		# Move cursor to starting position
-		cursor.x = @player.x
+    # Move cursor to starting position
+    cursor.x = @player.x
     cursor.y = @player.y
     cursor.visible = false
-		# Make message window
-		@message_window = Window_Message.new
+    # Make message window
+    @message_window = Window_Message.new
     
     # Make sprite set (includes the units)
-		$spriteset = Spriteset_Map.new
+    $spriteset = Spriteset_Map.new
     $spriteset.init_units
     $spriteset.revert_unit_colors
     $spriteset.update
     
-		# Transition run
-		Graphics.transition
-		# Main loop
-		loop do
-			# Update game screen
-			Graphics.update
-			# Update input information
-			Input.update
-			# Frame update
-			update
-			# Mouse update (for window active)
-			Mouse.update_windows
-			# Abort loop if screen is changed
-			if $scene != self
-				break
-			end
-		end
-		# Prepare for transition
-		Graphics.freeze
-		# Dispose of sprite set
-		$spriteset.dispose
-		# Dispose of message window
-		@message_window.dispose
-		# If switching to title screen
-		if $scene.is_a?(Scene_Title)
-			# Fade out screen
-			Graphics.transition
-			Graphics.freeze
-		end
-	end
-	
+    # Transition run
+    Graphics.transition
+    # Main loop
+    loop do
+      # Update game screen
+      Graphics.update
+      # Update input information
+      Input.update
+      # Frame update
+      update
+      # Mouse update (for window active)
+      Mouse.update_windows
+      # Abort loop if screen is changed
+      if $scene != self
+        break
+      end
+    end
+    # Prepare for transition
+    Graphics.freeze
+    # Dispose of sprite set
+    $spriteset.dispose
+    # Dispose of message window
+    @message_window.dispose
+    # If switching to title screen
+    if $scene.is_a?(Scene_Title)
+      # Fade out screen
+      Graphics.transition
+      Graphics.freeze
+    end
+  end
+  
 
-	#-----------------------------------------------------------------------------
-	# * Process_Movement : Called when unit is about to move
-	#-----------------------------------------------------------------------------
+  #-----------------------------------------------------------------------------
+  # * Process_Movement : Called when unit is about to move
+  #-----------------------------------------------------------------------------
   def process_movement
     # Move the cursor back to the selected unit
     proc = Proc.new{@unit.selected = false
@@ -110,156 +110,156 @@ class Scene_AWMap
                     @passed_positions = []}
     cursor.add_move_action(@unit.x, @unit.y, proc, 0, nil, true)
     # Delete the arrow path graphics and move-range tiles
-		@arrow_path.each{|a| a.dispose}
+    @arrow_path.each{|a| a.dispose}
     @arrow_path = []
     remove_ranges
     # Disable input, proceed to moving unit
     cursor.disable_input = true
     @phase = 4
-	end
-	#-----------------------------------------------------------------------------
-	# * determine_unit_commands : Checks what commands the unit can perform
-	#-----------------------------------------------------------------------------
-	def determine_unit_commands
-		commands = [] # Shall push all the commands into this variable
-		
-		# If the cursor is choosing a spot where a different unit exists (ignores hidden)
+  end
+  #-----------------------------------------------------------------------------
+  # * determine_unit_commands : Checks what commands the unit can perform
+  #-----------------------------------------------------------------------------
+  def determine_unit_commands
+    commands = [] # Shall push all the commands into this variable
+    
+    # If the cursor is choosing a spot where a different unit exists (ignores hidden)
     other_unit = $game_map.get_unit(*@command.move, false)
-		if other_unit != nil and other_unit != @unit
+    if other_unit != nil and other_unit != @unit
       # If the unit is the same army type
       if other_unit.army == @unit.army
-				# If units can join with each other
-				if @unit.can_join?(other_unit)
-					commands.push("Join")
-				# If unit can be loaded into this other unit
-				elsif other_unit.carry_capability(@unit)
-					commands.push("Load")
-				end
-			end
+        # If units can join with each other
+        if @unit.can_join?(other_unit)
+          commands.push("Join")
+        # If unit can be loaded into this other unit
+        elsif other_unit.carry_capability(@unit)
+          commands.push("Load")
+        end
+      end
       # Because this unit is ending its turn on another unit, the other commands
       # like Fire, Capture, and Wait do not need to be evaluated
-			return commands
-		end
-		
-		# If this unit can attack another unit directly
-		if @unit.max_range == 1 and (@unit.ammo > 0 or @unit.secondary)
-			ranges = calc_pos(unit, "direct", *@command.move)
+      return commands
+    end
+    
+    # If this unit can attack another unit directly
+    if @unit.max_range == 1 and (@unit.ammo > 0 or @unit.secondary)
+      ranges = calc_pos(unit, "direct", *@command.move)
       ranges.flatten.compact.each{|r|
         # Continue block if a valid tile to attack
-				next unless valid?(r.x, r.y)
-				# Get the unit at this spot
-				u = $game_map.get_unit(r.x, r.y, false)
-				# If no unit exists at this spot
-				if !u.is_a?(Unit)
+        next unless valid?(r.x, r.y)
+        # Get the unit at this spot
+        u = $game_map.get_unit(r.x, r.y, false)
+        # If no unit exists at this spot
+        if !u.is_a?(Unit)
           tile = $game_map.get_tile(r.x, r.y)
-					# If this is a tile that can be destroyed
-					if tile.is_a?(Structure) and tile.hp > 0 and @unit.can_attack?(tile)
-						commands.push("Fire")
-						break
-					end
-					# If enemy unit (will need edit for allied armies)
-				elsif u.army != @unit.army and @unit.can_attack?(u)
-					commands.push("Fire")
-					break
-				end
-			}
+          # If this is a tile that can be destroyed
+          if tile.is_a?(Structure) and tile.hp > 0 and @unit.can_attack?(tile)
+            commands.push("Fire")
+            break
+          end
+          # If enemy unit (will need edit for allied armies)
+        elsif u.army != @unit.army and @unit.can_attack?(u)
+          commands.push("Fire")
+          break
+        end
+      }
     # If this unit can attack indirectly (and didn't move)
-		elsif @unit.max_range > 1 and (@unit.ammo > 0 or @unit.secondary) and
+    elsif @unit.max_range > 1 and (@unit.ammo > 0 or @unit.secondary) and
     unit == $game_map.get_unit(*@command.move)
-			# Get ranges by calling calc_pos. Then evaluate each spot.
-			# If it finds an enemy, push "Fire". Else, push "Fire " (can't fire).
-			ranges = calc_pos(unit, "attack")
-			ranges.flatten.compact.each{|r|
-				next unless valid?(r.x, r.y)
-				u = $game_map.get_unit(r.x, r.y, false)
-				# If a unit doesn't exist at this spot
-				if !u.is_a?(Unit)
+      # Get ranges by calling calc_pos. Then evaluate each spot.
+      # If it finds an enemy, push "Fire". Else, push "Fire " (can't fire).
+      ranges = calc_pos(unit, "attack")
+      ranges.flatten.compact.each{|r|
+        next unless valid?(r.x, r.y)
+        u = $game_map.get_unit(r.x, r.y, false)
+        # If a unit doesn't exist at this spot
+        if !u.is_a?(Unit)
           tile = $game_map.get_tile(r.x, r.y)
-					if tile.is_a?(Structure) and tile.hp > 0 and @unit.can_attack?(tile)
-						commands.push("Fire")
-						break
-					end
-				elsif u.army != @unit.army and @unit.can_attack?(u)
-					commands.push("Fire")
-					break
-				end
-			}
+          if tile.is_a?(Structure) and tile.hp > 0 and @unit.can_attack?(tile)
+            commands.push("Fire")
+            break
+          end
+        elsif u.army != @unit.army and @unit.can_attack?(u)
+          commands.push("Fire")
+          break
+        end
+      }
       # Couldn't find a valid target--"Unable to Fire" command is added
-			commands.push("Fire ") if !commands.include?("Fire")
-		end
-		
-		# If this unit can capture a building
+      commands.push("Fire ") if !commands.include?("Fire")
+    end
+    
+    # If this unit can capture a building
     tile = $game_map.get_tile(*@command.move)
-		if @unit.can_capture and tile.is_a?(Property)
-			# If this is a missile silo
-			if tile.id == TILE_SILO
-				commands.push("Launch") unless tile.launched
-				# If this is a normal property
-			else
-				commands.push("Capt") if tile.army != unit.army
-			end
-		end
-		
-		# If unit is holding another unit and can drop it
-		if @unit.holding_units.size > 0 and @unit.valid_drop_spot(*@command.move)
-			units_nearby = $game_map.get_nearby_units(*@command.move)
-			tiles_nearby = $game_map.get_nearby_tiles(*@command.move)
-			for u in 0...@unit.holding_units.size
-				held_unit = @unit.holding_units[u]
-				for i in 0...units_nearby.size
-					# If the space is empty or if the unit in question is the same as the one
-					# being given orders right now
-					if units_nearby[i].nil? or units_nearby[i] == @unit
-						if @unit.test_drop_tile(tiles_nearby[i], held_unit)
-							commands.push("Drop")  if u == 0
-							commands.push("Drop ") if u == 1
-							break
-						end
-					end
-				end
-			end
-		end
-		
-		# If this unit can supply other units
-		if @unit.can_supply
-			# Get surrounding units
-			units_nearby = $game_map.get_nearby_units(*@command.move)
-			units_nearby.each{|u|
-				# If the space is empty
-				next unless u.is_a?(Unit)
-				# If the unit is of the same army and has low supplies
-				if u != @unit and u.army == @unit.army and u.need_supplies
-					commands.push("Supply")
-					break
-				end
-			}
-		end
-		
-		# If unit can dive or hide
-		if @unit.can_dive or @unit.can_hide
-			if @unit.hiding
-				commands.push("Surface") if @unit.can_dive
-				commands.push("Appear") if @unit.can_hide
-			else
-				commands.push("Dive") if @unit.can_dive
-				commands.push("Hide") if @unit.can_hide
-			end
-		end
-		
-		# Push 'Wait' by default, unless 'Join' or 'Load' is possible
-		commands.push("Wait")
-		return commands
-	end
-	#-----------------------------------------------------------------------------
-	# * Update Route : Helps determine what arrow path to draw when moving units
-	#-----------------------------------------------------------------------------
-	def update_player_route
+    if @unit.can_capture and tile.is_a?(Property)
+      # If this is a missile silo
+      if tile.id == TILE_SILO
+        commands.push("Launch") unless tile.launched
+        # If this is a normal property
+      else
+        commands.push("Capt") if tile.army != unit.army
+      end
+    end
+    
+    # If unit is holding another unit and can drop it
+    if @unit.holding_units.size > 0 and @unit.valid_drop_spot(*@command.move)
+      units_nearby = $game_map.get_nearby_units(*@command.move)
+      tiles_nearby = $game_map.get_nearby_tiles(*@command.move)
+      for u in 0...@unit.holding_units.size
+        held_unit = @unit.holding_units[u]
+        for i in 0...units_nearby.size
+          # If the space is empty or if the unit in question is the same as the one
+          # being given orders right now
+          if units_nearby[i].nil? or units_nearby[i] == @unit
+            if @unit.test_drop_tile(tiles_nearby[i], held_unit)
+              commands.push("Drop")  if u == 0
+              commands.push("Drop ") if u == 1
+              break
+            end
+          end
+        end
+      end
+    end
+    
+    # If this unit can supply other units
+    if @unit.can_supply
+      # Get surrounding units
+      units_nearby = $game_map.get_nearby_units(*@command.move)
+      units_nearby.each{|u|
+        # If the space is empty
+        next unless u.is_a?(Unit)
+        # If the unit is of the same army and has low supplies
+        if u != @unit and u.army == @unit.army and u.need_supplies
+          commands.push("Supply")
+          break
+        end
+      }
+    end
+    
+    # If unit can dive or hide
+    if @unit.can_dive or @unit.can_hide
+      if @unit.hiding
+        commands.push("Surface") if @unit.can_dive
+        commands.push("Appear") if @unit.can_hide
+      else
+        commands.push("Dive") if @unit.can_dive
+        commands.push("Hide") if @unit.can_hide
+      end
+    end
+    
+    # Push 'Wait' by default, unless 'Join' or 'Load' is possible
+    commands.push("Wait")
+    return commands
+  end
+  #-----------------------------------------------------------------------------
+  # * Update Route : Helps determine what arrow path to draw when moving units
+  #-----------------------------------------------------------------------------
+  def update_player_route
     #@passed_positions = []
-		### The cursor was located outside of the highlighted tiles
-		if @outside_of_range
+    ### The cursor was located outside of the highlighted tiles
+    if @outside_of_range
       @outside_of_range = false
-			# The cursor moves back into the range, and over a spot where arrow was drawn
-			result = false
+      # The cursor moves back into the range, and over a spot where arrow was drawn
+      result = false
       @passed_positions.each_index{|index|
         path = @passed_positions[index]
         if [path.x,path.y] == [cursor.x,cursor.y]
@@ -269,12 +269,12 @@ class Scene_AWMap
       }
       # It found the spot where the arrow was drawn
       if result
-				@passed_positions = @passed_positions[0, result+1]
+        @passed_positions = @passed_positions[0, result+1]
       # If moved back into range and over the unit's location
       elsif [cursor.x,cursor.y] == [@unit.x, @unit.y]
         @passed_positions = []
-				# If the cursor moves back into range but not where an arrow was drawn
-			elsif @positions[cursor.x][cursor.y].is_a?(MoveTile)
+        # If the cursor moves back into range but not where an arrow was drawn
+      elsif @positions[cursor.x][cursor.y].is_a?(MoveTile)
         # See if can extend current path to here
         added_path = extend_path(@unit, @passed_positions, [cursor.x,cursor.y])
         # If possible to extend path, do so
@@ -287,12 +287,12 @@ class Scene_AWMap
                               @positions[cursor.x][cursor.y])
         end
       # Did not move back in range; still outside                      
-			else
+      else
         @outside_of_range = true
       end
       
       
-		else
+    else
       ### If position player moves over was already passed over
       result = false
       @passed_positions.each_index{|index|
@@ -328,7 +328,7 @@ class Scene_AWMap
       end
     end
     draw_route unless @outside_of_range
-	end
+  end
   #===========================================================================
   # Check if user's drawn path can reach cursor's location and thereby extend
   # the drawing of the path. If possible, returns array of MoveTiles needed to
@@ -368,14 +368,14 @@ class Scene_AWMap
           # No more spaces to evaluate despite not going max range
           break if t_x.nil?
           
-					# If tile south can be moved to and not yet checked
-					if unit.passable?(t_x, t_y+1) && positions[t_x][t_y+1].nil?
+          # If tile south can be moved to and not yet checked
+          if unit.passable?(t_x, t_y+1) && positions[t_x][t_y+1].nil?
             # Get move cost of tile
-						c = (unit.army.officer.perfect_movement ? 1 : $game_map.get_tile(t_x,t_y+1).move_cost(unit))
+            c = (unit.army.officer.perfect_movement ? 1 : $game_map.get_tile(t_x,t_y+1).move_cost(unit))
             # Add onto this cost with the total cost it takes to get there
             c_total = lowest_cost_key + c
             # If cost is less than move range
-						if c_total <= unit.move
+            if c_total <= unit.move
               # If distance from this tile to target is too far to reach now
               if (t_x - target[0]).abs + (t_y+1 - target[1]).abs > unit.move - c_total
                 # Add dummy to positions to prevent evaluating it in future
@@ -389,16 +389,16 @@ class Scene_AWMap
                 end
               end
             end
-					end
-					
-					# If tile north can be moved to and not yet checked
-					if unit.passable?(t_x, t_y-1) && positions[t_x][t_y-1].nil?
+          end
+          
+          # If tile north can be moved to and not yet checked
+          if unit.passable?(t_x, t_y-1) && positions[t_x][t_y-1].nil?
             # Get move cost of tile
-						c = (unit.army.officer.perfect_movement ? 1 : $game_map.get_tile(t_x,t_y-1).move_cost(unit))
+            c = (unit.army.officer.perfect_movement ? 1 : $game_map.get_tile(t_x,t_y-1).move_cost(unit))
             # Add onto this cost with the total cost it takes to get there
             c_total = lowest_cost_key + c
             # If cost is less than move range
-						if c_total <= unit.move
+            if c_total <= unit.move
               # If distance from this tile to target is too far to reach now
               if (t_x - target[0]).abs + (t_y-1 - target[1]).abs > unit.move - c_total
                 # Add dummy to positions to prevent evaluating it in future
@@ -412,16 +412,16 @@ class Scene_AWMap
                 end
               end
             end
-					end
+          end
           
           # If tile east can be moved to and not yet checked
-					if unit.passable?(t_x+1, t_y) && positions[t_x+1][t_y].nil?
+          if unit.passable?(t_x+1, t_y) && positions[t_x+1][t_y].nil?
             # Get move cost of tile
-						c = (unit.army.officer.perfect_movement ? 1 : $game_map.get_tile(t_x+1,t_y).move_cost(unit))
+            c = (unit.army.officer.perfect_movement ? 1 : $game_map.get_tile(t_x+1,t_y).move_cost(unit))
             # Add onto this cost with the total cost it takes to get there
             c_total = lowest_cost_key + c
             # If cost is less than move range
-						if c_total <= unit.move
+            if c_total <= unit.move
               # If distance from this tile to target is too far to reach now
               if (t_x+1 - target[0]).abs + (t_y - target[1]).abs > unit.move - c_total
                 # Add dummy to positions to prevent evaluating it in future
@@ -435,16 +435,16 @@ class Scene_AWMap
                 end
               end
             end
-					end
+          end
           
           # If tile east can be moved to and not yet checked
-					if unit.passable?(t_x-1, t_y) && positions[t_x-1][t_y].nil?
+          if unit.passable?(t_x-1, t_y) && positions[t_x-1][t_y].nil?
             # Get move cost of tile
-						c = (unit.army.officer.perfect_movement ? 1 : $game_map.get_tile(t_x-1,t_y).move_cost(unit))
+            c = (unit.army.officer.perfect_movement ? 1 : $game_map.get_tile(t_x-1,t_y).move_cost(unit))
             # Add onto this cost with the total cost it takes to get there
             c_total = lowest_cost_key + c
             # If cost is less than move range
-						if c_total <= unit.move
+            if c_total <= unit.move
               # If distance from this tile to target is too far to reach now
               if (t_x-1 - target[0]).abs + (t_y - target[1]).abs > unit.move - c_total
                 # Add dummy to positions to prevent evaluating it in future
@@ -458,7 +458,7 @@ class Scene_AWMap
                 end
               end
             end
-					end
+          end
           
           # If found target spot, set cost limit for evaluation
           if cost_limit == 100 && 
@@ -531,18 +531,18 @@ class Scene_AWMap
       movetile = chosen
     end
   end
-	#-----------------------------------------------------------------------------
-	# * Draw Route : Draws the arrows that represent the unit's movement path
-	#-----------------------------------------------------------------------------
-	def draw_route
+  #-----------------------------------------------------------------------------
+  # * Draw Route : Draws the arrows that represent the unit's movement path
+  #-----------------------------------------------------------------------------
+  def draw_route
     # Delete all sprites in drawing of path
     @arrow_path.each{|a| a.dispose}
     @arrow_path = []
     
     return if @passed_positions.empty?
-		start_pos = [@unit.x, @unit.y]
-		new_pos = start_pos
-		type = ""
+    start_pos = [@unit.x, @unit.y]
+    new_pos = start_pos
+    type = ""
     # Get direction from unit to first tile in path
     last_dir = case [@passed_positions[0].x - @unit.x, @passed_positions[0].y - @unit.y]
               when [0, 1] then 2
@@ -551,10 +551,10 @@ class Scene_AWMap
               when [0,-1] then 8
               end
     # Loop through path positions, evaluating two elements at a time
-		for i in 0...@passed_positions.size
-			p1 = @passed_positions[i]
+    for i in 0...@passed_positions.size
+      p1 = @passed_positions[i]
       p1 = [p1.x, p1.y]
-			p2 = (@passed_positions[i+1] == nil ? 0 : @passed_positions[i+1])
+      p2 = (@passed_positions[i+1] == nil ? 0 : @passed_positions[i+1])
       if p2.is_a?(MoveTile)
         p2 = [p2.x, p2.y] 
         # Figure out the direction taken to get from p1 to p2
@@ -569,77 +569,77 @@ class Scene_AWMap
         dir = 0
       end
       # Evaluate the last direction taken to get to current spot
-			case last_dir
-			when 2
-				new_pos[1] += 1
-				type = case dir
-				when 0 then "d"
-				when 2 then "v"
-				when 4 then "ru"
-				when 6 then "lu"
-				end
-			when 4
-				new_pos[0] -= 1
-				type = case dir
-				when 0 then "l"
-				when 2 then "ld"
-				when 4 then "h"
-				when 8 then "lu"
-				end
-			when 6
-				new_pos[0] += 1
-				type = case dir
-				when 0 then "r"
-				when 2 then "rd"
-				when 6 then "h"
-				when 8 then "ru"
-				end
-			when 8
-				new_pos[1] -= 1
-				type = case dir
-				when 0 then "u"
-				when 4 then "rd"
-				when 6 then "ld"
-				when 8 then "v"
-				end
-			end
+      case last_dir
+      when 2
+        new_pos[1] += 1
+        type = case dir
+        when 0 then "d"
+        when 2 then "v"
+        when 4 then "ru"
+        when 6 then "lu"
+        end
+      when 4
+        new_pos[0] -= 1
+        type = case dir
+        when 0 then "l"
+        when 2 then "ld"
+        when 4 then "h"
+        when 8 then "lu"
+        end
+      when 6
+        new_pos[0] += 1
+        type = case dir
+        when 0 then "r"
+        when 2 then "rd"
+        when 6 then "h"
+        when 8 then "ru"
+        end
+      when 8
+        new_pos[1] -= 1
+        type = case dir
+        when 0 then "u"
+        when 4 then "rd"
+        when 6 then "ld"
+        when 8 then "v"
+        end
+      end
       last_dir = dir
-			@arrow_path.push(Arrow_Sprite.new($spriteset.viewport1, type, new_pos))
-		end
-	end
+      @arrow_path.push(Arrow_Sprite.new($spriteset.viewport1, type, new_pos))
+    end
+  end
   #-----------------------------------------------------------------------------
-	# * Calc_Pos - Find what tiles to highlight to determine range
-	#-----------------------------------------------------------------------------
-	# unit = Class Unit
-	# range_max = maximum range that can be achieved
-	# range_min = minimum "                         "
-	# type = what tiles are we going to work on?
-	#   >> "move"   - Move range
-	#   >> "attack" - Attack range
-	#   >> "direct" - 4 tiles around the unit
-	#		>> "vision" - Unit's vision range
+  # * Calc_Pos - Find what tiles to highlight to determine range
+  #-----------------------------------------------------------------------------
+  # unit = Class Unit
+  # range_max = maximum range that can be achieved
+  # range_min = minimum "                         "
+  # type = what tiles are we going to work on?
+  #   >> "move"   - Move range
+  #   >> "attack" - Attack range
+  #   >> "direct" - 4 tiles around the unit
+  #    >> "vision" - Unit's vision range
   #   >> "ai"     - Move + Attack ranges for direct units; Attack for indirect
-	# x , y = If wanting to get tiles from a specific spot and not a unit's x/y
-	#-----------------------------------------------------------------------------
-	def calc_pos(unit, type = "move", x = nil, y = nil)
+  # x , y = If wanting to get tiles from a specific spot and not a unit's x/y
+  #-----------------------------------------------------------------------------
+  def calc_pos(unit, type = "move", x = nil, y = nil)
     # If parameters x and y are not set up, use unit's x and y variables
     if x.nil? or y.nil?
       x = unit.x
       y = unit.y
     end
-		# Stores all the x-y coordinates of possible spots
+    # Stores all the x-y coordinates of possible spots
     positions = Array2D.new($game_map.width, $game_map.height)
     # If want move range OR requesting attack range of direct combat
-		if type == "move" or 
+    if type == "move" or 
     ((type == "attack" or type == "ai") and unit.max_range == 1)
-			# Sets maximum move range based on remaining fuel
-			range_max = (unit.fuel < unit.move ? unit.fuel : unit.move )
+      # Sets maximum move range based on remaining fuel
+      range_max = (unit.fuel < unit.move ? unit.fuel : unit.move )
       # Adds starting position
       positions[x][y] = MoveTile.new(x,y,0,0)
       # If can move further (not immobile)
       if range_max > 0
         # New hash that stores move costs and locations to be checked. Format:
-				# Current Move Cost => Array of tile coordinates that need to be checked
+        # Current Move Cost => Array of tile coordinates that need to be checked
         need_evaluation = {}
         # Set starting position to cost of zero
         need_evaluation[0] = [[x,y]]
@@ -649,7 +649,7 @@ class Scene_AWMap
         end
         
         # While tiles still need to be evaluated for potential move spaces
-				while need_evaluation.size > 0
+        while need_evaluation.size > 0
           # Get key corresponding to the tile with the lowest cost so far to be evaluated
           lowest_cost_key = need_evaluation.keys.sort.shift
           # Get next evaluated tile x/y
@@ -661,67 +661,67 @@ class Scene_AWMap
             # Jump back to start of loop for next available move cost
             next
           end
-					
-					# If tile south can be moved to
-					if positions[t_x,t_y+1].nil? && unit.passable?(t_x, t_y+1)
+          
+          # If tile south can be moved to
+          if positions[t_x,t_y+1].nil? && unit.passable?(t_x, t_y+1)
             # Get move cost of tile
-						c = (unit.army.officer.perfect_movement ? 1 : $game_map.get_tile(t_x,t_y+1).move_cost(unit))
+            c = (unit.army.officer.perfect_movement ? 1 : $game_map.get_tile(t_x,t_y+1).move_cost(unit))
             # Add onto this cost with the total cost it takes to get there
             c_total = lowest_cost_key + c
             # If cost is less than move range
-						if c_total <= range_max
-							# Add tile as possible move spot
+            if c_total <= range_max
+              # Add tile as possible move spot
               positions[t_x,t_y+1] = MoveTile.new(t_x, t_y+1, c, c_total)
               # If not expend all movement, add this tile to be evaluated later
               if c_total < range_max
                 need_evaluation[c_total].push([t_x, t_y+1])
               end
             end
-					end
-					
-					# If tile north can be moved to
-					if positions[t_x,t_y-1].nil? && unit.passable?(t_x, t_y-1)
+          end
+          
+          # If tile north can be moved to
+          if positions[t_x,t_y-1].nil? && unit.passable?(t_x, t_y-1)
             # Get move cost of tile
-						c = (unit.army.officer.perfect_movement ? 1 : $game_map.get_tile(t_x,t_y-1).move_cost(unit))
+            c = (unit.army.officer.perfect_movement ? 1 : $game_map.get_tile(t_x,t_y-1).move_cost(unit))
             # Add onto this cost with the total cost it takes to get there
             c_total = lowest_cost_key + c
             # If cost is less than move range
-						if c_total <= range_max
-							# Add tile as possible move spot
+            if c_total <= range_max
+              # Add tile as possible move spot
               positions[t_x,t_y-1] = MoveTile.new(t_x, t_y-1, c, c_total)
               # If not expend all movement, add this tile to be evaluated later
               if c_total < range_max
                 need_evaluation[c_total].push([t_x, t_y-1])
               end
             end
-					end
+          end
           
           # If tile east can be moved to
-					if positions[t_x+1,t_y].nil? && unit.passable?(t_x+1, t_y)
+          if positions[t_x+1,t_y].nil? && unit.passable?(t_x+1, t_y)
             # Get move cost of tile
-						c = (unit.army.officer.perfect_movement ? 1 : $game_map.get_tile(t_x+1,t_y).move_cost(unit))
+            c = (unit.army.officer.perfect_movement ? 1 : $game_map.get_tile(t_x+1,t_y).move_cost(unit))
             # Add onto this cost with the total cost it takes to get there
             c_total = lowest_cost_key + c
             # If cost is less than move range
-						if c_total <= range_max
-							# Add tile as possible move spot
+            if c_total <= range_max
+              # Add tile as possible move spot
               positions[t_x+1,t_y] = MoveTile.new(t_x+1, t_y, c, c_total)
               # If not expend all movement, add this tile to be evaluated later
               if c_total < range_max
                 need_evaluation[c_total].push([t_x+1, t_y])
               end
             end
-					end
+          end
           
           # If tile west can be moved to
-					if positions[t_x-1,t_y].nil? && unit.passable?(t_x-1, t_y)
+          if positions[t_x-1,t_y].nil? && unit.passable?(t_x-1, t_y)
             # Get move cost of tile
-						c = (unit.army.officer.perfect_movement ? 1 : $game_map.get_tile(t_x-1,t_y).move_cost(unit))
+            c = (unit.army.officer.perfect_movement ? 1 : $game_map.get_tile(t_x-1,t_y).move_cost(unit))
             # Add onto this cost with the total cost it takes to get there
             c_total = lowest_cost_key + c
             # If cost is less than move range
-						if c_total <= range_max
-							# Add tile as possible move spot
+            if c_total <= range_max
+              # Add tile as possible move spot
               positions[t_x-1,t_y] = MoveTile.new(t_x-1, t_y, c, c_total)
               # If not expend all movement, add this tile to be evaluated later
               if c_total < range_max
@@ -734,26 +734,26 @@ class Scene_AWMap
           if need_evaluation[lowest_cost_key] == []
             need_evaluation.delete(lowest_cost_key)
           end
-					
-				end
-				### END of *** while need_evaluation.size > 0 ***
-			end
-			### END of *** if range_max > 0 ***
-			
+          
+        end
+        ### END of *** while need_evaluation.size > 0 ***
+      end
+      ### END of *** if range_max > 0 ***
+      
       # If we only wanted move ranges, we are done and can stop here
-			if type == "move"
+      if type == "move"
         return positions
       end
-		end
-		######### END OF DEFINING MOVEMENT RANGE ##########
+    end
+    ######### END OF DEFINING MOVEMENT RANGE ##########
     
     # If we want attack, AI, or vision ranges
-		if type == "attack" or type == "ai" or type == "vision"
+    if type == "attack" or type == "ai" or type == "vision"
       # Get min and max ranges of unit based on whether we want attack or vision
       range_max = (type == "attack" || type == "ai" ? unit.max_range : unit.vision)
       range_min = (type == "attack" || type == "ai" ? unit.min_range : 0)
-			##### If want attack range and unit is direct type
-			if (type == "attack" or type == "ai") and range_max == 1
+      ##### If want attack range and unit is direct type
+      if (type == "attack" or type == "ai") and range_max == 1
         # Make copy of possible move positions
         move_positions = positions.clone
         # If we do not want to get AI range
@@ -762,7 +762,7 @@ class Scene_AWMap
           positions = Array2D.new($game_map.width, $game_map.height)
         end
         # For each possible move position
-				for p in move_positions.flatten.compact
+        for p in move_positions.flatten.compact
           # Unit exists at this spot, so cannot attack surrounding tiles here
           next unless ($game_map.get_unit(p.x,p.y,false).nil? || type == "ai")
           # Add attack ranges to list if it is a valid spot and doesn't already
@@ -771,171 +771,171 @@ class Scene_AWMap
           positions[p.x + 1,p.y] = MoveTile.new(p.x + 1, p.y) if (valid?(p.x + 1, p.y) && positions[p.x + 1,p.y].nil?)
           positions[p.x,p.y - 1] = MoveTile.new(p.x, p.y - 1) if (valid?(p.x, p.y - 1) && positions[p.x,p.y - 1].nil?)
           positions[p.x,p.y + 1] = MoveTile.new(p.x, p.y + 1) if (valid?(p.x, p.y + 1) && positions[p.x,p.y + 1].nil?)
-				end
+        end
         # Don't include the spot this unit is on as attackable, unless this is AI
-				positions[x][y] = nil if type != "ai"
+        positions[x][y] = nil if type != "ai"
       ##### If unit is indirect type or we want vision ranges
-			else
+      else
         # If want vision range, consider unit's spot as seen
-				if type == "vision"
-					positions[x, y] = MoveTile.new(x, y)
-					range_min = 1
-				end
-				# Calculate ranges in a clockwise direction, radiating outwards
-				for r in range_min..range_max
+        if type == "vision"
+          positions[x, y] = MoveTile.new(x, y)
+          range_min = 1
+        end
+        # Calculate ranges in a clockwise direction, radiating outwards
+        for r in range_min..range_max
           origin = [unit.x, unit.y-r]
-					positions[origin[0],origin[1]] = MoveTile.new(origin[0], origin[1]) if valid?(origin[0], origin[1])
-					loop do
+          positions[origin[0],origin[1]] = MoveTile.new(origin[0], origin[1]) if valid?(origin[0], origin[1])
+          loop do
             origin[0] += 1
             origin[1] += 1
-						positions[origin[0],origin[1]] = MoveTile.new(origin[0], origin[1]) if valid?(origin[0], origin[1])
-						break if origin[1] == unit.y
-					end
-					loop do
+            positions[origin[0],origin[1]] = MoveTile.new(origin[0], origin[1]) if valid?(origin[0], origin[1])
+            break if origin[1] == unit.y
+          end
+          loop do
             origin[0] -= 1
             origin[1] += 1
-						positions[origin[0],origin[1]] = MoveTile.new(origin[0], origin[1]) if valid?(origin[0], origin[1])
-						break if origin[0] == unit.x
-					end
-					loop do
+            positions[origin[0],origin[1]] = MoveTile.new(origin[0], origin[1]) if valid?(origin[0], origin[1])
+            break if origin[0] == unit.x
+          end
+          loop do
             origin[0] -= 1
             origin[1] -= 1
-						positions[origin[0],origin[1]] = MoveTile.new(origin[0], origin[1]) if valid?(origin[0], origin[1])
-						break if origin[1] == unit.y
-					end
-					loop do
+            positions[origin[0],origin[1]] = MoveTile.new(origin[0], origin[1]) if valid?(origin[0], origin[1])
+            break if origin[1] == unit.y
+          end
+          loop do
             origin[0] += 1
             origin[1] -= 1
             break if origin[0] == unit.x
-						positions[origin[0],origin[1]] = MoveTile.new(origin[0], origin[1]) if valid?(origin[0], origin[1])
-					end
-				end
-			end
-			# Gets the spots directly next to this unit
-		elsif type == "direct"
+            positions[origin[0],origin[1]] = MoveTile.new(origin[0], origin[1]) if valid?(origin[0], origin[1])
+          end
+        end
+      end
+      # Gets the spots directly next to this unit
+    elsif type == "direct"
       locations = [[x, y-1], [x+1, y], [x, y+1], [x-1, y]]
       for spot in locations
         positions[spot[0],spot[1]] = MoveTile.new(spot[0],spot[1]) if valid?(spot[0], spot[1])
       end
-		end
+    end
     
-		return positions
-	end
-	#--------------------------------------------------------------------------
-	# Determines which [x,y] coordinate is best to launch a missile silo
-	#--------------------------------------------------------------------------
-	def find_best_missile_spot(radius = 2)
-		# initialize variables
-		total_unit_cost = 0.1
-		best_spot       = [-1,-1]
-		cost = 0
-		# check each spot on map
-		for y in 0...$game_map.height
-			for x in 0...$game_map.width
-				cost = 0
-				positions = $game_map.get_spaces_in_area(x,y,radius)
-				positions.each{|pos|
-					u = $game_map.get_unit(pos[0],pos[1])
-					next if u.nil?
-					if u.army == @player
-						cost -= u.cost * u.unit_hp
-					else
-						cost += u.cost * u.unit_hp
-					end
-				}
-				# Prefers most cost effective strike
-				if cost >= total_unit_cost
-					# If this spot is the same results as another spot
-					if cost == total_unit_cost
-						# Obtain units, if any, at these two spots
-						unit_a = $game_map.get_unit(best_spot[0],best_spot[1])
-						unit_b = $game_map.get_unit(x,y)
-						# If there was no unit at best_spot
-						if unit_a.nil?
-							best_spot = [x,y]
-							total_unit_cost = cost
-						else
-							# If there is a unit at this current spot
-							unless unit_b.nil?
-								# If the cost of this unit is more than the 'best_spot' unit
-								if unit_a.cost < unit_b.cost
-									best_spot = [x,y]
-									total_unit_cost = cost
-								end
-							end
-						end
-					else
-						best_spot = [x,y]
-						total_unit_cost = cost
-					end
-				end
-			end
-		end
-		return best_spot
-	end
-	#--------------------------------------------------------------------------
-	# Modify the @positions2 array to remove places that do not satisfy the condition.
-	# 'unit' is the unit that must satisfy attack or drop conditions.
-	# 0 -> Removes spots that have units on them (i.e. dropping units)
-	# 1 -> Keeps spots that have enemy units on them (i.e. firing)
-	#--------------------------------------------------------------------------
-	def remove_empty_zones(type, unit = nil)
-		@positions2.flatten.compact.each{|zone|
-			next unless (!zone.nil? && valid?(zone.x,zone.y))
-			u = $game_map.get_unit(zone.x, zone.y, false)
-			# If unit exists at this location
-			if !u.nil?
-				# If dropping a unit, and this unit here is the carrying unit
-				if u == unit and type == 0
-					if @command.action == "Drop"
-						held_unit = unit.holding_units[0]
-					elsif @command.action == "Drop "
-						held_unit = unit.holding_units[1]
-					end
-					# If this location cannot drop a unit here
-					if !unit.test_drop_tile($game_map.get_tile(zone.x,zone.y), held_unit) or @command.drop_loc(0) == [zone.x,zone.y]
-						@positions2[zone.x,zone.y] = nil
-					end
-					next
+    return positions
+  end
+  #--------------------------------------------------------------------------
+  # Determines which [x,y] coordinate is best to launch a missile silo
+  #--------------------------------------------------------------------------
+  def find_best_missile_spot(radius = 2)
+    # initialize variables
+    total_unit_cost = 0.1
+    best_spot       = [-1,-1]
+    cost = 0
+    # check each spot on map
+    for y in 0...$game_map.height
+      for x in 0...$game_map.width
+        cost = 0
+        positions = $game_map.get_spaces_in_area(x,y,radius)
+        positions.each{|pos|
+          u = $game_map.get_unit(pos[0],pos[1])
+          next if u.nil?
+          if u.army == @player
+            cost -= u.cost * u.unit_hp
+          else
+            cost += u.cost * u.unit_hp
+          end
+        }
+        # Prefers most cost effective strike
+        if cost >= total_unit_cost
+          # If this spot is the same results as another spot
+          if cost == total_unit_cost
+            # Obtain units, if any, at these two spots
+            unit_a = $game_map.get_unit(best_spot[0],best_spot[1])
+            unit_b = $game_map.get_unit(x,y)
+            # If there was no unit at best_spot
+            if unit_a.nil?
+              best_spot = [x,y]
+              total_unit_cost = cost
+            else
+              # If there is a unit at this current spot
+              unless unit_b.nil?
+                # If the cost of this unit is more than the 'best_spot' unit
+                if unit_a.cost < unit_b.cost
+                  best_spot = [x,y]
+                  total_unit_cost = cost
+                end
+              end
+            end
+          else
+            best_spot = [x,y]
+            total_unit_cost = cost
+          end
+        end
+      end
+    end
+    return best_spot
+  end
+  #--------------------------------------------------------------------------
+  # Modify the @positions2 array to remove places that do not satisfy the condition.
+  # 'unit' is the unit that must satisfy attack or drop conditions.
+  # 0 -> Removes spots that have units on them (i.e. dropping units)
+  # 1 -> Keeps spots that have enemy units on them (i.e. firing)
+  #--------------------------------------------------------------------------
+  def remove_empty_zones(type, unit = nil)
+    @positions2.flatten.compact.each{|zone|
+      next unless (!zone.nil? && valid?(zone.x,zone.y))
+      u = $game_map.get_unit(zone.x, zone.y, false)
+      # If unit exists at this location
+      if !u.nil?
+        # If dropping a unit, and this unit here is the carrying unit
+        if u == unit and type == 0
+          if @command.action == "Drop"
+            held_unit = unit.holding_units[0]
+          elsif @command.action == "Drop "
+            held_unit = unit.holding_units[1]
+          end
+          # If this location cannot drop a unit here
+          if !unit.test_drop_tile($game_map.get_tile(zone.x,zone.y), held_unit) or @command.drop_loc(0) == [zone.x,zone.y]
+            @positions2[zone.x,zone.y] = nil
+          end
+          next
         # If finding attackable units, and this unit happens to be targetting itself
-				elsif u == unit and type == 1
-					@positions2[zone.x,zone.y] = nil
-					next
-				end
-				# Unit exists here, so delete spot if type 0
-				if type == 0
-					@positions2[zone.x,zone.y] = nil
-					next
-					# Because unit is of same army type, delete spot
-				elsif u.army == @player or !unit.can_attack?(u)
-					@positions2[zone.x,zone.y] = nil
-				end
-			else
-				# If the tile here can be attacked, keep it
-				tile = $game_map.get_tile(zone.x,zone.y)
-				if tile.is_a?(Structure) and tile.hp > 0 and unit.can_attack?(tile)
-					next
-				end
-				@positions2[zone.x,zone.y] = nil if type == 1
-				# If the unit parameter has a value
-				unless unit.nil?
-					if @command.action == "Drop"
-						held_unit = unit.holding_units[0]
-					elsif @command.action == "Drop "
-						held_unit = unit.holding_units[1]
-					end
-					# If this location cannot drop a unit here
-					if !unit.test_drop_tile(tile, held_unit) or @command.drop_loc(0) == [zone.x,zone.y]
-						@positions2[zone.x,zone.y] = nil
-					end
-				end
-			end
+        elsif u == unit and type == 1
+          @positions2[zone.x,zone.y] = nil
+          next
+        end
+        # Unit exists here, so delete spot if type 0
+        if type == 0
+          @positions2[zone.x,zone.y] = nil
+          next
+          # Because unit is of same army type, delete spot
+        elsif u.army == @player or !unit.can_attack?(u)
+          @positions2[zone.x,zone.y] = nil
+        end
+      else
+        # If the tile here can be attacked, keep it
+        tile = $game_map.get_tile(zone.x,zone.y)
+        if tile.is_a?(Structure) and tile.hp > 0 and unit.can_attack?(tile)
+          next
+        end
+        @positions2[zone.x,zone.y] = nil if type == 1
+        # If the unit parameter has a value
+        unless unit.nil?
+          if @command.action == "Drop"
+            held_unit = unit.holding_units[0]
+          elsif @command.action == "Drop "
+            held_unit = unit.holding_units[1]
+          end
+          # If this location cannot drop a unit here
+          if !unit.test_drop_tile(tile, held_unit) or @command.drop_loc(0) == [zone.x,zone.y]
+            @positions2[zone.x,zone.y] = nil
+          end
+        end
+      end
     }
-	end
-	#--------------------------------------------------------------------------
-	# Generates a list of units in @unit's holding_units that can still be dropped
-	#--------------------------------------------------------------------------
-	def can_drop_list
+  end
+  #--------------------------------------------------------------------------
+  # Generates a list of units in @unit's holding_units that can still be dropped
+  #--------------------------------------------------------------------------
+  def can_drop_list
     # No units to drop
     return false if @unit.holding_units.empty?
     held_units = @unit.holding_units.clone
@@ -945,7 +945,7 @@ class Scene_AWMap
     return false if held_units.empty?
     can_be_dropped = []
     # Check surrounding areas for potential drop off locations
-		tiles_nearby = calc_pos(@unit, "direct", *@command.move)
+    tiles_nearby = calc_pos(@unit, "direct", *@command.move)
     tiles_nearby.flatten.compact.each{|tile|
       break if held_units.empty?
       # Check that a unit is not already being dropped here
@@ -970,43 +970,43 @@ class Scene_AWMap
     }
     # If no units can be dropped, return false; otherwise, return the list
     return (can_be_dropped.empty? ? false : can_be_dropped)
-	end
+  end
   #--------------------------------------------------------------------------
-	# Draw the tiles to show range of attack and move
+  # Draw the tiles to show range of attack and move
   # 'type' to draw the correct glowy tiles
-	#--------------------------------------------------------------------------
-	def draw_ranges(positions, type)
+  #--------------------------------------------------------------------------
+  def draw_ranges(positions, type)
     $spriteset.show_ranges(positions.flatten.compact)
-	end
+  end
   #--------------------------------------------------------------------------
-	# Turns the movement range tiles invisible or visible
-	#--------------------------------------------------------------------------
-	def remove_ranges
+  # Turns the movement range tiles invisible or visible
+  #--------------------------------------------------------------------------
+  def remove_ranges
     $spriteset.show_ranges(false)
-	end
+  end
   #--------------------------------------------------------------------------
-	# Delete the arrow sprites drawing the unit path
-	#--------------------------------------------------------------------------
+  # Delete the arrow sprites drawing the unit path
+  #--------------------------------------------------------------------------
   def dispose_arrows
     @arrow_path.each{|a| a.dispose}
     @arrow_path = []
     @passed_positions = []
   end
-	#-------------------------------------------------------------------------
-	# Valid? - Determines if x,y coordinates are on map
-	#-------------------------------------------------------------------------
-	def valid?(x, y)
-		return (x >= 0 and x < $game_map.width and y >= 0 and y < $game_map.height)
-	end
-	#-------------------------------------------------------------------------
-	# cursor - Easier/logical reading of cursor
-	#-------------------------------------------------------------------------
-	def cursor
-		return $game_player
-	end
-	#-----------------------------------------------------------------------------
-	# Disposes the active window and sets it to nil
-	#-----------------------------------------------------------------------------
+  #-------------------------------------------------------------------------
+  # Valid? - Determines if x,y coordinates are on map
+  #-------------------------------------------------------------------------
+  def valid?(x, y)
+    return (x >= 0 and x < $game_map.width and y >= 0 and y < $game_map.height)
+  end
+  #-------------------------------------------------------------------------
+  # cursor - Easier/logical reading of cursor
+  #-------------------------------------------------------------------------
+  def cursor
+    return $game_player
+  end
+  #-----------------------------------------------------------------------------
+  # Disposes the active window and sets it to nil
+  #-----------------------------------------------------------------------------
   def dispose_active_window
     @active_window.dispose
     @active_window = nil

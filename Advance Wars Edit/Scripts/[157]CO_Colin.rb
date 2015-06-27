@@ -24,11 +24,11 @@ class CO_Colin < CO
     "The young Blue Moon commander who is the heir to a mass fortune. Has a sharp, if insecure, mind.",
     "Being the heir to a mass fortune, Colin can buy units at lowered prices. Low firepower and defense stem from his lack of experience.",
     "Colin gains an additional 50% of daily income or multiplies his current funds by 150%, whichever is smaller.",
-			"Firepower of all units increases based on the amount of funds. The more money Colin has, the more power his units receive.",
-		"Rich boy-wonder. Buys units at greatly reduced costs but have low stats. Powers increase his funds and improves unit attack power."]
+      "Firepower of all units increases based on the amount of funds. The more money Colin has, the more power his units receive.",
+    "Rich boy-wonder. Buys units at greatly reduced costs but have low stats. Powers increase his funds and improves unit attack power."]
     @cop_stars = 2
     @scop_stars = 6
-		@cost_multiplier = 80
+    @cost_multiplier = 80
   end
   
   def atk_bonus(unit)
@@ -51,11 +51,11 @@ class CO_Colin < CO
   
   def use_cop
     super
-		if @army.funds / 2 > @army.daily_income/2
-			@army.funds += @army.daily_income/2
-		else
-			@army.funds = @army.funds * 150 / 100
-		end
+    if @army.funds / 2 > @army.daily_income/2
+      @army.funds += @army.daily_income/2
+    else
+      @army.funds = @army.funds * 150 / 100
+    end
   end
   
 end

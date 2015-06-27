@@ -5,37 +5,37 @@
 #==============================================================================
 
 class Window_Selectable < Window_Base
-	#--------------------------------------------------------------------------
+  #--------------------------------------------------------------------------
   # * Object Initialization
   #--------------------------------------------------------------------------
-	alias re_init_winsel initialize
+  alias re_init_winsel initialize
   def initialize(x, y, width, height)
-		@custom_update_method = false
+    @custom_update_method = false
     re_init_winsel(x, y, width, height)
   end
 =begin
-	def active=(bool)
-		# If active has not been set yet
-		if @active.nil?
-			# If set to true, init the cursor. Else, hide it.
-			if bool
-				self.index = 0
-			else
-				self.index = -1
-			end
-			@active = bool
-			return
-		end
-		# If turning on
-		if bool and !@active
-			@active = bool
-			self.index = @index + 1 + (2*@index)
-			# If turning off
-		elsif !bool and @active
-			@active = bool
-			self.index = @index - (2*@index) - 1
-		end
-	end
+  def active=(bool)
+    # If active has not been set yet
+    if @active.nil?
+      # If set to true, init the cursor. Else, hide it.
+      if bool
+        self.index = 0
+      else
+        self.index = -1
+      end
+      @active = bool
+      return
+    end
+    # If turning on
+    if bool and !@active
+      @active = bool
+      self.index = @index + 1 + (2*@index)
+      # If turning off
+    elsif !bool and @active
+      @active = bool
+      self.index = @index - (2*@index) - 1
+    end
+  end
 =end
   #--------------------------------------------------------------------------
   # * Get Number of Rows Displayable on 1 Page
@@ -79,7 +79,7 @@ class Window_Selectable < Window_Base
   #--------------------------------------------------------------------------
   def update
     super
-		return if @custom_update_method
+    return if @custom_update_method
     # If cursor is movable
     if self.active and @item_max > 0 and @index >= 0
       # If pressing down on the directional buttons

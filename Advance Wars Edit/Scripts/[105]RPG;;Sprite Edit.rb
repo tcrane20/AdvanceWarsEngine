@@ -34,11 +34,11 @@ ____________________
 ________________________________________________________________________________
 =end
 module RPG
-	class Sprite < ::Sprite
+  class Sprite < ::Sprite
     
     #-------------------------------------------------------------------------
-		# Initialize new variables
-		#-------------------------------------------------------------------------
+    # Initialize new variables
+    #-------------------------------------------------------------------------
     alias init_new_blink_anims initialize
     def initialize(viewport = nil)
       @_blink_type = 0
@@ -47,8 +47,8 @@ module RPG
       init_new_blink_anims(viewport)
     end
     #-------------------------------------------------------------------------
-		# Allows blinking to have different types
-		#-------------------------------------------------------------------------
+    # Allows blinking to have different types
+    #-------------------------------------------------------------------------
     alias orig_blink_on blink_on
     def blink_on(type = 0)
       return if @_blink
@@ -56,8 +56,8 @@ module RPG
       orig_blink_on
     end
     #-------------------------------------------------------------------------
-		# Allows loop animations to return to a specific frame rather than the first
-		#-------------------------------------------------------------------------
+    # Allows loop animations to return to a specific frame rather than the first
+    #-------------------------------------------------------------------------
     alias set_loop_point_animation loop_animation
     def loop_animation(animation, loop_back_frame = 0)
       return if set_loop_point_animation(animation) == nil
@@ -109,11 +109,11 @@ module RPG
     end
     
     
-		#-------------------------------------------------------------------------
-		# New update methods for blink and loop animations
-		#-------------------------------------------------------------------------
+    #-------------------------------------------------------------------------
+    # New update methods for blink and loop animations
+    #-------------------------------------------------------------------------
     alias update_after_custom_stuff update
-		def update
+    def update
       # Reset the flag every update
       @_animation_done = false
       # Save flags for end
@@ -140,7 +140,7 @@ module RPG
           end
         end
         # Set the color
-				self.color.set(255, 255, 255, alpha)
+        self.color.set(255, 255, 255, alpha)
         # Turn off blink flag temporarily
         @_blink = false
       end
@@ -160,36 +160,36 @@ module RPG
       @_blink = blinking
       @_loop_animation = looping
     end
-		#-------------------------------------------------------------------------
-		# Turns flag on that animation ended
-		#-------------------------------------------------------------------------
+    #-------------------------------------------------------------------------
+    # Turns flag on that animation ended
+    #-------------------------------------------------------------------------
     alias animation_ends_flag dispose_animation
-		def dispose_animation
+    def dispose_animation
       if @_animation_sprites != nil
         @_animation_done = true 
       end
       animation_ends_flag
     end
-		#-------------------------------------------------------------------------
-		# Modified to include a new method
-		#-------------------------------------------------------------------------
+    #-------------------------------------------------------------------------
+    # Modified to include a new method
+    #-------------------------------------------------------------------------
     alias loop_animation_ends_flag dispose_loop_animation
-		def dispose_loop_animation
+    def dispose_loop_animation
       if @_loop_animation_sprites != nil
         @_animation_done = true 
       end
       
       loop_animation_ends_flag
     end
-		#-------------------------------------------------------------------------
-		# Returns true if the animation that was playing on this graphic has finally
-		# finished. This value is set to false as soon as the sprite is updated again.
-		#-------------------------------------------------------------------------
-		def animation_end?
-			return @_animation_done
-		end
-		
-	end
+    #-------------------------------------------------------------------------
+    # Returns true if the animation that was playing on this graphic has finally
+    # finished. This value is set to false as soon as the sprite is updated again.
+    #-------------------------------------------------------------------------
+    def animation_end?
+      return @_animation_done
+    end
+    
+  end
 end
 
 

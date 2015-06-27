@@ -5,7 +5,7 @@ class Window_Command < Window_Selectable
   #     width    : window width
   #     commands : command text string array
   #     icons    : if this window uses icons for its commands
-	#			unit 		 : needed to draw units being carried for 'Drop' purposes
+  #      unit      : needed to draw units being carried for 'Drop' purposes
   #--------------------------------------------------------------------------
   def initialize(width, commands, icons = false, unit = nil)
     # Compute window height from command quantity
@@ -14,17 +14,17 @@ class Window_Command < Window_Selectable
     @unit = unit
     @item_max = commands.size
     @commands = commands
-		
+    
     self.contents = Bitmap.new(@width, @height)
     refresh
     self.index = 0
   end
-	#--------------------------------------------------------------------------
-	# Returns the data value located at current index
-	#--------------------------------------------------------------------------
-	def at_index
-		return @commands[@index]
-	end
+  #--------------------------------------------------------------------------
+  # Returns the data value located at current index
+  #--------------------------------------------------------------------------
+  def at_index
+    return @commands[@index]
+  end
   #--------------------------------------------------------------------------
   # * Draw Item
   #     index : item number
@@ -40,10 +40,10 @@ class Window_Command < Window_Selectable
         icon = Config.get_command_icon(@commands[index])
         draw_text_icon(index+1, @commands[index], icon)
       else
-				# Get the correct unit when drawing the "Drop" command(s)
-				held_unit = @unit.holding_units[0] if @commands[index] == "Drop"
-				held_unit = @unit.holding_units[1] if @commands[index] == "Drop "
-				# Get the held unit's bitmap
+        # Get the correct unit when drawing the "Drop" command(s)
+        held_unit = @unit.holding_units[0] if @commands[index] == "Drop"
+        held_unit = @unit.holding_units[1] if @commands[index] == "Drop "
+        # Get the held unit's bitmap
         id = "_" + held_unit.army.id.to_s
         bitmap = RPG::Cache.character(held_unit.name + id, 0)
         y = 32 * (index+1) - 32

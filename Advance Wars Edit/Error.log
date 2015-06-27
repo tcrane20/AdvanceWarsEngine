@@ -590,3 +590,33 @@ uninitialized constant Scene_Title::Scene_Lobby
 }:59:in `<main>'
 ruby:in `eval'
 
+2015-06-23 15:29:32 -0700:
+undefined method `opacity=' for nil:NilClass
+{Unit_Sprite}:157:in `update_bitmap'
+{Unit_Sprite}:131:in `update'
+{Spriteset_Map kk20}:153:in `block in update'
+{Spriteset_Map kk20}:150:in `each'
+{Spriteset_Map kk20}:150:in `update'
+{FZer0 Weather Script}:4806:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main}:59:in `<main>'
+ruby:in `eval'
+
+2015-06-23 17:04:54 -0700:
+undefined method `opacity=' for nil:NilClass
+{Unit_Sprite}:157:in `update_bitmap'
+{Unit_Sprite}:131:in `update'
+{Spriteset_Map kk20}:153:in `block in update'
+{Spriteset_Map kk20}:150:in `each'
+{Spriteset_Map kk20}:150:in `update'
+{FZer0 Weather Script}:4806:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main}:59:in `<main>'
+ruby:in `eval'
+

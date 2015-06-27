@@ -23,7 +23,7 @@ class Health_Sprite < RPG::Sprite
     @oy = @y; @ox = @x 
     @anim_frame = @unit.frame
     #self.bitmap = Bitmap.new(16, 16)
-		self.z = 22000
+    self.z = 22000
     moveto(@ox, @oy)
   end
   #----------------------------------------------------------------------------
@@ -47,18 +47,18 @@ class Health_Sprite < RPG::Sprite
   # Updates the animation frame
   #--------------------------------------------------------------------------
   def update_bitmap
-		# Check if hiding HP from enemy view is true
-		if @unit.army.officer.hide_hp and !@unit.army.playing
-			self.bitmap = RPG::Cache.picture("hp_hide")
-		else # Display normal HP value
-			# If unit has damage on it
-			if @unit.unit_hp < 10
-				self.bitmap = RPG::Cache.picture("hp_" + @unit.unit_hp.to_s)
-			# Otherwise, draw no flag
-			else
-				self.bitmap = nil
-			end
-		end
+    # Check if hiding HP from enemy view is true
+    if @unit.army.officer.hide_hp and !@unit.army.playing
+      self.bitmap = RPG::Cache.picture("hp_hide")
+    else # Display normal HP value
+      # If unit has damage on it
+      if @unit.unit_hp < 10
+        self.bitmap = RPG::Cache.picture("hp_" + @unit.unit_hp.to_s)
+      # Otherwise, draw no flag
+      else
+        self.bitmap = nil
+      end
+    end
   end
   #--------------------------------------------------------------------------
   # Updates the origin of the sprite (where it should be drawn)
