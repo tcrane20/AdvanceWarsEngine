@@ -48,7 +48,7 @@ by KK20                                                             Jun 22 2015
 #       3 = Playtest (import scripts from folder to playtest game; does not
 #                     replace or create a 'Scripts.r_data' file)
 #------------------------------------------------------------------------------
-IMPORT_EXPORT_MODE = 1
+IMPORT_EXPORT_MODE = 3
 #------------------------------------------------------------------------------
 # Folder name where scripts are imported from and exported to
 #------------------------------------------------------------------------------

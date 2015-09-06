@@ -7,3 +7,5 @@ Configuration settings should not request Standard RTP package
 AW_Font needs to be installed.
 
 RGSS102E.dll needs to be in the folder
+
+A user reported that the RGSS3 version 3.0.0.1 did not work but version 3.0.1.1 did. Research will be necessary.
