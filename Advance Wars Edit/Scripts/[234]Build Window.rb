@@ -33,7 +33,6 @@ class Build_Window < Window_Selectable
     refresh
     self.index = 0
     self.active = true
-    Mouse.saved_window = self
     @desc_window.draw_info(@units[@index].stat_desc[0])
     @info_window.set_desc_window(@desc_window)
     self.z = 10000

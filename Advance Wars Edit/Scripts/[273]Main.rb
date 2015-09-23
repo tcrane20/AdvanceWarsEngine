@@ -50,6 +50,8 @@ begin
   Font.default_outline = false
   # [ Load in Map files and initialize them ]
   
+  # Load other data (such as CO objects)
+  $CO.each_index{|i| $CO[i] = $CO[i].new }
   # Prepare for transition
   Graphics.freeze
   # Make scene object (title screen)

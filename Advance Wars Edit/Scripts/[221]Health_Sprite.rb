@@ -23,7 +23,7 @@ class Health_Sprite < RPG::Sprite
     @oy = @y; @ox = @x 
     @anim_frame = @unit.frame
     #self.bitmap = Bitmap.new(16, 16)
-    self.z = 22000
+    self.z = 1000
     moveto(@ox, @oy)
   end
   #----------------------------------------------------------------------------

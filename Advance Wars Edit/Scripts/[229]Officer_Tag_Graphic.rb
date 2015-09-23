@@ -20,7 +20,6 @@ ____________________________
 ________________________________________________________________________________
 =end
 class Officer_Tag_Graphic < RPG::Sprite
-  attr_accessor :y
   def initialize(viewport, army, on_map = true)
     super(viewport)
     # Create gold, Stars and Day
@@ -109,6 +108,7 @@ class Officer_Tag_Graphic < RPG::Sprite
         # if on left side of screen
         if !self.mirror
           @powerbar.x = case (@phase+1)/2
+          # 2 ^ (case + 7)
             when -6 then @powerbar.width / 2 - @powerbar.width
             when -5 then @powerbar.width / 4 - @powerbar.width
             when -4 then @powerbar.width / 8 - @powerbar.width
@@ -118,6 +118,7 @@ class Officer_Tag_Graphic < RPG::Sprite
           end
         else # on right side
           @powerbar.x = case (@phase+1)/2
+          # 2 ^ (case + 7)
             when -6 then 640 - @powerbar.width / 2
             when -5 then 640 - @powerbar.width / 4
             when -4 then 640 - @powerbar.width / 8
@@ -131,6 +132,7 @@ class Officer_Tag_Graphic < RPG::Sprite
         # if on left side of screen
         if !self.mirror
           @powerbar.x = case (@phase+1)/2
+          # (2 ^ case - 1) / 2 ^ case, unless case == 7, then 1
             when 1 then @powerbar.width / 2 - @powerbar.width
             when 2 then @powerbar.width * 3 / 4 - @powerbar.width
             when 3 then @powerbar.width * 7 / 8 - @powerbar.width
@@ -141,6 +143,7 @@ class Officer_Tag_Graphic < RPG::Sprite
           end
         else # on right side
           @powerbar.x = case (@phase+1)/2
+          # (2 ^ case - 1) / 2 ^ case, unless case == 7, then 1
             when 1 then 640 - @powerbar.width / 2
             when 2 then 640 - @powerbar.width * 3 / 4
             when 3 then 640 - @powerbar.width * 7 / 8

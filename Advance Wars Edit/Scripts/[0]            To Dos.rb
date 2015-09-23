@@ -1,10 +1,12 @@
 =begin
 
 Things I noticed:
-  Cursor is not invisible at appropriate times
-  CO Profiles scene not done (will error)
-  Flag sprites have high z-values; they overlap sprites that should be higher
-  Crashing units error the game (their flag sprites are updated when already disposed)
+  -Cursor is not invisible at appropriate times
+  -CO Profiles scene not done (will error)
+  -Flag sprites have high z-values; they overlap sprites that should be higher
+  -Crashing units error the game (their flag sprites are updated when already disposed)
+  -Mouse click needs button assignment to it at appropriate times. Can't scroll
+  down a window without triggering to select the item if left click = C.
   
 
 Thing I know I have finished

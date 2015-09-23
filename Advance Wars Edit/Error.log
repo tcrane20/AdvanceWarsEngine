@@ -620,3 +620,80 @@ undefined method `opacity=' for nil:NilClass
 {Main}:59:in `<main>'
 ruby:in `eval'
 
+2015-09-06 17:37:10 -0700:
+uninitialized constant Scene_Title::Scene_Lobby
+{Scene_Title Edit}:191:in `command_continue'
+{Scene_Title}:102:in `update'
+{Scene_Title Edit}:110:in `block in main'
+{Scene_Title Edit}:104:in `loop'
+{Scene_Title Edit}:104:in `main'
+{Main}:59:in `<main>'
+ruby:in `eval'
+
+2015-09-06 17:42:28 -0700:
+undefined method `x' for 18:Fixnum
+{Spriteset_Map kk20}:117:in `block in show_ranges'
+{Spriteset_Map kk20}:117:in `each'
+{Spriteset_Map kk20}:117:in `show_ranges'
+{Scene_AWMap}:979:in `draw_ranges'
+{Scene_AWMap Phases}:504:in `phase_cursor'
+{Scene_AWMap Phases}:206:in `update_by_phase'
+{Scene_AWMap Phases}:73:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main}:59:in `<main>'
+ruby:in `eval'
+
+2015-09-06 17:45:14 -0700:
+wrong number of arguments (1 for 2)
+{Scene_Lobby}:7:in `new'
+{Scene_Lobby}:7:in `main'
+{Main}:59:in `<main>'
+ruby:in `eval'
+
+2015-09-06 17:53:51 -0700:
+undefined method `new' for #<CO_Andy:0x9546d30>
+{Scene_Title Edit}:32:in `block in main'
+{Scene_Title Edit}:32:in `each_index'
+{Scene_Title Edit}:32:in `main'
+{Main}:59:in `<main>'
+ruby:in `eval'
+
+2015-09-12 17:40:23 -0700:
+can't clone Cursor_Rect
+{Blizzard - Mouse Controller}:346:in `clone'
+{Blizzard - Mouse Controller}:346:in `block in update_selections'
+{Blizzard - Mouse Controller}:343:in `each'
+{Blizzard - Mouse Controller}:343:in `update_selections'
+{Blizzard - Mouse Controller}:331:in `index='
+{Window_Command edit}:20:in `initialize'
+{Scene_Title Edit}:92:in `new'
+{Scene_Title Edit}:92:in `main'
+{Main}:61:in `<main>'
+ruby:in `eval'
+
+2015-09-12 17:41:27 -0700:
+can't clone Cursor_Rect
+{Blizzard - Mouse Controller}:347:in `clone'
+{Blizzard - Mouse Controller}:347:in `block in update_selections'
+{Blizzard - Mouse Controller}:343:in `each'
+{Blizzard - Mouse Controller}:343:in `update_selections'
+{Blizzard - Mouse Controller}:331:in `index='
+{Window_Command edit}:20:in `initialize'
+{Scene_Title Edit}:92:in `new'
+{Scene_Title Edit}:92:in `main'
+{Main}:61:in `<main>'
+ruby:in `eval'
+
+2015-09-12 18:05:58 -0700:
+undefined method `update' for nil:NilClass
+{Scene_AWMap Phases}:896:in `phase_menu'
+{Scene_AWMap Phases}:211:in `update_by_phase'
+{Scene_AWMap Phases}:73:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main}:61:in `<main>'
+ruby:in `eval'
+

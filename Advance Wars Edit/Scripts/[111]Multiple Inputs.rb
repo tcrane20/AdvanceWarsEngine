@@ -42,7 +42,7 @@ module Input
   RIGHT = [Key['Arrow Right']]
   A = [Key['Shift']]
   B = [Key['Esc'], Key['NumberPad 0'], Key['X']]
-  C = [Key['Space'], Key['Enter'], Key['C']]
+  C = [Key['Space'], Key['Enter'], Key['C'], Key['Mouse Left']]
   X = [Key['A']]
   Y = [Key['S']]
   Z = [Key['D']]

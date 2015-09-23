@@ -78,7 +78,7 @@ class Scene_AWMap
       # Frame update
       update
       # Mouse update (for window active)
-      Mouse.update_windows
+#      Mouse.update_windows
       # Abort loop if screen is changed
       if $scene != self
         break

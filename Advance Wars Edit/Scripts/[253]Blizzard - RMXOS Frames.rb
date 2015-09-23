@@ -11,12 +11,13 @@
 class Frame < Sprite
   
   # constants
-  BORDER_COLOR = Color.new(255, 255, 255, 160)
-  BACK_COLOR = Color.new(0, 0, 0, 160)
+  BORDER_COLOR = Color.new(255, 255, 255, 200)
+  BACK_COLOR = Color.new(128, 128, 128, 160)
   # setting all accessible variables
   attr_accessor :active
   attr_reader   :width
   attr_reader   :height
+  attr_reader   :ax, :ay
   #----------------------------------------------------------------------------
   # Initialization.
   #  x             - x coordinate
@@ -114,6 +115,12 @@ class Frame < Sprite
     super
     update_background
   end
+  
+  def visible=(vis)
+    @background.visible = vis
+    super(vis)
+  end
+  
   #----------------------------------------------------------------------------
   # Refreshes the display. Abstract method.
   #----------------------------------------------------------------------------
@@ -143,7 +150,7 @@ end
 class Frame_Text < Frame
   
   # constants
-  CURSOR_COLOR = Color.new(255, 255, 255)
+  CURSOR_COLOR = Color.new(255, 0, 0)
   # setting all accessible variables
   attr_reader :text
   attr_reader :password_char
@@ -172,7 +179,7 @@ class Frame_Text < Frame
     @width += 200
     w = @background.bitmap.text_size("m" * @max_length).width
     self.bitmap = Bitmap.new(w, @height)
-    self.bitmap.font = Font.new('Courier New')
+    
     # filter for input, allows all printable characters
     @input_filter = //
   end
@@ -509,7 +516,7 @@ class Frame_Text < Frame
   #----------------------------------------------------------------------------
   def cursor_x
     # x is "0" if cursor position at 0
-    return -self.src_rect.x if !self.cursor_can_move_left?
+    return -self.src_rect.x + 4 if !self.cursor_can_move_left?
     # find cursor position from text left from it
     display_text = get_display_text.scan(/./m)[0, @cursor_position].join
     cx = self.bitmap.text_size(display_text).width - self.src_rect.x
@@ -522,10 +529,8 @@ class Frame_Text < Frame
       self.ox -= 80
       self.ox = [self.ox, 0].max
     end
-    
-    #puts [cx, self.ox, cx - self.ox]
-    
-    return cx - self.ox
+
+    return cx - self.ox + 4
   end
   #----------------------------------------------------------------------------
   # Gets the y offset of the cursor.
@@ -539,7 +544,7 @@ class Frame_Text < Frame
   # Returns: Height for the cursor.
   #----------------------------------------------------------------------------
   def cursor_height
-    return 28
+    return Font.default_size
   end
   #----------------------------------------------------------------------------
   # Updates the cursor display.
@@ -555,7 +560,7 @@ class Frame_Text < Frame
       end
     else
       # if cursor does not exist
-      @cursor = Sprite.new if @cursor == nil
+      @cursor = Sprite.new(@v) if @cursor == nil
       if @cursor.bitmap != nil && @cursor.bitmap.height != cursor_height
         @cursor.bitmap.dispose
         @cursor.bitmap = nil
@@ -566,7 +571,7 @@ class Frame_Text < Frame
         @cursor.bitmap.fill_rect(0, 0, 1, cursor_height, CURSOR_COLOR)
       end
       # position the cursor
-      @cursor.x, @cursor.y = @ax + cursor_x, @ay + cursor_y #self.x + cursor_x, self.y + cursor_y
+      @cursor.x, @cursor.y = cursor_x, cursor_y #@ax + cursor_x, @ay + cursor_y #self.x + cursor_x, self.y + cursor_y
       @cursor.z = self.z + 1
     end
   end
@@ -588,7 +593,7 @@ class Frame_Text < Frame
   def refresh
     self.bitmap.clear
     # draw text
-    self.bitmap.draw_text(0, 0, self.bitmap.width, 28, get_display_text)
+    self.bitmap.draw_text(4, 2, self.bitmap.width, 28, get_display_text)
   end
   
 end
@@ -631,7 +636,7 @@ class Frame_Caption < Frame_Text
   def refresh
     self.bitmap.clear
     # draw caption
-    self.bitmap.draw_text(4, 0, 160, 32, @caption, 2)
+    self.bitmap.draw_text(4, 0, 160, 32, @caption)
     # draw text
     self.bitmap.draw_text(172, 0, @width - 8 - 168, 32, get_display_text)
   end
@@ -641,6 +646,22 @@ class Frame_Caption < Frame_Text
   #----------------------------------------------------------------------------
   def cursor_x
     return (super + 172)
+  end
+  
+end
+
+
+class Frame_Text < Frame
+  
+  attr_writer :input_filter
+  
+  def mouse_over?
+    mx,my = $mouse.position
+    return mx >= @ax && my >= @ay && mx < @ax + self.width && my < @ay + self.height
+  end
+  
+  def clicked_on?
+    return mouse_over? && Input.trigger?(Input::Key['Mouse Left'])
   end
   
 end

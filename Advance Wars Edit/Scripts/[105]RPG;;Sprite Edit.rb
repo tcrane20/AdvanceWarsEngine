@@ -25,6 +25,8 @@ ____________________
  Notes:
  
  Updates:
+ - 9/12/15
+   + Removed the z-layer addition to animation sprites
  - 11/08/14
    + Raised z layer of animations
  - 04/10/14
@@ -63,7 +65,7 @@ module RPG
       return if set_loop_point_animation(animation) == nil
       @_loop_back_frame = loop_back_frame
     end
-    
+=begin    
     alias raise_animation_z animation_set_sprites
     def animation_set_sprites(sprites, cell_data, position)
       raise_animation_z(sprites, cell_data, position)
@@ -96,7 +98,7 @@ module RPG
         end
         sprite.x += cell_data[i, 1]
         sprite.y += cell_data[i, 2]
-        sprite.z = 2000
+        sprite.z = 100000
         sprite.ox = 96
         sprite.oy = 96
         sprite.zoom_x = cell_data[i, 3] / 100.0
@@ -107,7 +109,7 @@ module RPG
         sprite.blend_type = cell_data[i, 7]
       end
     end
-    
+=end    
     
     #-------------------------------------------------------------------------
     # New update methods for blink and loop animations

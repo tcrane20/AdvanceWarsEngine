@@ -141,7 +141,7 @@ class Game_Player < Game_Character
       # Process player controls. If mouse is on game screen, process mouse commands.
       # Otherwise, process keyboard commands.
       # Note that this only applies to moving the cursor.
-      mouse_loc = Mouse.pos(false) # Get the mouse's location relative to the game screen
+      mouse_loc = $mouse.position # Get the mouse's location relative to the game screen
       unless mouse_loc == [-1,-1]
         x = (mouse_loc[0] + $game_map.display_x/4) / 32
         y = (mouse_loc[1] + $game_map.display_y/4) / 32
@@ -293,11 +293,11 @@ class Game_Player < Game_Character
   def moveto(x, y, mouse_jump = false)
     center(x, y)
     super(x,y)
-    if Mouse.on_screen? and mouse_jump
-      new_x = x * 32 - ($game_map.display_x/4) + 16
-      new_y = y * 32 - ($game_map.display_y/4) + 16
-      Mouse.pos_set(new_x,new_y)
-    end
+    #if Mouse.on_screen? and mouse_jump
+    #  new_x = x * 32 - ($game_map.display_x/4) + 16
+    #  new_y = y * 32 - ($game_map.display_y/4) + 16
+    #  Mouse.pos_set(new_x,new_y)
+    #end
   end
   #--------------------------------------------------------------------------
   # Instantly moves the cursor to the coordinates if they are within the

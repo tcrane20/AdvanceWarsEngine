@@ -200,6 +200,12 @@ class Cursor_Rect < ::Sprite
       
     end
   end
+  #------------
+  #For Blizz's Mouse Script
+  #------------
+  def clone
+    return Rect.new(self.x, self.y, self.width, self.height)
+  end
 end
 
 #==============================================================================
@@ -749,8 +755,8 @@ class Window_Base < Window
   # Return true if mouse is in within the window
   #--------------------------------------------------------------------------
   def mouse_on_window?
-    return false unless Mouse.on_screen?
-    pos = Mouse.pos(false)
+    return false unless $mouse.on_screen?
+    pos = $mouse.position
     return (pos[0] >= self.x and pos[0] < self.x + self.width and
       pos[1] >= self.y and pos[1] < self.y + self.height)
   end
@@ -761,11 +767,11 @@ class Window_Base < Window
   def update
     super
     # Process mouse operations if mouse is on screen and custom method implemented
-    if Mouse.on_screen? and @active_mod_on
-      if mouse_on_window?
-        Mouse.window_add(self)
-      end
-    end
+    #if $mouse.on_screen? and @active_mod_on
+    #  if mouse_on_window?
+    #    Mouse.window_add(self)
+    #  end
+    #end
   end
   
 end

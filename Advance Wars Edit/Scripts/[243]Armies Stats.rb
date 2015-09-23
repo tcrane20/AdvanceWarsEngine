@@ -8,6 +8,7 @@ class SecondScreen
     $game_map.army.each{|army| next if army.nil?
       ot = Officer_Tag_Graphic.new(@viewport, army, false)
       ot.y = 60 * i + 40
+      p ot.y
       @officer_tags.push(ot)
       i += 1
     }

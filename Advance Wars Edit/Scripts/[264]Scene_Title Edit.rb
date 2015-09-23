@@ -29,7 +29,7 @@ class Scene_Title
     
     
     
-    $CO.each_index{|i| $CO[i] = $CO[i].new }
+    
     
 =begin
     maps = {}

@@ -47,11 +47,11 @@ class CO_Flak < CO
   
   def neg_luck_bonus(unit)
     if @scop
-      return 30
+      return 50
     elsif @cop
-      return 20
+      return 35
     else
-      return 10
+      return 20
     end
   end
   
