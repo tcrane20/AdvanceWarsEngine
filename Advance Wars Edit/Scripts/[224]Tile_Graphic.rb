@@ -39,8 +39,11 @@ class Tile_Graphic < RPG::Sprite
   def update_graphic
     self.bitmap.clear
     # Load tile id and get graphic to draw
-    tile_id = $spriteset.fow_tilemap.map_data[$game_player.x, $game_player.y, 0] if $game_map.fow
-    tile_id = $game_map.data[$game_player.x, $game_player.y, 0] if (tile_id.nil? or tile_id == 0)
+    if $game_map.fow
+      tile_id = $spriteset.fow_tilemap.map_data[$game_player.x, $game_player.y, 0]
+    else
+      tile_id = $game_map.data[$game_player.x, $game_player.y, 0]
+    end
     
     tile = $game_map.get_tile($game_player.x,$game_player.y)
     bitmap = RPG::Cache.tile($game_map.tileset_name, tile_id, 0)

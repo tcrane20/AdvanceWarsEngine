@@ -6,8 +6,8 @@
 #   Secondary Weapon : Machine Gun
 ################################################################################
 class Cruiser < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
+  def initialize(*args)
+    super(*args)
     @name = "cruiser"
     @real_name = "Cruiser"
     @unit_type = 16

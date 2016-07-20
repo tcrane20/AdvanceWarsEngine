@@ -464,11 +464,11 @@ class Scene_AWMap
             draw_ranges(@positions, 1) 
           # If tile can build units and it belongs to you, draw build units window
           elsif tile.is_a?(Property) and tile.army == @player and 
-          tile.build_list(@player) and unit.nil?
+          tile.build_list and unit.nil?
             Config.play_se("decide")
             #Draw build command
-            units = tile.build_list(@player)
-            @active_window = Build_Window.new(units)
+            units = tile.build_list
+            @active_window = Build_Window.new(units, @player)
             @phase = 6
           else
             Config.play_se("decide")

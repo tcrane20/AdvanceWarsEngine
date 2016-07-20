@@ -6,8 +6,8 @@
 #   Secondary Weapon : None
 ################################################################################
 class Tcop < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
+  def initialize(*args)
+    super(*args)
     @name = "tcopter"
     @real_name = "T. Copter"
     @unit_type = 11

@@ -6,9 +6,10 @@
 #   Secondary Weapon : Machine Gun
 ################################################################################
 class Infantry < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
-    @name = "infantry" + army.nation.to_s
+  def initialize(*args)
+    super(*args)
+    @name = "infantry"
+    @nation_gfx = true # Changes the sprite based on CO's nation
     @real_name = "Infantry"
     @unit_type = INF
     @cost = 1000

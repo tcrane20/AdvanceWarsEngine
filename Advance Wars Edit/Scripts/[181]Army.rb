@@ -51,7 +51,7 @@ class Army
     officer = temp.join
     ####
     @officer = eval("CO_#{officer}.new(self)")
-    @nation = get_nation(@officer.description[0])
+    @nation = get_nation
     @can_rout = false
     @lost_battle = false
     @halve_income = false
@@ -61,8 +61,8 @@ class Army
     @playing = false
   end
   
-  def get_nation(string)
-    return case string
+  def get_nation
+    return case @officer.description[0]
     when "Orange Star" then 1
     when "Blue Moon" then 2
     when "Green Earth" then 3
@@ -103,7 +103,7 @@ class Army
     cities = []
     @owned_props.each{|prop| cities.push(prop) unless prop.is_a?(ComTower)}
     # If earning half income this turn
-    return (cities.size * 1000 * @officer.income_multiplier)
+    return (cities.size * 10 * @officer.income_multiplier)
   end
   
   def earn_daily_income

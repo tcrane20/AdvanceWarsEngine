@@ -6,8 +6,8 @@
 #   Secondary Weapon : None
 ################################################################################
 class Bomber < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
+  def initialize(*args)
+    super(*args)
     @name = "bomber"
     @real_name = "Bomber"
     @unit_type = 14

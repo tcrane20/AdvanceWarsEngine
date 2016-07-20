@@ -7,9 +7,8 @@ class Airport < Property
     @ai_value = 500
   end
   
-  def build_list(army)
-    x,y = -1,-1
-    return [Tcop.new(x,y,army),Bcop.new(x,y,army),Zeppelin.new(x,y,army),Fighter.new(x,y,army),Bomber.new(x,y,army),Stealth.new(x,y,army)]
+  def build_list
+    return [Tcop, Bcop, Zeppelin, Fighter, Bomber, Stealth]
   end
   #-------------------------------------------------------------------------
   #  Checks if the specified unit can be repaired on this property.

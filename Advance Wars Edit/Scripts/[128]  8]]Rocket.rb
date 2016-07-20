@@ -6,8 +6,8 @@
 #   Secondary Weapon : None
 ################################################################################
 class Rocket < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
+  def initialize(*args)
+    super(*args)
     @name = "rocket"
     @real_name = "Rockets"
     @unit_type = 8

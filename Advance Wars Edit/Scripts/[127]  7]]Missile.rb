@@ -6,8 +6,8 @@
 #   Secondary Weapon : None
 ################################################################################
 class Missile < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
+  def initialize(*args)
+    super(*args)
     @name = "missile"
     @real_name = "Missiles"
     @unit_type = 7

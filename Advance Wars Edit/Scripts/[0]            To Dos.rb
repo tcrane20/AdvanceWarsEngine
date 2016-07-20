@@ -4,7 +4,9 @@ Things I noticed:
   -Cursor is not invisible at appropriate times
   -CO Profiles scene not done (will error)
   -Flag sprites have high z-values; they overlap sprites that should be higher
-  -Crashing units error the game (their flag sprites are updated when already disposed)
+  -Crashing units require a slight delay between them; right now, if more than one unit crashes,
+   all will play their crash animation at the same time. Cursor needs to move to the first crashing unit,
+   play animation, wait for animation to finish, then proceed to the next crashing unit.
   -Mouse click needs button assignment to it at appropriate times. Can't scroll
   down a window without triggering to select the item if left click = C.
   

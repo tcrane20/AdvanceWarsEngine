@@ -697,3 +697,167 @@ undefined method `update' for nil:NilClass
 {Main}:61:in `<main>'
 ruby:in `eval'
 
+2015-09-27 21:11:34 -0700:
+undefined method `set_window' for nil:NilClass
+{Scene_Title Edit}:119:in `block in main'
+{Scene_Title Edit}:104:in `loop'
+{Scene_Title Edit}:104:in `main'
+{Main}:61:in `<main>'
+ruby:in `eval'
+
+2016-06-25 21:55:32 -0700:
+undefined method `name' for nil:NilClass
+{CO Select}:64:in `block in initialize'
+{CO Select}:58:in `each_index'
+{CO Select}:58:in `initialize'
+{Scene MainMenu}:80:in `new'
+{Scene MainMenu}:80:in `update'
+{Scene MainMenu}:46:in `block in main'
+{Scene MainMenu}:40:in `loop'
+{Scene MainMenu}:40:in `main'
+{Main}:85:in `<main>'
+ruby:in `eval'
+
+2016-06-25 22:03:40 -0700:
+undefined method `set_window' for nil:NilClass
+{Scene_Title Edit}:109:in `block in main'
+{Scene_Title Edit}:94:in `loop'
+{Scene_Title Edit}:94:in `main'
+{Main}:146:in `<main>'
+ruby:in `eval'
+
+2016-06-29 23:58:54 -0700:
+undefined method `-' for nil:NilClass
+{RPG Module}:73:in `tile'
+{Tile_Graphic}:46:in `update_graphic'
+{Tile_Graphic}:34:in `update'
+{StatWindow find kk20}:63:in `update'
+{Spriteset_Map kk20}:183:in `update'
+{FZer0 Weather Script}:4806:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main}:151:in `<main>'
+ruby:in `eval'
+
+2016-06-30 00:00:35 -0700:
+undefined method `-' for nil:NilClass
+{RPG Module}:73:in `tile'
+{Tile_Graphic}:46:in `update_graphic'
+{Tile_Graphic}:34:in `update'
+{StatWindow find kk20}:63:in `update'
+{Spriteset_Map kk20}:183:in `update'
+{FZer0 Weather Script}:4806:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main}:151:in `<main>'
+ruby:in `eval'
+
+2016-06-30 00:00:55 -0700:
+undefined method `-' for nil:NilClass
+{RPG Module}:73:in `tile'
+{Tile_Graphic}:46:in `update_graphic'
+{Tile_Graphic}:34:in `update'
+{StatWindow find kk20}:63:in `update'
+{Spriteset_Map kk20}:183:in `update'
+{FZer0 Weather Script}:4806:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main}:151:in `<main>'
+ruby:in `eval'
+
+2016-06-30 00:04:34 -0700:
+undefined method `-' for nil:NilClass
+{RPG Module}:73:in `tile'
+{Tile_Graphic}:50:in `update_graphic'
+{Tile_Graphic}:34:in `update'
+{StatWindow find kk20}:63:in `update'
+{Spriteset_Map kk20}:183:in `update'
+{FZer0 Weather Script}:4806:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main}:151:in `<main>'
+ruby:in `eval'
+
+2016-06-30 00:05:57 -0700:
+undefined method `-' for nil:NilClass
+{RPG Module}:74:in `tile'
+{Tile_Graphic}:50:in `update_graphic'
+{Tile_Graphic}:34:in `update'
+{StatWindow find kk20}:63:in `update'
+{Spriteset_Map kk20}:183:in `update'
+{FZer0 Weather Script}:4806:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main}:151:in `<main>'
+ruby:in `eval'
+
+2016-06-30 00:06:45 -0700:
+undefined method `-' for nil:NilClass
+{RPG Module}:74:in `tile'
+{Tile_Graphic}:50:in `update_graphic'
+{Tile_Graphic}:34:in `update'
+{StatWindow find kk20}:63:in `update'
+{Spriteset_Map kk20}:183:in `update'
+{FZer0 Weather Script}:4806:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main}:151:in `<main>'
+ruby:in `eval'
+
+2016-06-30 00:07:20 -0700:
+undefined method `-' for nil:NilClass
+{RPG Module}:74:in `tile'
+{Tile_Graphic}:50:in `update_graphic'
+{Tile_Graphic}:34:in `update'
+{StatWindow find kk20}:63:in `update'
+{Spriteset_Map kk20}:183:in `update'
+{FZer0 Weather Script}:4806:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main}:151:in `<main>'
+ruby:in `eval'
+
+2016-06-30 00:07:42 -0700:
+undefined method `-' for nil:NilClass
+{RPG Module}:74:in `tile'
+{Tile_Graphic}:50:in `update_graphic'
+{Tile_Graphic}:34:in `update'
+{StatWindow find kk20}:63:in `update'
+{Spriteset_Map kk20}:183:in `update'
+{FZer0 Weather Script}:4806:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main}:151:in `<main>'
+ruby:in `eval'
+
+2016-06-30 00:08:17 -0700:
+undefined method `-' for nil:NilClass
+{RPG Module}:74:in `tile'
+{Tile_Graphic}:50:in `update_graphic'
+{Tile_Graphic}:34:in `update'
+{StatWindow find kk20}:63:in `update'
+{Spriteset_Map kk20}:183:in `update'
+{FZer0 Weather Script}:4806:in `update'
+{Scene_AWMap Phases}:57:in `update'
+{Scene_AWMap}:79:in `block in main'
+{Scene_AWMap}:73:in `loop'
+{Scene_AWMap}:73:in `main'
+{Main}:151:in `<main>'
+ruby:in `eval'
+

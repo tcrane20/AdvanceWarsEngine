@@ -6,8 +6,8 @@
 #   Secondary Weapon : None
 ################################################################################
 class Artillery < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
+  def initialize(*args)
+    super(*args)
     @name = "artillery"
     @real_name = "Artillery"
     @unit_type = 4

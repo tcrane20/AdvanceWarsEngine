@@ -6,8 +6,8 @@
 #   Secondary Weapon : Machine Gun
 ################################################################################
 class Destroyer < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
+  def initialize(*args)
+    super(*args)
     @name = "destroyer"
     @real_name = "Destroyer"
     @unit_type = 22

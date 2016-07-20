@@ -6,8 +6,8 @@
 #   Secondary Weapon : None
 ################################################################################
 class Sub < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
+  def initialize(*args)
+    super(*args)
     @name = "sub"
     @real_name = "Submarine"
     @unit_type = 17

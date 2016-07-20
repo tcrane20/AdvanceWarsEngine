@@ -78,8 +78,9 @@ class Unit
 #  attr_accessor :play_animation # Play the explosion animation if destroyed
   attr_accessor :ai
   
-  def initialize(x, y, army)
+  def initialize(x=nil, y=nil, army=nil)
     @army = army
+    @nation_gfx = false
     @unit_type = -1
     @cost = 0
     @move = 1
@@ -135,6 +136,19 @@ class Unit
   # A T T R I B U T E S
   #~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*~*
 
+  #-----------------------------------------------------------------------------
+  # Appends an integer to the end of @name to signify which graphic to use
+  # based on the army's nation (1 = Orange Star, 2 = Blue Moon, etc.).
+  # An army-less unit will default to 1.
+  # Units must set @nation_gfx to true in order to enable this feature.
+  #-----------------------------------------------------------------------------
+  def name
+    if @nation_gfx
+      return @army.nil? ? @name + "1" : @name + army.get_nation.to_s
+    else
+      return @name
+    end
+  end
   #-----------------------------------------------------------------------------
   # Get unit's CO
   #-----------------------------------------------------------------------------
@@ -334,12 +348,11 @@ class Unit
     if by_joining
       index = @army.units.index(self)
       @army.units[index] = nil
-    else
+    else # Play destruction animation
       # Stops capture of the unit if destroyed in battle
       stop_capture
-    end
-    # Play destruction animation?
-    if !by_joining
+      # The cursor will move to this unit before playing the destroy animation.
+      # After the destroy animation, the cursor will continue to the next action.
       proc = Proc.new{ @destroyed = true; $game_map.set_unit(@x,@y,nil)}
       $game_player.add_move_action(@x, @y, proc, WAIT_UNIT_ANIMATION)
     end

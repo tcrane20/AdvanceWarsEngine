@@ -6,8 +6,8 @@
 #   Secondary Weapon : Machine Gun
 ################################################################################
 class Recon < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
+  def initialize(*args)
+    super(*args)
     @name = "recon"
     @real_name = "Recon"
     @unit_type = 2

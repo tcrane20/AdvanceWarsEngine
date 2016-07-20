@@ -6,8 +6,8 @@
 #   Secondary Weapon : Machine Gun
 ################################################################################
 class MdTank < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
+  def initialize(*args)
+    super(*args)
     @name = "midtank"
     @real_name = "Med. Tank"
     @unit_type = 9

@@ -6,8 +6,8 @@
 #   Secondary Weapon : Machine Gun
 ################################################################################
 class Bike < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
+  def initialize(*args)
+    super(*args)
     @name = "bike"
     @real_name = "Bike Infantry"
     @unit_type = BIK

@@ -59,11 +59,10 @@ class HQ < City
   end
 
   
-  def build_list(army)
+  def build_list
     return false if @id == TILE_HQ
-    return false unless army.officer.build_on_cities
-    x,y = -1,-1
-    return [Infantry.new(x,y,army),Bike.new(x,y,army),Mech.new(x,y,army),Recon.new(x,y,army),Apc.new(x,y,army),Artillery.new(x,y,army),Tank.new(x,y,army),AntiAir.new(x,y,army),Missile.new(x,y,army),Antitank.new(x,y,army),Rocket.new(x,y,army),MdTank.new(x,y,army),Neotank.new(x,y,army),Megatank.new(x,y,army)]
+    return false unless @army.officer.build_on_cities
+    return [Infantry, Bike, Mech, Recon, Apc, Artillery, Tank, AntiAir, Missile, Antitank, Rocket, MdTank, Neotank, Megatank]
   end
 
 end

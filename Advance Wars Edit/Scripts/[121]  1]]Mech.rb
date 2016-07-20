@@ -6,9 +6,10 @@
 #   Secondary Weapon : Machine Gun
 ################################################################################
 class Mech < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
-    @name = "mech" + army.nation.to_s
+  def initialize(*args)
+    super(*args)
+    @name = "mech"
+    @nation_gfx = true # Changes the sprite based on CO's nation
     @real_name = "Mech"
     @unit_type = 1
     @cost = 3000

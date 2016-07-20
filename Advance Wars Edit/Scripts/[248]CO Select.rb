@@ -45,12 +45,12 @@ class CO_Select < RPG::Sprite
     @index = 0
     @tab_index = 0
     # Load array of player CO choices
-    @player_COs = (currentCOs.nil? ? [CO_Andy.new(Army.new(0,0)), CO_Olaf.new(Army.new(0,0)), CO_Eagle.new(Army.new(0,0)), CO_Kanbei.new(Army.new(0,0)), CO_Flak.new(Army.new(0,0))] : currentCOs)
+    @player_COs = (currentCOs.nil? ? [$CO["Andy"], $CO["Olaf"], $CO["Eagle"], $CO["Kanbei"]] : currentCOs)
     # Initialize sprite for drawing on
     @sprite_player_COs = Sprite.new
     @sprite_player_COs.bitmap = Bitmap.new(640,480)
     # Sets spacing of profiles
-    @spacing = [50,25,24].delete_at(players-2)
+    @spacing = [50,25,24][players-2]
     @first_draw_x = (640-(111*players)-(@spacing*(players-1)))/2
     # Load graphics
     @graphics = RPG::Cache.picture("coselect_graphics")
@@ -218,11 +218,11 @@ class CO_Select < RPG::Sprite
     # Setup which army officers to display
     @co_list = []
     case @tab_index
-    when 0 then $CO.each{|co| @co_list.push(co) if co.nation == "Orange Star" }
-    when 1 then $CO.each{|co| @co_list.push(co) if co.nation == "Blue Moon" }
-    when 2 then $CO.each{|co| @co_list.push(co) if co.nation == "Green Earth" }
-    when 3 then $CO.each{|co| @co_list.push(co) if co.nation == "Yellow Comet" }
-    when 4 then $CO.each{|co| @co_list.push(co) if co.nation == "Black Hole" }
+    when 0 then $CO.each_value{|co| @co_list.push(co) if co.nation == "Orange Star" }
+    when 1 then $CO.each_value{|co| @co_list.push(co) if co.nation == "Blue Moon" }
+    when 2 then $CO.each_value{|co| @co_list.push(co) if co.nation == "Green Earth" }
+    when 3 then $CO.each_value{|co| @co_list.push(co) if co.nation == "Yellow Comet" }
+    when 4 then $CO.each_value{|co| @co_list.push(co) if co.nation == "Black Hole" }
     end
     @index = @co_list.size-1 if @index >= @co_list.size
     # CO Select Windows

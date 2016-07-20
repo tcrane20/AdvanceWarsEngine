@@ -6,8 +6,8 @@
 #   Secondary Weapon : None
 ################################################################################
 class Apc < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
+  def initialize(*args)
+    super(*args)
     @name = "apc"
     @real_name = "APC"
     @unit_type = 3

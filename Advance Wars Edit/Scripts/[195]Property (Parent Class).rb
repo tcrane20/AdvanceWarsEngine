@@ -20,7 +20,7 @@ class Property < Tile
   #-------------------------------------------------------------------------
   #  Defines what can be built on this property. Defined in sub-classes.
   #-------------------------------------------------------------------------
-  def build_list(army)
+  def build_list
     return false
   end
   #-------------------------------------------------------------------------

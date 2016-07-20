@@ -6,8 +6,8 @@
 #   Secondary Weapon : None
 ################################################################################
 class Antitank < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
+  def initialize(*args)
+    super(*args)
     @name = "antitank"
     @real_name = "Anti-Tank"
     @unit_type = 25

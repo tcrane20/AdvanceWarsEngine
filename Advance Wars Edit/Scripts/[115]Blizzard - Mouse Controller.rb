@@ -170,11 +170,17 @@ class Mouse
   if HIDE_WINDOWS_CURSOR
     Win32API.new('user32', 'ShowCursor', 'i', 'i').call(0)
   end
+
+  ShowCursor = Win32API.new('user32', 'ShowCursor', 'i', 'i')
   
   SCREEN_TO_CLIENT = Win32API.new('user32', 'ScreenToClient', %w(l p), 'i')
   READ_INI = Win32API.new('kernel32', 'GetPrivateProfileStringA', %w(p p p p l p), 'l')
   FIND_WINDOW = Win32API.new('user32', 'FindWindowA', %w(p p), 'l')
   CURSOR_POSITION = Win32API.new('user32', 'GetCursorPos', 'p', 'i')
+  # Mouse Wheel experiment
+  StartWheel = Win32API.new('MouseWheel', 'Initialize', 'i', 'i')
+  StartWheel.call(0)
+  WheelDelta = Win32API.new('MouseWheel', 'WheelDelta', '', 'i')
   
   def initialize
     @cursor = Sprite.new
@@ -184,7 +190,20 @@ class Mouse
   end
   
   def update
-    @cursor.x, @cursor.y = self.position
+    if Input.trigger?(Input::SHIFT)
+      puts CursorHidden.call
+    end
+
+    delta = WheelDelta.call
+    puts delta if delta != 0
+    #a = self.scroll
+    #puts a if a != nil
+
+    if defined?(Graphics.inFocus) && Graphics.inFocus
+      @cursor.x, @cursor.y = self.position
+    else
+      @cursor.x, @cursor.y = -1,-1
+    end
   end
   
   def x
@@ -243,7 +262,74 @@ class Mouse
   WINDOW = self.find_window
   
 end
-
+#=begin
+#EXPERIMENT =======================================================================================
+class Mouse
+  
+  Point = Struct.new(:x, :y) if !const_defined?(:Point)
+  
+  Message = Struct.new(:message, :wparam, :lparam, :pt) if !const_defined?(:Message)
+  
+  Param = Struct.new(:x, :y, :scroll) if !const_defined?(:Param)
+  
+  Scroll = 0x0000020A if !const_defined?(:Scroll)
+  
+  #Get_Message = Win32API.new('user32', 'GetMessage', 'plll', 'l') if !const_defined?(:Get_Message)
+  Peek_Message = Win32API.new('user32', 'PeekMessage', 'pllll', 'l')
+  
+  def hiword(dword)
+    return((dword & 0xffff0000) >> 16) & 0x0000ffff
+  end
+  
+  def loword(dword)
+    return dword & 0x0000ffff
+  end
+    
+  def word2signed_short(value)
+    return value if (value & 0x8000) == 0
+    return -1 *((~value & 0x7fff) + 1)
+  end
+  
+  def unpack_dword(buffer, offset = 0)
+    bitso = buffer.bytes.to_a
+    ret = bitso[offset + 0] & 0x000000ff
+    ret |=(bitso[offset + 1] << (8 * 1)) & 0x0000ff00
+    ret |=(bitso[offset + 2] << (8 * 2)) & 0x00ff0000
+    ret |=(bitso[offset + 3] << (8 * 3)) & 0xff000000
+    return ret
+  end
+  
+  def unpack_msg(buffer)
+    msg = Message.new
+    msg.pt = Point.new
+    msg.message = unpack_dword(buffer,4 * 1)
+    msg.wparam = unpack_dword(buffer, 4 * 2)
+    msg.lparam = unpack_dword(buffer,4 * 3)
+    msg.pt.x = unpack_dword(buffer, 4 * 5)
+    msg.pt.y = unpack_dword(buffer, 4 * 6)
+    return msg
+  end
+  
+  def wmcallback(msg)
+    return unless msg.message == Scroll
+    #param = Param.new
+    #param.x = word2signed_short(loword(msg.lparam))
+    #param.y = word2signed_short(hiword(msg.lparam))
+    return word2signed_short(hiword(msg.wparam))
+    #return [param.x, param.y, param.scroll]
+  end
+  
+  def scroll
+    msg = "\0" * 32
+    #Get_Message.call(msg, WINDOW || @hwnd || 0, 0, 0)
+    #Get_Message.call(msg, WINDOW || @hwnd || 0, 0x020A, 0x020A)
+    Peek_Message.call(msg, WINDOW, 0x020A, 0x020A, 0x0000)
+    r = wmcallback(unpack_msg(msg))
+    return r if !r.nil?
+  end
+end
+#==============================================================
+#=end
 $mouse = Mouse.new
 
 #==============================================================================

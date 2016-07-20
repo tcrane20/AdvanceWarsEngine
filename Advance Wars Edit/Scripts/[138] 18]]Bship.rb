@@ -6,8 +6,8 @@
 #   Secondary Weapon : None
 ################################################################################
 class Bship < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
+  def initialize(*args)
+    super(*args)
     @name = "battleship"
     @real_name = "Battleship"
     @unit_type = 18

@@ -6,8 +6,8 @@
 #   Secondary Weapon : None
 ################################################################################
 class Stealth < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
+  def initialize(*args)
+    super(*args)
     @name = "stealth"
     @real_name = "Stealth F."
     @unit_type = 21

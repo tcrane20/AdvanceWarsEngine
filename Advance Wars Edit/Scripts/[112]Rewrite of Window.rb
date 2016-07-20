@@ -721,9 +721,8 @@ class Window_Base < Window
   def get_even_text(width, text)
     width -= 16
     # Replace all instances of \v[n] to the game variable's value
-    text.gsub!("\v") {"\\v"}
-    text.gsub!("\V") {"\\v"}
     text.gsub!(/\\[Vv]\[([0-9]+)\]/) { $game_variables[$1.to_i] }
+    text.gsub!(/[\V\v]\[([0-9]+)\]/) { $game_variables[$1.to_i] }
     # Break up the text into lines
     lines = text.split("\n")
     result = []

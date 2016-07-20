@@ -6,8 +6,8 @@
 #   Secondary Weapon : None
 ################################################################################
 class Zeppelin < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
+  def initialize(*args)
+    super(*args)
     @name = "zeppelin"
     @real_name = "Zeppelin"
     @unit_type = 23

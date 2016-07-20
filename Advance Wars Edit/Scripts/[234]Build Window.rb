@@ -19,12 +19,13 @@ class Build_Window < Window_Selectable
   # Initialize the build window
   #     units - list of units to be drawn; stored in @commands
   #-----------------------------------------------------------------------
-  def initialize(units)
+  def initialize(units, army)
     h = [units.size,8].min
     #super(58, 100, 220, 10+(32*h))
     super(30, 100, 248, 10+(32*h))
     @active_mod_on = true
     @units = units
+    @units.each_index{|i| @units[i] = @units[i].new(-1,-1,army)}
     self.contents = Bitmap.new(250, 32*units.size)
     @item_max = units.size
     @sprite_frame = Graphics.frame_count % 60 / 15

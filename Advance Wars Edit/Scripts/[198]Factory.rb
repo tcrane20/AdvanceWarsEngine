@@ -7,9 +7,8 @@ class Factory < Property
     @ai_value = 1000
   end
   
-  def build_list(army)
-    x,y = -1,-1
-    return [Infantry.new(x,y,army),Bike.new(x,y,army),Mech.new(x,y,army),Recon.new(x,y,army),Apc.new(x,y,army),Artillery.new(x,y,army),Tank.new(x,y,army),AntiAir.new(x,y,army),Missile.new(x,y,army),Antitank.new(x,y,army),Rocket.new(x,y,army),MdTank.new(x,y,army),Neotank.new(x,y,army), Megatank.new(x,y,army)]
+  def build_list
+    return [Infantry, Bike, Mech, Recon, Apc, Artillery, Tank, AntiAir, Missile, Antitank, Rocket, MdTank, Neotank, Megatank]
   end
   #-------------------------------------------------------------------------
   #  Checks if the specified unit can be repaired on this property.

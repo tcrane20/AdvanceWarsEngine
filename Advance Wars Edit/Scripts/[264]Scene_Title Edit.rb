@@ -21,16 +21,6 @@ class Scene_Title
   # * Main Processing
   #--------------------------------------------------------------------------
   def main
-    # If battle test
-    if $BTEST
-      battle_test
-      return
-    end
-    
-    
-    
-    
-    
 =begin
     maps = {}
     for i in 0..30
@@ -110,7 +100,7 @@ class Scene_Title
       update
       
       
-      
+      # TESTING MESSAGE WINDOW ---------------------------------------------------------------------------
       if Input.trigger?(Input::Key['T'])
         @win = Dialogue_Window.new#(0,0,480,200)
       end
@@ -132,7 +122,7 @@ class Scene_Title
         @win.set_window("Nell", 2)
         @win.add_text("...")
       end
-      
+      #----------------------------------------------------------------------------------------------------
       
       
       

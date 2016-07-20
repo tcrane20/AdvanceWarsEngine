@@ -6,8 +6,8 @@
 #   Secondary Weapon : None
 ################################################################################
 class Lander < Unit
-  def initialize(x, y, army)
-    super(x, y, army)
+  def initialize(*args)
+    super(*args)
     @name = "lander"
     @real_name = "Lander"
     @unit_type = 15
